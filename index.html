@@ -3,64 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-<title>Non-Profit Goals Tracker</title>
+<title>350 Spokane Dashboard</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- PapaParse for Google Sheet CSV -->
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
 <style>
   body {
-    font-family: Arial, sans-serif;
-    margin: 0; padding: 0;
-    background: #f9f9f9;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: #f4f6f8;
     color: #333;
   }
   header {
-    background: #4CAF50;
+    background: #2a9d8f;
     color: white;
-    padding: 2rem;
     text-align: center;
+    padding: 3rem 1rem;
+  }
+  header h1 {
+    margin: 0.2rem 0;
+    font-size: 2.2rem;
+  }
+  header p {
+    margin: 0;
+    font-weight: 500;
   }
   nav {
     display: flex;
     justify-content: center;
-    background: #333;
+    background: #264653;
   }
   nav a {
     color: white;
-    padding: 1rem;
+    padding: 1rem 2rem;
     text-decoration: none;
+    font-weight: 600;
     transition: background 0.3s;
   }
   nav a:hover {
-    background: #4CAF50;
+    background: #2a9d8f;
   }
   section {
-    padding: 2rem;
-    max-width: 900px;
+    padding: 3rem 1rem;
+    max-width: 1000px;
     margin: auto;
   }
   h2 {
-    color: #4CAF50;
-    border-bottom: 2px solid #eee;
+    color: #264653;
+    border-bottom: 3px solid #e9ecef;
     padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
   }
   .card {
     background: white;
-    border-radius: 8px;
-    padding: 1rem;
-    margin: 1rem 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   }
   footer {
     text-align: center;
-    padding: 1rem;
-    background: #333;
+    padding: 2rem;
+    background: #264653;
     color: white;
+  }
+  ul#updates-list {
+    list-style: none;
+    padding: 0;
+  }
+  ul#updates-list li {
+    background: white;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Our Non-Profit</h1>
+  <h1>Our Work</h1>
   <p>Tracking our goals, strategies, and public impact</p>
 </header>
 
@@ -70,40 +106,79 @@
   <a href="#about">About</a>
 </nav>
 
+<!-- Goals & Strategies -->
 <section id="goals">
   <h2>Goals & Strategies</h2>
-  <div class="card">
-    <h3>Goal 1: Sustainable Volunteer Base</h3>
-    <ul>
-      <li>Strategy: Regular recruitment drives</li>
-      <li>Strategy: Volunteer recognition program</li>
-    </ul>
-  </div>
-  <div class="card">
-    <h3>Goal 2: Climate Education</h3>
-    <ul>
-      <li>Strategy: Monthly public workshops</li>
-      <li>Strategy: Online resources and guides</li>
-    </ul>
+  <div class="cards">
+    <div class="card">
+      <h3>Goal 1: Sustainable Volunteer Base</h3>
+      <ul>
+        <li>Strategy: Regular recruitment drives</li>
+        <li>Strategy: Volunteer recognition program</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Goal 2: Climate Events& Engagement</h3>
+      <ul>
+        <li>Strategy: Monthly public workshops</li>
+        <li>Strategy: Online resources and guides</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Goal 3: Fossil Fuel Reduction</h3>
+      <ul>
+        <li>Strategy: Promote renewable energy adoption</li>
+        <li>Strategy: Community campaigns to reduce consumption</li>
+      </ul>
+    </div>
   </div>
 </section>
 
+<!-- Public Updates -->
 <section id="updates">
   <h2>Public Updates</h2>
-  <div class="card">
-    <p>Update: Hosted a community workshop on renewable energy solutions.</p>
-  </div>
+  <ul id="updates-list">
+    <li>Loading updates...</li>
+  </ul>
 </section>
 
+<!-- About -->
 <section id="about">
   <h2>About & Contact</h2>
   <p>We are committed to empowering our community to take meaningful action on climate change.</p>
-  <p>Email: contact@nonprofit.org | Socials: [Twitter] [Facebook]</p>
+  <p>Email: coming soon | Socials:  </p>
 </section>
 
 <footer>
-  &copy; 2025 Our Non-Profit
+  &copy; 350 Spokane
 </footer>
+
+<!-- Google Sheet Live Updates Script -->
+<script>
+const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRgthgkZFKRdDqdAg-fAJQktY8IyHlkiBWxcnZaelCtORBnByayHDiz0qKiw5A0ceVOKKBtGBBI9Iu7/pub?gid=0&single=true&output=csv';
+
+Papa.parse(csvUrl, {
+  download: true,
+  header: true,
+  complete: function(results) {
+    const ul = document.getElementById('updates-list');
+    ul.innerHTML = '';
+    // Sort latest first
+    results.data.sort((a,b) => new Date(b.Date) - new Date(a.Date));
+    results.data.forEach(row => {
+      if(row.Date && row.Update) {
+        const li = document.createElement('li');
+        li.textContent = `${row.Date}: ${row.Update}`;
+        ul.appendChild(li);
+      }
+    });
+  },
+  error: function(err) {
+    console.error('Error loading updates:', err);
+    document.getElementById('updates-list').innerHTML = '<li>Error loading updates</li>';
+  }
+});
+</script>
 
 </body>
 </html>
