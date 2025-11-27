@@ -1,11 +1,17 @@
+// Wrap URL with a CORS proxy
+function proxy(url) {
+  return "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
+}
+
+// Extract text from a PDF URL
 async function extractTextFromPDFUrl(url) {
   const loadingTask = pdfjsLib.getDocument(url);
   const pdf = await loadingTask.promise;
 
   let fullText = "";
 
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const page = await pdf.getPage(i);
+  for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+    const page = await pdf.getPage(pageNum);
     const content = await page.getTextContent();
     const strings = content.items.map(item => item.str);
     fullText += strings.join(" ") + "\n";
@@ -14,7 +20,7 @@ async function extractTextFromPDFUrl(url) {
   return normalizeText(fullText);
 }
 
-// Light cleanup to improve diff quality
+// Light cleanup to help the diff algorithm
 function normalizeText(text) {
   return text
     .replace(/\s+/g, " ")
@@ -23,17 +29,20 @@ function normalizeText(text) {
 }
 
 document.getElementById("compare").onclick = async () => {
-  const urlA = document.getElementById("urlA").value.trim();
-  const urlB = document.getElementById("urlB").value.trim();
+  const rawA = document.getElementById("urlA").value.trim();
+  const rawB = document.getElementById("urlB").value.trim();
 
-  if (!urlA || !urlB) {
+  if (!rawA || !rawB) {
     alert("Please enter both PDF URLs.");
     return;
   }
 
-  document.getElementById("results").innerHTML = "Processing…";
+  document.getElementById("results").innerHTML = "Processing PDFs…";
 
   try {
+    const urlA = proxy(rawA);
+    const urlB = proxy(rawB);
+
     const [textA, textB] = await Promise.all([
       extractTextFromPDFUrl(urlA),
       extractTextFromPDFUrl(urlB)
