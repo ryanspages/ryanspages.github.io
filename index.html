@@ -2,8 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>PDF Version Diff</title>
+  <title>PDF Version Comparison Tool</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Libraries -->
   <script src="libs/pdf.min.js"></script>
   <script src="libs/diff.min.js"></script>
 </head>
@@ -13,10 +15,10 @@
 
   <div class="input-section">
     <label>PDF URL A:</label>
-    <input id="urlA" type="text" placeholder="https://example.com/agenda_v1.pdf">
+    <input id="urlA" type="text" placeholder="https://city.gov/file1.pdf">
 
     <label>PDF URL B:</label>
-    <input id="urlB" type="text" placeholder="https://example.com/agenda_v2.pdf">
+    <input id="urlB" type="text" placeholder="https://city.gov/file2.pdf">
 
     <button id="compare">Compare</button>
   </div>
