@@ -12,7 +12,7 @@ body {
   gap: 10px;
 }
 
-input[type="text"] {
+input[type="file"] {
   padding: 8px;
   font-size: 14px;
 }
