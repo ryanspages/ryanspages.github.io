@@ -1,31 +1,108 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>PDF Version Comparison Tool</title>
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Libraries -->
-  <script src="libs/pdf.min.js"></script>
-  <script src="libs/diff.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Non-Profit Goals Tracker</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0; padding: 0;
+    background: #f9f9f9;
+    color: #333;
+  }
+  header {
+    background: #4CAF50;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    background: #333;
+  }
+  nav a {
+    color: white;
+    padding: 1rem;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  nav a:hover {
+    background: #4CAF50;
+  }
+  section {
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+  }
+  h2 {
+    color: #4CAF50;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+  }
+  .card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background: #333;
+    color: white;
+  }
+</style>
 </head>
-
 <body>
-  <h1>PDF Version Comparison Tool</h1>
 
-  <div class="input-section">
-    <label>PDF Version A:</label>
-    <input id="fileA" type="file" accept="application/pdf">
+<header>
+  <h1>Our Non-Profit</h1>
+  <p>Tracking our goals, strategies, and public impact</p>
+</header>
 
-    <label>PDF Version B:</label>
-    <input id="fileB" type="file" accept="application/pdf">
+<nav>
+  <a href="#goals">Goals</a>
+  <a href="#updates">Updates</a>
+  <a href="#about">About</a>
+</nav>
 
-    <button id="compare">Compare</button>
+<section id="goals">
+  <h2>Goals & Strategies</h2>
+  <div class="card">
+    <h3>Goal 1: Sustainable Volunteer Base</h3>
+    <ul>
+      <li>Strategy: Regular recruitment drives</li>
+      <li>Strategy: Volunteer recognition program</li>
+    </ul>
   </div>
+  <div class="card">
+    <h3>Goal 2: Climate Education</h3>
+    <ul>
+      <li>Strategy: Monthly public workshops</li>
+      <li>Strategy: Online resources and guides</li>
+    </ul>
+  </div>
+</section>
 
-  <h2>Differences:</h2>
-  <div id="results" class="results"></div>
+<section id="updates">
+  <h2>Public Updates</h2>
+  <div class="card">
+    <p>Update: Hosted a community workshop on renewable energy solutions.</p>
+  </div>
+</section>
 
-  <script src="compare.js"></script>
+<section id="about">
+  <h2>About & Contact</h2>
+  <p>We are committed to empowering our community to take meaningful action on climate change.</p>
+  <p>Email: contact@nonprofit.org | Socials: [Twitter] [Facebook]</p>
+</section>
+
+<footer>
+  &copy; 2025 Our Non-Profit
+</footer>
+
 </body>
 </html>
