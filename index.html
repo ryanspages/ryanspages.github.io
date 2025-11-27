@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Agenda Scanner — PDF URL → Summary + Search</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin: 0; padding: 18px; color: #111; background:#f6f7fb;}
+    header { display:flex; gap:12px; align-items:center; margin-bottom:12px; }
+    input[type="text"]{ width: 560px; padding:8px 10px; border-radius:6px; border:1px solid #d0d4e0; background:white;}
+    button { padding:8px 12px; border-radius:6px; border:none; background:#2b66f6; color:white; cursor:pointer; }
+    button.alt { background:#4b5563; }
+    main { display:grid; grid-template-columns: 420px 1fr; gap:16px; align-items:start; }
+    .panel { background:white; border-radius:10px; padding:12px; box-shadow:0 1px 4px rgba(20,24,40,0.06); max-height:78vh; overflow:auto;}
+    .search-row { display:flex; gap:8px; margin-top:8px; }
+    .result { padding:10px; border-radius:8px; margin-bottom:8px; border:1px solid #eef2ff; }
+    mark { background: #fff4b1; padding:0 2px; border-radius:3px;}
+    #viewerCanvas { width:100%; border-radius:6px; background:#ddd; display:block; }
+    .meta { font-size:13px; color:#555; margin-bottom:8px; }
+    .small { font-size:13px; color:#666; }
+    footer { margin-top:12px; color:#666; font-size:13px; }
+    .loader { display:inline-block; margin-left:8px; font-size:13px; color:#444; }
+    .hint { font-size:13px; color:#666; margin-top:6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h2 style="margin:0">Agenda Scanner</h2>
+    <div class="hint">Paste a PDF URL and click <strong>Process PDF</strong>.</div>
+  </header>
+
+  <div style="margin-bottom:10px">
+    <input id="pdfUrl" type="text" placeholder="PDF URL (https://.../agenda.pdf)" />
+    <button id="processBtn">Process PDF</button>
+    <button id="sampleBtn" class="alt">Load sample</button>
+    <span id="status" class="loader"></span>
+  </div>
+
+  <main>
+    <div class="panel" id="leftPanel">
+      <div class="meta" id="docMeta">No document loaded.</div>
+
+      <div>
+        <strong>Summary</strong>
+        <div id="summary" class="small" style="margin-top:6px">—</div>
+        <div style="margin-top:8px">
+          <button id="summarizeBtn">Regenerate extractive summary</button>
+          <button id="openAiBtn" class="alt" title="Optional: enable OpenAI summarization">LLM summary (optional)</button>
+        </div>
+      </div>
+
+      <hr style="margin:12px 0" />
+
+      <div>
+        <strong>Search inside document</strong>
+        <div class="search-row" style="margin-top:8px">
+          <input id="searchInput" type="text" placeholder="Search word or phrase (regex supported)" />
+          <button id="searchBtn">Search</button>
+          <button id="clearBtn" class="alt">Clear</button>
+        </div>
+        <div id="searchStats" class="small" style="margin-top:8px">No search yet.</div>
+        <div id="results" style="margin-top:8px"></div>
+      </div>
+
+      <hr style="margin:12px 0" />
+
+      <div>
+        <strong>Table of pages</strong>
+        <div id="pagesList" class="small" style="margin-top:6px">—</div>
+      </div>
+
+      <footer>
+        Note: if the PDF URL returns a CORS error, try a CORS proxy (see below). This is a client-side-only tool.
+      </footer>
+    </div>
+
+    <div class="panel" id="rightPanel">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div><strong>Page viewer</strong></div>
+        <div class="small" id="viewerInfo">Page —</div>
+      </div>
+
+      <canvas id="viewerCanvas"></canvas>
+      <div style="margin-top:8px; display:flex; gap:8px; align-items:center;">
+        <button id="prevPage" class="alt">Prev</button>
+        <button id="nextPage" class="alt">Next</button>
+        <div class="small">Go to page: <input id="goto" type="number" style="width:70px; padding:4px; margin-left:8px" /></div>
+        <div style="flex:1"></div>
+        <div class="small" id="renderTime"></div>
+      </div>
+
+      <hr style="margin:12px 0" />
+
+      <div>
+        <strong>Raw page text (for selected result)</strong>
+        <pre id="rawText" style="white-space:pre-wrap; font-family:inherit; background:#fafafa; padding:10px; border-radius:6px; max-height:28vh; overflow:auto;">—</pre>
+      </div>
+    </div>
+  </main>
+
+  <!-- pdf.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.min.js"></script>
+
+  <script>
+  // Basic single-file app that:
+  // - fetches a PDF from a URL (arrayBuffer)
+  // - uses pdf.js to extract text per page
+  // - displays an extractive summary (simple TF-based)
+  // - enables search across pages and shows snippets + page numbers
+  // - renders selected page to a canvas
+
+  // CONFIG
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.9.179/pdf.worker.min.js';
+  const MAX_PAGES_TO_EXTRACT = 1200; // safety cap
+
+  // State
+  let pdfDoc = null;
+  let pagesText = []; // [{pageNum, text, snippet}]
+  let currentPage = 1;
+  let loadedUrl = '';
+
+  // UI refs
+  const statusEl = document.getElementById('status');
+  const docMeta = document.getElementById('docMeta');
+  const summaryEl = document.getElementById('summary');
+  const pagesList = document.getElementById('pagesList');
+  const resultsEl = document.getElementById('results');
+  const searchStats = document.getElementById('searchStats');
+  const rawText = document.getElementById('rawText');
+  const viewerCanvas = document.getElementById('viewerCanvas');
+  const viewerInfo = document.getElementById('viewerInfo');
+  const renderTimeEl = document.getElementById('renderTime');
+
+  // Buttons
+  document.getElementById('processBtn').addEventListener('click', processPdf);
+  document.getElementById('sampleBtn').addEventListener('click', loadSample);
+  document.getElementById('searchBtn').addEventListener('click', search);
+  document.getElementById('clearBtn').addEventListener('click', clearSearch);
+  document.getElementById('summarizeBtn').addEventListener('click', generateSummary);
+  document.getElementById('openAiBtn').addEventListener('click', openAiHint);
+  document.getElementById('prevPage').addEventListener('click', ()=>renderPage(currentPage-1));
+  document.getElementById('nextPage').addEventListener('click', ()=>renderPage(currentPage+1));
+  document.getElementById('goto').addEventListener('change', (e)=>renderPage(Number(e.target.value)));
+
+  async function processPdf(){
+    const url = document.getElementById('pdfUrl').value.trim();
+    if(!url){ alert('Please paste a PDF URL.'); return; }
+    loadedUrl = url;
+    resetState();
+    setStatus('Fetching PDF…');
+
+    try {
+      const arrayBuffer = await fetchPdfAsArrayBuffer(url);
+      setStatus('Loading PDF into pdf.js…');
+      pdfDoc = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+
+      const total = pdfDoc.numPages;
+      docMeta.textContent = `Loaded: ${url} — ${total} pages.`;
+      setStatus(`Extracting text from ${total} pages (this may take a few seconds)…`);
+
+      const pagesToExtract = Math.min(total, MAX_PAGES_TO_EXTRACT);
+      pagesText = [];
+
+      for(let p=1; p<=pagesToExtract; p++){
+        const page = await pdfDoc.getPage(p);
+        const content = await page.getTextContent();
+        const texts = content.items.map(i=>i.str).join(' ');
+        // simple cleanup
+        const cleaned = texts.replace(/\s+/g,' ').trim();
+        const snippet = cleaned.slice(0, 350);
+        pagesText.push({pageNum: p, text: cleaned, snippet});
+        setStatus(`Extracted page ${p}/${pagesToExtract}`);
+        // small yield for UI
+        await new Promise(r=>setTimeout(r, 30));
+      }
+
+      if(total > pagesToExtract){
+        pagesList.innerHTML = `Extracted first ${pagesToExtract} / ${total} pages.`;
+      } else {
+        pagesList.innerHTML = pagesText.map(p=>`Page ${p.pageNum}`).join(', ');
+      }
+
+      setStatus('Done extracting. Generating summary…');
+      generateSummary();
+      setStatus('Ready.');
+      renderPage(1);
+
+    } catch(err){
+      console.error(err);
+      setStatus('');
+      alert('Error loading PDF. If you see a CORS error, the server hosting the PDF is blocking cross-origin requests. See note below.');
+      docMeta.textContent = 'No document loaded.';
+    }
+  }
+
+  // FETCH WITH CORS NOTE
+  async function fetchPdfAsArrayBuffer(url){
+    // Some servers block cross-origin requests — you'll get a CORS error.
+    // If that happens, either:
+    // 1) host a tiny proxy on your own server that fetches the PDF and sets CORS headers, or
+    // 2) use a public CORS proxy (for quick tests only), eg:
+    //    https://cors.bridged.cc/https://example.com/agenda.pdf
+    //    https://cors-anywhere.herokuapp.com/ (must enable)
+    // Security note: do NOT send sensitive PDFs through public proxies.
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('Network error: ' + res.status);
+    const ab = await res.arrayBuffer();
+    return ab;
+  }
+
+  // SIMPLE EXTRACTIVE SUMMARY (no LLM): pick top N sentences by term frequency
+  function generateSummary(){
+    if(!pagesText.length){ summaryEl.textContent = 'No document text to summarize.'; return; }
+    const doc = pagesText.map(p=>p.text).join(' ');
+    const sents = naiveSentences(doc);
+    const tf = termFreq(doc);
+    // score sentences
+    const scored = sents.map(s=>{
+      const words = s.toLowerCase().replace(/[^\w\s]/g,'').split(/\s+/).filter(Boolean);
+      const score = words.reduce((acc,w)=>acc + (tf[w]||0), 0) / Math.sqrt(words.length||1);
+      return {s, score};
+    });
+    scored.sort((a,b)=>b.score - a.score);
+    const top = scored.slice(0,6).map(x=>x.s.trim()).join(' • ');
+    summaryEl.textContent = top || pagesText[0].snippet || '—';
+  }
+
+  // Simple sentence splitter
+  function naiveSentences(text){
+    const raw = text.replace(/\n/g,' ').replace(/\s+/g,' ').trim();
+    const parts = raw.split(/(?<=[.?!])\s+(?=[A-Z0-9])/g);
+    if(parts.length < 2) return [raw.slice(0,400)];
+    return parts;
+  }
+
+  // term frequency map for scoring
+  function termFreq(text){
+    const words = text.toLowerCase().replace(/[^\w\s]/g,' ').split(/\s+/).filter(Boolean);
+    const tf = {};
+    for(const w of words){
+      tf[w] = (tf[w]||0) + 1;
+    }
+    return tf;
+  }
+
+  // SEARCH: show page results with snippets, highlight matches and allow "view page"
+  function search(){
+    const q = document.getElementById('searchInput').value.trim();
+    if(!q){ alert('Type a search term or regex.'); return; }
+    let re;
+    try { re = new RegExp(q, 'ig'); }
+    catch(e){ alert('Invalid regular expression.'); return; }
+
+    const results = [];
+    for(const p of pagesText){
+      const t = p.text;
+      if(!t) continue;
+      const matches = [...t.matchAll(re)];
+      if(matches.length){
+        const snippets = matches.slice(0,5).map(m=>{
+          const idx = m.index;
+          const start = Math.max(0, idx - 60);
+          const end = Math.min(t.length, idx + (m[0].length || 10) + 60);
+          let context = t.slice(start, end).replace(/\s+/g,' ');
+          // highlight occurrences
+          context = context.replace(re, (m)=>`[[[HIGHLIGHT]]]${m}[[[END]]]`);
+          context = escapeHtml(context).replace(/\[\[\[HIGHLIGHT\]\]\](.*?)\[\[\[END\]\]\]/g, '<mark>$1</mark>');
+          return context;
+        });
+        results.push({page: p.pageNum, count: matches.length, snippets});
+      }
+    }
+
+    searchStats.textContent = `Found ${results.reduce((s,r)=>s + r.count,0)} matches on ${results.length} pages.`;
+    renderResults(results);
+  }
+
+  function renderResults(results){
+    resultsEl.innerHTML = '';
+    if(!results.length){ resultsEl.textContent = 'No matches found.'; return; }
+
+    for(const r of results){
+      const div = document.createElement('div');
+      div.className = 'result';
+      const btn = document.createElement('button');
+      btn.textContent = `View page ${r.page}`;
+      btn.style.marginRight = '8px';
+      btn.addEventListener('click', ()=>{ renderPage(r.page); showRawText(r.page); });
+      div.innerHTML = `<strong>Page ${r.page}</strong> — ${r.count} match(es)`;
+      div.prepend(btn);
+      const snipCont = document.createElement('div');
+      snipCont.className = 'small';
+      snipCont.style.marginTop = '6px';
+      snipCont.innerHTML = r.snippets.map(s=>`<div style="margin-bottom:6px">${s}</div>`).join('');
+      div.appendChild(snipCont);
+      resultsEl.appendChild(div);
+    }
+  }
+
+  function clearSearch(){
+    document.getElementById('searchInput').value = '';
+    resultsEl.innerHTML = '';
+    searchStats.textContent = 'Cleared.';
+  }
+
+  // render a page to canvas
+  async function renderPage(num){
+    if(!pdfDoc) return;
+    if(num < 1) num = 1;
+    if(num > pdfDoc.numPages) num = pdfDoc.numPages;
+    currentPage = num;
+    viewerInfo.textContent = `Page ${currentPage} / ${pdfDoc.numPages}`;
+    document.getElementById('goto').value = currentPage;
+
+    const start = performance.now();
+    const page = await pdfDoc.getPage(currentPage);
+    const viewport = page.getViewport({scale: 1.5});
+    const canvas = viewerCanvas;
+    const ctx = canvas.getContext('2d');
+    canvas.width = Math.floor(viewport.width);
+    canvas.height = Math.floor(viewport.height);
+
+    const renderTask = page.render({ canvasContext: ctx, viewport });
+    await renderTask.promise;
+    renderTimeEl.textContent = `Rendered in ${Math.round(performance.now()-start)}ms`;
+    showRawText(currentPage);
+  }
+
+  function showRawText(pageNum){
+    const page = pagesText.find(p=>p.pageNum === pageNum);
+    rawText.textContent = page ? page.text.slice(0, 20000) : 'No text extracted for this page.';
+  }
+
+  function resetState(){
+    pdfDoc = null;
+    pagesText = [];
+    currentPage = 1;
+    docMeta.textContent = 'Loading...';
+    summaryEl.textContent = '—';
+    pagesList.textContent = '—';
+    resultsEl.innerHTML = '';
+    rawText.textContent = '—';
+    viewerCanvas.width = 800;
+    viewerCanvas.height = 100;
+    viewerInfo.textContent = 'Page —';
+    renderTimeEl.textContent = '';
+  }
+
+  function setStatus(s){ statusEl.textContent = s; }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; });
+  }
+
+  // Sample PDF for demos (public CORS-friendly)
+  function loadSample(){
+    // small sample PDF (city-docs etc. — replace with any public, CORS-enabled PDF)
+    const sample = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+    document.getElementById('pdfUrl').value = sample;
+    processPdf();
+  }
+
+  // optional LLM hook — explain how to wire if user wants to call OpenAI (no key used here)
+  function openAiHint(){
+    alert('Optional: to use an LLM for a more natural summary, send the extracted text to your server or directly to the OpenAI API (careful with large docs — chunk text and summarize per-chunk). This demo does an extractive summary locally.');
+  }
+
+  // small utility to show escaped content as HTML in results
+  function showHtmlSnippet(html){
+    const div = document.createElement('div');
+    div.innerHTML = html;
+    return div;
+  }
+
+  </script>
+</body>
+</html>
