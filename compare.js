@@ -1,15 +1,10 @@
-// Wrap URL with a CORS proxy
-function proxy(url) {
-  return "https://api.allorigins.win/raw?url=" + encodeURIComponent(url);
-}
-
-// Extract text from a PDF URL
-async function extractTextFromPDFUrl(url) {
-  const loadingTask = pdfjsLib.getDocument(url);
+// Extract text from a PDF file (File object)
+async function extractTextFromPDFFile(file) {
+  const arrayBuffer = await file.arrayBuffer();
+  const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
   const pdf = await loadingTask.promise;
 
   let fullText = "";
-
   for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
     const page = await pdf.getPage(pageNum);
     const content = await page.getTextContent();
@@ -20,7 +15,7 @@ async function extractTextFromPDFUrl(url) {
   return normalizeText(fullText);
 }
 
-// Light cleanup to help the diff algorithm
+// Light cleanup to improve diff results
 function normalizeText(text) {
   return text
     .replace(/\s+/g, " ")
@@ -29,23 +24,20 @@ function normalizeText(text) {
 }
 
 document.getElementById("compare").onclick = async () => {
-  const rawA = document.getElementById("urlA").value.trim();
-  const rawB = document.getElementById("urlB").value.trim();
+  const fileA = document.getElementById("fileA").files[0];
+  const fileB = document.getElementById("fileB").files[0];
 
-  if (!rawA || !rawB) {
-    alert("Please enter both PDF URLs.");
+  if (!fileA || !fileB) {
+    alert("Please select both PDF files.");
     return;
   }
 
   document.getElementById("results").innerHTML = "Processing PDFs…";
 
   try {
-    const urlA = proxy(rawA);
-    const urlB = proxy(rawB);
-
     const [textA, textB] = await Promise.all([
-      extractTextFromPDFUrl(urlA),
-      extractTextFromPDFUrl(urlB)
+      extractTextFromPDFFile(fileA),
+      extractTextFromPDFFile(fileB)
     ]);
 
     const diff = Diff.diffWords(textA, textB);
@@ -61,6 +53,6 @@ document.getElementById("compare").onclick = async () => {
   } catch (err) {
     console.error(err);
     document.getElementById("results").innerHTML =
-      "Error loading or processing the PDFs.";
+      "Error processing the PDFs.";
   }
 };
