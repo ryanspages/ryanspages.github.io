@@ -5,7 +5,7 @@ from pathlib import Path
 # -----------------------------
 # CONFIG
 # -----------------------------
-INPUT_CSV = "season_data.csv"
+INPUT_CSV = "raw_data/season_data.csv"
 OUTPUT_DIR = Path("data")
 TEAM = "SEA"
 YEAR = 2025
