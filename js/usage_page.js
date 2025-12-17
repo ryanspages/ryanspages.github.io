@@ -44,7 +44,7 @@ function updateToggle(btnDefense, btnPA){
 
 let currentTeamData = null;
 
-fetch('/data/team_usage.json')
+fetch('data/team_usage.json')
   .then(res => res.json())
   .then(data => {
       if(!data[year] || !data[year][team]){
