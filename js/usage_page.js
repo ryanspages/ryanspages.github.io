@@ -119,24 +119,25 @@ async function buildDashboard() {
   const container = document.getElementById("usage-dashboard");
   container.innerHTML = "";
 
-  // ----------------------------
-  // Defensive Positions
-  // ----------------------------
+// ----------------------------
+// Defensive Positions
+// ----------------------------
 
-  const defenseSection = document.createElement("div");
-  defenseSection.className = "section";
-  defenseSection.innerHTML = "<h2>Defense</h2>";
+const defenseSection = document.createElement("div");
+defenseSection.className = "section";
+defenseSection.innerHTML = "<h2>Defense</h2>";
 
-  data.defense.forEach(pos => {
+if (data.positions) {
+  data.positions.forEach(pos => {
     const players = pos.players
       .map(p => ({
         name: p.name,
-        usage: p.inn,
-        percent: (p.inn / pos.total_inn) * 100,
+        usage: p.usage,
+        percent: p.percent,
         wOBA: p.wOBA,
         xwOBA: p.xwOBA
       }))
-      .sort((a, b) => b.percent - a.percent);
+      .sort((a, b) => b.percent - a.percent); // largest → smallest
 
     defenseSection.appendChild(
       createRow(
@@ -154,8 +155,11 @@ async function buildDashboard() {
       )
     );
   });
+} else {
+  defenseSection.innerHTML += "<p>No defensive data available.</p>";
+}
 
-  container.appendChild(defenseSection);
+container.appendChild(defenseSection);
 
   // ----------------------------
   // Batting
