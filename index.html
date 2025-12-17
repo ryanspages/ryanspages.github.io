@@ -1,297 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Seattle Mariners — 2024 Usage & Production</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Wireframe-only styles (structure > aesthetics) -->
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      margin: 0;
-      padding: 24px;
-      background: #fafafa;
-      color: #222;
-      display: flex;
-      justify-content: center;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1200px; /* ~80% on most desktop screens */
-    }
-
-    h1, h2 {
-      margin: 0 0 8px 0;
-      font-weight: 600;
-    }
-
-    h2 {
-      margin-top: 32px;
-    }
-
-    .subtle {
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    /* Header */
-    .page-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 16px;
-    }
-
-    .summary {
-      display: flex;
-      gap: 16px;
-      font-size: 0.85rem;
-    }
-
-    .pill {
-      background: #eee;
-      padding: 6px 10px;
-      border-radius: 12px;
-    }
-
-    /* Toggle */
-    .controls {
-      margin-top: 16px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-
-    .toggle {
-      border: 1px solid #ccc;
-      padding: 6px 12px;
-      cursor: pointer;
-      background: #fff;
-    }
-
-    .toggle.active {
-      background: #222;
-      color: #fff;
-    }
-
-    /* Position rows */
-    .section {
-      margin-top: 40px;
-    }
-
-    .position-row {
-      padding: 12px 0;
-      border-bottom: 1px solid #e0e0e0;
-    }
-
-    .row-header {
-      display: grid;
-      grid-template-columns: 120px 1fr 140px;
-      align-items: center;
-      gap: 16px;
-      cursor: pointer;
-    }
-
-    .position-label {
-      font-weight: 600;
-    }
-
-    .bar {
-      height: 18px;
-      background: #ddd;
-      display: flex;
-      overflow: hidden;
-      border-radius: 4px;
-    }
-
-    .segment {
-      height: 100%;
-    }
-
-    .stats {
-      font-size: 0.8rem;
-      text-align: right;
-      color: #555;
-    }
-
-    /* Expanded table */
-    .details {
-      margin-left: 136px;
-      margin-top: 8px;
-      display: none;
-    }
-
-    /* Only show details when explicitly expanded */
-    .position-row.expanded .details {
-      display: block;
-    }
-
-    .position-row.expanded .details {
-      display: block;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-    }
-
-    th, td {
-      padding: 6px 8px;
-      border-bottom: 1px solid #eee;
-      text-align: left;
-    }
-
-    th {
-      font-weight: 600;
-      color: #444;
-    }
-
-    /* Pitching */
-    .pitching-block {
-      margin-top: 24px;
-    }
-
-    /* Footer note */
-    .footer-note {
-      margin-top: 48px;
-      font-size: 0.8rem;
-      color: #666;
-      font-style: italic;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baseball Team Usage Dashboard</title>
+<link rel="stylesheet" href="/css/usage_styles.css">
+<style>
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 24px;
+  background: #fafafa;
+  color: #222;
+  display: flex;
+  justify-content: center;
+}
+.container {
+  width: 100%;
+  max-width: 1200px;
+}
+.controls {
+  display: flex;
+  margin-bottom: 16px;
+}
+.toggle {
+  cursor: pointer;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  margin-right: 8px;
+  border-radius: 4px;
+}
+.toggle.active {
+  background-color: #0077cc;
+  color: white;
+}
+.section {
+  margin-bottom: 32px;
+}
+.position-row {
+  margin-bottom: 8px;
+}
+.row-header {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.position-label {
+  width: 120px;
+  font-weight: bold;
+}
+.bar {
+  flex: 1;
+  display: flex;
+  height: 24px;
+  margin: 0 12px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #eee;
+}
+.segment {
+  height: 100%;
+}
+.stats {
+  width: 80px;
+  text-align: right;
+}
+.details {
+  margin-left: 136px;
+  margin-top: 8px;
+  display: none;
+}
+.position-row.expanded .details {
+  display: block;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  text-align: left;
+}
+</style>
 </head>
 <body>
   <div class="container">
-
-  <!-- PAGE HEADER -->
-  <div class="page-header">
-    <div>
-      <h1>Seattle Mariners — 2024 Usage & Production</h1>
-      <div class="subtle">Where playing time and production actually came from</div>
-    </div>
-    <div class="summary">
-      <div class="pill">Record: 88–74</div>
-      <div class="pill">Runs: 704 / 672</div>
-      <div class="pill">Team wOBA: .309</div>
-      <div class="pill">Team ERA: 3.96</div>
-    </div>
+    <div id="usage-dashboard"></div>
   </div>
-
-  <!-- CONTROLS -->
-  <div class="controls">
-    <div class="toggle active">Defensive Innings</div>
-    <div class="toggle">Plate Appearances</div>
-  </div>
-
-  <!-- POSITION PLAYERS -->
-  <div class="section">
-    <h2>Position Player Usage & Production</h2>
-    <div class="subtle">All positions shown below. Click a bar to reveal player breakdown.</div>
-
-    <!-- POSITION ROW TEMPLATE: repeat in fixed order -->
-    <!-- Order: C, 1B, 2B, SS, 3B, LF, CF, RF, DH -->
-    <div class="position-row">
-      <div class="row-header">
-        <div class="position-label">SS<br><span class="subtle">1,458 inn</span></div>
-        <div class="bar">
-          <div class="segment" style="width:82%; background:#4c72b0"></div>
-          <div class="segment" style="width:14%; background:#55a868"></div>
-          <div class="segment" style="width:4%; background:#999"></div>
-        </div>
-        <div class="stats">
-          wOBA .298<br>xwOBA .311
-        </div>
-      </div>
-
-      <div class="details">
-        <table>
-          <thead>
-            <tr>
-              <th>Player</th>
-              <th>Usage</th>
-              <th>%</th>
-              <th>wOBA</th>
-              <th>xwOBA</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>J.P. Crawford</td>
-              <td>1,202 inn</td>
-              <td>82%</td>
-              <td>.304</td>
-              <td>.318</td>
-            </tr>
-            <tr>
-              <td>Dylan Moore</td>
-              <td>198 inn</td>
-              <td>14%</td>
-              <td>.279</td>
-              <td>.295</td>
-            </tr>
-            <tr>
-              <td>Others</td>
-              <td>58 inn</td>
-              <td>4%</td>
-              <td>.261</td>
-              <td>.270</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Additional positions repeat same structure -->
-
-  </div>
-
-  <!-- PITCHING -->
-  <div class="section">
-    <h2>Pitching Usage & Production</h2>
-    <div class="subtle">Bar length reflects share of team innings pitched</div>
-
-    <!-- STARTING PITCHING -->
-    <div class="pitching-block">
-      <div class="position-row">
-        <div class="row-header">
-          <div class="position-label">SP<br><span class="subtle">836 IP</span></div>
-          <div class="bar">
-            <div class="segment" style="width:22%; background:#4c72b0"></div>
-            <div class="segment" style="width:19%; background:#55a868"></div>
-            <div class="segment" style="width:11%; background:#c44e52"></div>
-            <div class="segment" style="width:48%; background:#999"></div>
-          </div>
-          <div class="stats">ERA 3.71<br>xERA 3.62</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RELIEF PITCHING -->
-    <div class="pitching-block">
-      <div class="position-row">
-        <div class="row-header">
-          <div class="position-label">RP<br><span class="subtle">612 IP</span></div>
-          <div class="bar">
-            <div class="segment" style="width:12%; background:#4c72b0"></div>
-            <div class="segment" style="width:10%; background:#55a868"></div>
-            <div class="segment" style="width:8%; background:#c44e52"></div>
-            <div class="segment" style="width:70%; background:#999"></div>
-          </div>
-          <div class="stats">ERA 3.88<br>xERA 3.91</div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="footer-note">
-    This page reflects where playing time and production came from, not player talent in isolation. Click any bar to inspect player-level detail.
-  </div>
-
-  </div>
+  <script src="/js/usage_page.js"></script>
 </body>
 </html>
