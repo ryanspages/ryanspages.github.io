@@ -84,7 +84,10 @@ function createRow(labelText, totalLabel, players, statLabel = "", tableColumns 
 
   row.appendChild(details);
 
-  header.onclick = () => row.classList.toggle("expanded");
+  header.onclick = () => {
+  const isOpen = details.style.display === "block";
+  details.style.display = isOpen ? "none" : "block";
+};
 
   return row;
 }
