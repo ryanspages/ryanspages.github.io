@@ -89,7 +89,9 @@ async function buildDashboard() {
   posSection.className = "section";
   posSection.innerHTML = `<h2>Position Player Usage & Production</h2><div class="subtle">Click a bar for player breakdown.</div>`;
   data.positions.forEach(pos => {
-    const players = pos.players.map(p => ({name: p.name, percent: p.usage/pos.total_inn*100}));
+    const players = pos.players
+  .map(p => ({name: p.name, percent: p.usage / pos.total_inn * 100}))
+  .sort((a, b) => b.percent - a.percent); // sort descending
     const metric = `wOBA ${pos.team_wOBA}`;
     posSection.appendChild(createRow(pos.position, pos.total_inn+" inn", players, metric));
   });
