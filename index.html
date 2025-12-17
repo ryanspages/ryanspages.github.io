@@ -1,194 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>350 Spokane Dashboard</title>
+  <meta charset="UTF-8" />
+  <title>Seattle Mariners — 2024 Usage & Production</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Wireframe-only styles (structure > aesthetics) -->
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #fafafa;
+      color: #222;
+    }
 
-<!-- PapaParse for Google Sheet CSV -->
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    h1, h2 {
+      margin: 0 0 8px 0;
+      font-weight: 600;
+    }
 
-<style>
-  body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    background: #f4f6f8;
-    color: #333;
-  }
-  header {
-    background: #ffffff;
-    color: #0F81E8;
-    text-align: center;
-    padding: 3rem 1rem;
-  }
-  header h1 {
-    margin: 0.2rem 0;
-    font-size: 2.2rem;
-  }
-  header p {
-    margin: 0;
-    font-weight: 500;
-  }
-  nav {
-    display: flex;
-    justify-content: center;
-    background: #0F81E8;
-  }
-  nav a {
-    color: white;
-    padding: 1rem 2rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s;
-  }
-  nav a:hover {
-    background: #FF6112;
-  }
-  section {
-    padding: 3rem 1rem;
-    max-width: 1000px;
-    margin: auto;
-  }
-  h2 {
-    color: #264653;
-    border-bottom: 3px solid #e9ecef;
-    padding-bottom: 0.5rem;
-    margin-bottom: 2rem;
-  }
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-  .card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  }
-  footer {
-    text-align: center;
-    padding: 2rem;
-    background: #0F81E8;
-    color: white;
-  }
-  ul#updates-list {
-    list-style: none;
-    padding: 0;
-  }
-  ul#updates-list li {
-    background: white;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  }
-</style>
+    h2 {
+      margin-top: 32px;
+    }
+
+    .subtle {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* Header */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 16px;
+    }
+
+    .summary {
+      display: flex;
+      gap: 16px;
+      font-size: 0.85rem;
+    }
+
+    .pill {
+      background: #eee;
+      padding: 6px 10px;
+      border-radius: 12px;
+    }
+
+    /* Toggle */
+    .controls {
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .toggle {
+      border: 1px solid #ccc;
+      padding: 6px 12px;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .toggle.active {
+      background: #222;
+      color: #fff;
+    }
+
+    /* Position rows */
+    .section {
+      margin-top: 40px;
+    }
+
+    .position-row {
+      padding: 12px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .row-header {
+      display: grid;
+      grid-template-columns: 120px 1fr 140px;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+    }
+
+    .position-label {
+      font-weight: 600;
+    }
+
+    .bar {
+      height: 18px;
+      background: #ddd;
+      display: flex;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .segment {
+      height: 100%;
+    }
+
+    .stats {
+      font-size: 0.8rem;
+      text-align: right;
+      color: #555;
+    }
+
+    /* Expanded table */
+    .details {
+      margin-left: 136px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .position-row.expanded .details {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    th, td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #eee;
+      text-align: left;
+    }
+
+    th {
+      font-weight: 600;
+      color: #444;
+    }
+
+    /* Pitching */
+    .pitching-block {
+      margin-top: 24px;
+    }
+
+    /* Footer note */
+    .footer-note {
+      margin-top: 48px;
+      font-size: 0.8rem;
+      color: #666;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>Our Work</h1>
-  <p>Tracking our goals, strategies, and public impact</p>
-</header>
-
-<nav>
-  <a href="#goals">Goals</a>
-  <a href="#updates">Updates</a>
-  <a href="#about">About</a>
-</nav>
-
-<!-- Goals & Strategies -->
-<section id="goals">
-  <h2>Goals & Strategies</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Goal 1: Sustainable Volunteer Base</h3>
-      <ul>
-        
-      </ul>
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div>
+      <h1>Seattle Mariners — 2024 Usage & Production</h1>
+      <div class="subtle">Where playing time and production actually came from</div>
     </div>
-    <div class="card">
-      <h3>Goal 2: Climate Events & Engagement</h3>
-      <ul>
-        
-      </ul>
-    </div>
-    <div class="card">
-      <h3>Goal 3: Fossil Fuel Reduction</h3>
-      <ul>
-        <li>We track city progress on SAP plan. <a href="https://sapscorecard.github.io/" target="_blank">Scorecard</a></li>
-        
-      </ul>
-    </div>
-        <div class="card">
-      <h3>Goal 4: Preserve & Protect Natural Environments</h3>
-      <ul>
-
-      </ul>
-    </div>
-            <div class="card">
-      <h3>Goal 5: Communites are Prepared & Protected from Climate Impacts</h3>
-      <ul>
-        
-      </ul>
+    <div class="summary">
+      <div class="pill">Record: 88–74</div>
+      <div class="pill">Runs: 704 / 672</div>
+      <div class="pill">Team wOBA: .309</div>
+      <div class="pill">Team ERA: 3.96</div>
     </div>
   </div>
-</section>
 
-<!-- Public Updates -->
-<section id="updates">
-  <h2>Public Updates</h2>
-  <ul id="updates-list">
-    <li>Loading updates...</li>
-  </ul>
-</section>
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="toggle active">Defensive Innings</div>
+    <div class="toggle">Plate Appearances</div>
+  </div>
 
-<!-- About -->
-<section id="about">
-  <h2>About & Contact</h2>
-  <p>350 Spokane is a volunteer-run nonprofit building an effective movement for climate action in the greater Spokane area, promoting a just transition to 100% fossil-free energy and a low-carbon economy that works for everyone. </p>
-  <p>https://www.350spokane.org/</p>
-</section>
+  <!-- POSITION PLAYERS -->
+  <div class="section">
+    <h2>Position Player Usage & Production</h2>
+    <div class="subtle">Bar length reflects share of team usage at that position</div>
 
-<footer>
-  &copy; 350 Spokane
-</footer>
+    <!-- POSITION ROW: SS -->
+    <div class="position-row expanded">
+      <div class="row-header">
+        <div class="position-label">SS<br><span class="subtle">1,458 inn</span></div>
+        <div class="bar">
+          <div class="segment" style="width:82%; background:#4c72b0"></div>
+          <div class="segment" style="width:14%; background:#55a868"></div>
+          <div class="segment" style="width:4%; background:#999"></div>
+        </div>
+        <div class="stats">
+          wOBA .298<br>xwOBA .311
+        </div>
+      </div>
 
-<!-- Google Sheet Live Updates Script -->
-<script>
-const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRgthgkZFKRdDqdAg-fAJQktY8IyHlkiBWxcnZaelCtORBnByayHDiz0qKiw5A0ceVOKKBtGBBI9Iu7/pub?output=csv';
+      <div class="details">
+        <table>
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Usage</th>
+              <th>%</th>
+              <th>wOBA</th>
+              <th>xwOBA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>J.P. Crawford</td>
+              <td>1,202 inn</td>
+              <td>82%</td>
+              <td>.304</td>
+              <td>.318</td>
+            </tr>
+            <tr>
+              <td>Dylan Moore</td>
+              <td>198 inn</td>
+              <td>14%</td>
+              <td>.279</td>
+              <td>.295</td>
+            </tr>
+            <tr>
+              <td>Others</td>
+              <td>58 inn</td>
+              <td>4%</td>
+              <td>.261</td>
+              <td>.270</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-Papa.parse(csvUrl, {
-  download: true,
-  header: true,
-  complete: function(results) {
-    const ul = document.getElementById('updates-list');
-    ul.innerHTML = '';
-    // Sort latest first
-    results.data.sort((a,b) => new Date(b.Date) - new Date(a.Date));
-    results.data.forEach(row => {
-      if(row.Date && row.Update) {
-        const li = document.createElement('li');
-        li.textContent = `${row.Date}: ${row.Update}`;
-        ul.appendChild(li);
-      }
-    });
-  },
-  error: function(err) {
-    console.error('Error loading updates:', err);
-    document.getElementById('updates-list').innerHTML = '<li>Error loading updates</li>';
-  }
-});
-</script>
+    <!-- Additional positions repeat same structure -->
+
+  </div>
+
+  <!-- PITCHING -->
+  <div class="section">
+    <h2>Pitching Usage & Production</h2>
+    <div class="subtle">Bar length reflects share of team innings pitched</div>
+
+    <!-- STARTING PITCHING -->
+    <div class="pitching-block">
+      <div class="position-row">
+        <div class="row-header">
+          <div class="position-label">SP<br><span class="subtle">836 IP</span></div>
+          <div class="bar">
+            <div class="segment" style="width:22%; background:#4c72b0"></div>
+            <div class="segment" style="width:19%; background:#55a868"></div>
+            <div class="segment" style="width:11%; background:#c44e52"></div>
+            <div class="segment" style="width:48%; background:#999"></div>
+          </div>
+          <div class="stats">ERA 3.71<br>xERA 3.62</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RELIEF PITCHING -->
+    <div class="pitching-block">
+      <div class="position-row">
+        <div class="row-header">
+          <div class="position-label">RP<br><span class="subtle">612 IP</span></div>
+          <div class="bar">
+            <div class="segment" style="width:12%; background:#4c72b0"></div>
+            <div class="segment" style="width:10%; background:#55a868"></div>
+            <div class="segment" style="width:8%; background:#c44e52"></div>
+            <div class="segment" style="width:70%; background:#999"></div>
+          </div>
+          <div class="stats">ERA 3.88<br>xERA 3.91</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">
+    This page reflects where playing time and production came from, not player talent in isolation.
+  </div>
 
 </body>
 </html>
