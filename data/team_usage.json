@@ -1,0 +1,14 @@
+{
+  "2024": {
+    "Mariners": {
+      "positions": [
+        {"position": "C", "total_usage": 1300, "team_metric": 0.290, "players": [{"name": "Player1","usage":900,"percent":69,"wOBA":0.305,"xwOBA":0.310},{"name":"Player2","usage":400,"percent":31,"wOBA":0.270,"xwOBA":0.280}]}
+        /* ...add other positions C->DH... */
+      ],
+      "pitchers": [
+        {"role":"SP","total_IP":836,"team_metric":3.71,"pitchers":[{"name":"Castillo","IP":184,"percent":22,"ERA":3.42,"xERA":3.31}]}
+        /* ...add RP... */
+      ]
+    }
+  }
+}
