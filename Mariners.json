@@ -1,0 +1,120 @@
+{
+  "team": "Seattle Mariners",
+  "season": 2024,
+  "positions": [
+    {
+      "position": "C",
+      "total_usage": 1300,
+      "type": "position",
+      "team_metric": 0.290,
+      "players": [
+        {"name": "Player 1", "usage": 900, "percent": 69, "wOBA": 0.305, "xwOBA": 0.310},
+        {"name": "Player 2", "usage": 400, "percent": 31, "wOBA": 0.270, "xwOBA": 0.280}
+      ]
+    },
+    {
+      "position": "1B",
+      "total_usage": 1400,
+      "type": "position",
+      "team_metric": 0.300,
+      "players": [
+        {"name": "Player A", "usage": 1000, "percent": 71, "wOBA": 0.310, "xwOBA": 0.315},
+        {"name": "Player B", "usage": 400, "percent": 29, "wOBA": 0.280, "xwOBA": 0.290}
+      ]
+    },
+    {
+      "position": "2B",
+      "total_usage": 1350,
+      "type": "position",
+      "team_metric": 0.304,
+      "players": [
+        {"name": "Player A", "usage": 820, "percent": 61, "wOBA": 0.319, "xwOBA": 0.331},
+        {"name": "Player B", "usage": 360, "percent": 27, "wOBA": 0.287, "xwOBA": 0.301},
+        {"name": "Player C", "usage": 170, "percent": 12, "wOBA": 0.261, "xwOBA": 0.278}
+      ]
+    },
+    {
+      "position": "SS",
+      "total_usage": 1458,
+      "type": "position",
+      "team_metric": 0.298,
+      "players": [
+        {"name": "J.P. Crawford", "usage": 1202, "percent": 82, "wOBA": 0.304, "xwOBA": 0.318},
+        {"name": "Dylan Moore", "usage": 198, "percent": 14, "wOBA": 0.279, "xwOBA": 0.295},
+        {"name": "Others", "usage": 58, "percent": 4, "wOBA": 0.261, "xwOBA": 0.270}
+      ]
+    },
+    {
+      "position": "3B",
+      "total_usage": 1380,
+      "type": "position",
+      "team_metric": 0.303,
+      "players": [
+        {"name": "Player X", "usage": 900, "percent": 65, "wOBA": 0.312, "xwOBA": 0.320},
+        {"name": "Player Y", "usage": 480, "percent": 35, "wOBA": 0.285, "xwOBA": 0.295}
+      ]
+    },
+    {
+      "position": "LF",
+      "total_usage": 1320,
+      "type": "position",
+      "team_metric": 0.301,
+      "players": [
+        {"name": "Player L", "usage": 800, "percent": 61, "wOBA": 0.310, "xwOBA": 0.315},
+        {"name": "Player M", "usage": 520, "percent": 39, "wOBA": 0.287, "xwOBA": 0.292}
+      ]
+    },
+    {
+      "position": "CF",
+      "total_usage": 1400,
+      "type": "position",
+      "team_metric": 0.306,
+      "players": [
+        {"name": "Player C1", "usage": 1100, "percent": 79, "wOBA": 0.312, "xwOBA": 0.320},
+        {"name": "Player C2", "usage": 300, "percent": 21, "wOBA": 0.285, "xwOBA": 0.290}
+      ]
+    },
+    {
+      "position": "RF",
+      "total_usage": 1360,
+      "type": "position",
+      "team_metric": 0.299,
+      "players": [
+        {"name": "Player R1", "usage": 900, "percent": 66, "wOBA": 0.310, "xwOBA": 0.315},
+        {"name": "Player R2", "usage": 460, "percent": 34, "wOBA": 0.285, "xwOBA": 0.292}
+      ]
+    },
+    {
+      "position": "DH",
+      "total_usage": 650,
+      "type": "position",
+      "team_metric": 0.308,
+      "players": [
+        {"name": "Player D1", "usage": 400, "percent": 62, "wOBA": 0.315, "xwOBA": 0.320},
+        {"name": "Player D2", "usage": 250, "percent": 38, "wOBA": 0.285, "xwOBA": 0.295}
+      ]
+    }
+  ],
+  "pitchers": [
+    {
+      "role": "SP",
+      "total_IP": 836,
+      "team_metric": 3.71,
+      "pitchers": [
+        {"name": "Luis Castillo", "IP": 184, "percent": 22, "ERA": 3.42, "xERA": 3.31},
+        {"name": "Logan Gilbert", "IP": 161, "percent": 19, "ERA": 3.88, "xERA": 3.71},
+        {"name": "Others", "IP": 491, "percent": 59, "ERA": 4.10, "xERA": 3.95}
+      ]
+    },
+    {
+      "role": "RP",
+      "total_IP": 612,
+      "team_metric": 3.88,
+      "pitchers": [
+        {"name": "Paul Sewald", "IP": 72, "percent": 12, "ERA": 2.91, "xERA": 3.02},
+        {"name": "Matt Brash", "IP": 64, "percent": 10, "ERA": 3.38, "xERA": 3.55},
+        {"name": "Others", "IP": 476, "percent": 78, "ERA": 4.21, "xERA": 4.10}
+      ]
+    }
+  ]
+}
