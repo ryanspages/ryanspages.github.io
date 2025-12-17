@@ -13,6 +13,13 @@
       padding: 24px;
       background: #fafafa;
       color: #222;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px; /* ~80% on most desktop screens */
     }
 
     h1, h2 {
@@ -117,6 +124,11 @@
       display: none;
     }
 
+    /* Only show details when explicitly expanded */
+    .position-row.expanded .details {
+      display: block;
+    }
+
     .position-row.expanded .details {
       display: block;
     }
@@ -153,6 +165,7 @@
   </style>
 </head>
 <body>
+  <div class="container">
 
   <!-- PAGE HEADER -->
   <div class="page-header">
@@ -177,10 +190,10 @@
   <!-- POSITION PLAYERS -->
   <div class="section">
     <h2>Position Player Usage & Production</h2>
-    <div class="subtle">Bar length reflects share of team usage at that position</div>
+    <div class="subtle">All positions shown below. Click a bar to reveal player breakdown.</div>
 
-    <!-- POSITION ROW: SS -->
-    <div class="position-row expanded">
+    <!-- POSITION ROW TEMPLATE: repeat for each position (collapsed by default) -->
+    <div class="position-row">
       <div class="row-header">
         <div class="position-label">SS<br><span class="subtle">1,458 inn</span></div>
         <div class="bar">
@@ -275,8 +288,9 @@
   </div>
 
   <div class="footer-note">
-    This page reflects where playing time and production came from, not player talent in isolation.
+    This page reflects where playing time and production came from, not player talent in isolation. Click any bar to inspect player-level detail.
   </div>
 
+  </div>
 </body>
 </html>
