@@ -110,3 +110,19 @@ td, th {
   padding: 4px 8px;
   text-align: left;
 }
+.team-header {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* space between link and title */
+  margin-bottom: 24px;
+}
+
+.home-link {
+  font-size: 0.9rem;
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.home-link:hover {
+  text-decoration: underline;
+}
