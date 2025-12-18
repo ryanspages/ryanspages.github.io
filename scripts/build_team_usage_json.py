@@ -7,7 +7,7 @@ from pathlib import Path
 # -----------------------------
 INPUT_CSV = "raw_data/season_data.csv"
 OUTPUT_DIR = Path("data")
-TEAM = "NYY"
+TEAM = "CHC"
 YEAR = 2025
 
 # Bucketing thresholds

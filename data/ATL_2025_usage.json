@@ -1,0 +1,953 @@
+{
+  "team": "ATL",
+  "year": 2025,
+  "positions": [
+    {
+      "position": "C",
+      "total_inn": 1437.3,
+      "team_wOBA": 0.329,
+      "players": [
+        {
+          "name": "Chadwick Tromp",
+          "usage": 16.1,
+          "percent": 1.1,
+          "PA": 6,
+          "wOBA": 0.115,
+          "xwOBA": 0.151
+        },
+        {
+          "name": "Drake Baldwin",
+          "usage": 759.2,
+          "percent": 52.8,
+          "PA": 446,
+          "wOBA": 0.351,
+          "xwOBA": 0.353
+        },
+        {
+          "name": "Sandy Le\u00f3n",
+          "usage": 29.0,
+          "percent": 2.0,
+          "PA": 12,
+          "wOBA": 0.17,
+          "xwOBA": 0.112
+        },
+        {
+          "name": "Sean Murphy",
+          "usage": 633.0,
+          "percent": 44.0,
+          "PA": 337,
+          "wOBA": 0.309,
+          "xwOBA": 0.313
+        }
+      ]
+    },
+    {
+      "position": "1B",
+      "total_inn": 1438.0,
+      "team_wOBA": 0.345,
+      "players": [
+        {
+          "name": "Matt Olson",
+          "usage": 1429.0,
+          "percent": 99.4,
+          "PA": 724,
+          "wOBA": 0.366,
+          "xwOBA": 0.36
+        },
+        {
+          "name": "Other",
+          "usage": 9.0,
+          "percent": 0.6,
+          "PA": 271,
+          "wOBA": 0.29,
+          "xwOBA": 0.309
+        }
+      ]
+    },
+    {
+      "position": "2B",
+      "total_inn": 1438.0,
+      "team_wOBA": 0.275,
+      "players": [
+        {
+          "name": "Brett Wisely",
+          "usage": 26.0,
+          "percent": 1.8,
+          "PA": 9,
+          "wOBA": 0.23,
+          "xwOBA": 0.302
+        },
+        {
+          "name": "Nick Allen",
+          "usage": 25.0,
+          "percent": 1.7,
+          "PA": 416,
+          "wOBA": 0.245,
+          "xwOBA": 0.25
+        },
+        {
+          "name": "Ozzie Albies",
+          "usage": 1387.0,
+          "percent": 96.5,
+          "PA": 667,
+          "wOBA": 0.295,
+          "xwOBA": 0.298
+        }
+      ]
+    },
+    {
+      "position": "3B",
+      "total_inn": 1437.3,
+      "team_wOBA": 0.3,
+      "players": [
+        {
+          "name": "Austin Riley",
+          "usage": 888.2,
+          "percent": 61.8,
+          "PA": 447,
+          "wOBA": 0.318,
+          "xwOBA": 0.328
+        },
+        {
+          "name": "Luke Williams",
+          "usage": 24.0,
+          "percent": 1.7,
+          "PA": 34,
+          "wOBA": 0.167,
+          "xwOBA": 0.229
+        },
+        {
+          "name": "Nacho Alvarez Jr.",
+          "usage": 495.1,
+          "percent": 34.4,
+          "PA": 208,
+          "wOBA": 0.279,
+          "xwOBA": 0.265
+        },
+        {
+          "name": "Vidal Bruj\u00e1n",
+          "usage": 23.0,
+          "percent": 1.6,
+          "PA": 47,
+          "wOBA": 0.311,
+          "xwOBA": 0.333
+        },
+        {
+          "name": "Other",
+          "usage": 7.0,
+          "percent": 0.5,
+          "PA": 4,
+          "wOBA": 0.441,
+          "xwOBA": 0.126
+        }
+      ]
+    },
+    {
+      "position": "SS",
+      "total_inn": 1437.3,
+      "team_wOBA": 0.253,
+      "players": [
+        {
+          "name": "Ha-Seong Kim",
+          "usage": 208.0,
+          "percent": 14.5,
+          "PA": 98,
+          "wOBA": 0.301,
+          "xwOBA": 0.307
+        },
+        {
+          "name": "Luke Williams",
+          "usage": 63.1,
+          "percent": 4.4,
+          "PA": 34,
+          "wOBA": 0.167,
+          "xwOBA": 0.229
+        },
+        {
+          "name": "Nick Allen",
+          "usage": 1045.2,
+          "percent": 72.7,
+          "PA": 416,
+          "wOBA": 0.245,
+          "xwOBA": 0.25
+        },
+        {
+          "name": "Orlando Arcia",
+          "usage": 78.0,
+          "percent": 5.4,
+          "PA": 32,
+          "wOBA": 0.199,
+          "xwOBA": 0.21
+        },
+        {
+          "name": "Vidal Bruj\u00e1n",
+          "usage": 40.0,
+          "percent": 2.8,
+          "PA": 47,
+          "wOBA": 0.311,
+          "xwOBA": 0.333
+        },
+        {
+          "name": "Other",
+          "usage": 3.0,
+          "percent": 0.2,
+          "PA": 4,
+          "wOBA": 0.441,
+          "xwOBA": 0.126
+        }
+      ]
+    },
+    {
+      "position": "LF",
+      "total_inn": 1436.6,
+      "team_wOBA": 0.296,
+      "players": [
+        {
+          "name": "Alex Verdugo",
+          "usage": 426.1,
+          "percent": 29.7,
+          "PA": 213,
+          "wOBA": 0.264,
+          "xwOBA": 0.308
+        },
+        {
+          "name": "Bryan De La Cruz",
+          "usage": 90.0,
+          "percent": 6.3,
+          "PA": 50,
+          "wOBA": 0.208,
+          "xwOBA": 0.246
+        },
+        {
+          "name": "Eli White",
+          "usage": 189.2,
+          "percent": 13.2,
+          "PA": 271,
+          "wOBA": 0.29,
+          "xwOBA": 0.309
+        },
+        {
+          "name": "Jurickson Profar",
+          "usage": 701.0,
+          "percent": 48.8,
+          "PA": 371,
+          "wOBA": 0.346,
+          "xwOBA": 0.322
+        },
+        {
+          "name": "Stuart Fairchild",
+          "usage": 19.0,
+          "percent": 1.3,
+          "PA": 55,
+          "wOBA": 0.266,
+          "xwOBA": 0.267
+        },
+        {
+          "name": "Other",
+          "usage": 11.3,
+          "percent": 0.8,
+          "PA": 89,
+          "wOBA": 0.254,
+          "xwOBA": 0.28
+        }
+      ]
+    },
+    {
+      "position": "CF",
+      "total_inn": 1438.0,
+      "team_wOBA": 0.288,
+      "players": [
+        {
+          "name": "Eli White",
+          "usage": 33.0,
+          "percent": 2.3,
+          "PA": 271,
+          "wOBA": 0.29,
+          "xwOBA": 0.309
+        },
+        {
+          "name": "Michael Harris II",
+          "usage": 1397.0,
+          "percent": 97.1,
+          "PA": 641,
+          "wOBA": 0.289,
+          "xwOBA": 0.314
+        },
+        {
+          "name": "Other",
+          "usage": 8.0,
+          "percent": 0.6,
+          "PA": 55,
+          "wOBA": 0.266,
+          "xwOBA": 0.267
+        }
+      ]
+    },
+    {
+      "position": "RF",
+      "total_inn": 1436.6,
+      "team_wOBA": 0.33,
+      "players": [
+        {
+          "name": "Eli White",
+          "usage": 351.2,
+          "percent": 24.4,
+          "PA": 271,
+          "wOBA": 0.29,
+          "xwOBA": 0.309
+        },
+        {
+          "name": "Jake Fraley",
+          "usage": 34.0,
+          "percent": 2.4,
+          "PA": 24,
+          "wOBA": 0.302,
+          "xwOBA": 0.279
+        },
+        {
+          "name": "Jarred Kelenic",
+          "usage": 160.0,
+          "percent": 11.1,
+          "PA": 65,
+          "wOBA": 0.236,
+          "xwOBA": 0.281
+        },
+        {
+          "name": "Ronald Acu\u00f1a Jr.",
+          "usage": 779.2,
+          "percent": 54.2,
+          "PA": 412,
+          "wOBA": 0.403,
+          "xwOBA": 0.395
+        },
+        {
+          "name": "Stuart Fairchild",
+          "usage": 78.2,
+          "percent": 5.4,
+          "PA": 55,
+          "wOBA": 0.266,
+          "xwOBA": 0.267
+        },
+        {
+          "name": "Vidal Bruj\u00e1n",
+          "usage": 24.0,
+          "percent": 1.7,
+          "PA": 47,
+          "wOBA": 0.311,
+          "xwOBA": 0.333
+        },
+        {
+          "name": "Other",
+          "usage": 10.0,
+          "percent": 0.7,
+          "PA": 55,
+          "wOBA": 0.189,
+          "xwOBA": 0.227
+        }
+      ]
+    }
+  ],
+  "batting": {
+    "total_PA": 6186,
+    "players": [
+      {
+        "name": "Alex Verdugo",
+        "PA": 213,
+        "percent": 3.4,
+        "wOBA": 0.264,
+        "xwOBA": 0.308
+      },
+      {
+        "name": "Austin Riley",
+        "PA": 447,
+        "percent": 7.2,
+        "wOBA": 0.318,
+        "xwOBA": 0.328
+      },
+      {
+        "name": "Bryan De La Cruz",
+        "PA": 50,
+        "percent": 0.8,
+        "wOBA": 0.208,
+        "xwOBA": 0.246
+      },
+      {
+        "name": "Drake Baldwin",
+        "PA": 446,
+        "percent": 7.2,
+        "wOBA": 0.351,
+        "xwOBA": 0.353
+      },
+      {
+        "name": "Eli White",
+        "PA": 271,
+        "percent": 4.4,
+        "wOBA": 0.29,
+        "xwOBA": 0.309
+      },
+      {
+        "name": "Ha-Seong Kim",
+        "PA": 98,
+        "percent": 1.6,
+        "wOBA": 0.301,
+        "xwOBA": 0.307
+      },
+      {
+        "name": "Jake Fraley",
+        "PA": 24,
+        "percent": 0.4,
+        "wOBA": 0.302,
+        "xwOBA": 0.279
+      },
+      {
+        "name": "Jarred Kelenic",
+        "PA": 65,
+        "percent": 1.1,
+        "wOBA": 0.236,
+        "xwOBA": 0.281
+      },
+      {
+        "name": "Jurickson Profar",
+        "PA": 371,
+        "percent": 6.0,
+        "wOBA": 0.346,
+        "xwOBA": 0.322
+      },
+      {
+        "name": "Luke Williams",
+        "PA": 34,
+        "percent": 0.5,
+        "wOBA": 0.167,
+        "xwOBA": 0.229
+      },
+      {
+        "name": "Marcell Ozuna",
+        "PA": 592,
+        "percent": 9.6,
+        "wOBA": 0.334,
+        "xwOBA": 0.351
+      },
+      {
+        "name": "Matt Olson",
+        "PA": 724,
+        "percent": 11.7,
+        "wOBA": 0.366,
+        "xwOBA": 0.36
+      },
+      {
+        "name": "Michael Harris II",
+        "PA": 641,
+        "percent": 10.4,
+        "wOBA": 0.289,
+        "xwOBA": 0.314
+      },
+      {
+        "name": "Nacho Alvarez Jr.",
+        "PA": 208,
+        "percent": 3.4,
+        "wOBA": 0.279,
+        "xwOBA": 0.265
+      },
+      {
+        "name": "Nick Allen",
+        "PA": 416,
+        "percent": 6.7,
+        "wOBA": 0.245,
+        "xwOBA": 0.25
+      },
+      {
+        "name": "Orlando Arcia",
+        "PA": 32,
+        "percent": 0.5,
+        "wOBA": 0.199,
+        "xwOBA": 0.21
+      },
+      {
+        "name": "Ozzie Albies",
+        "PA": 667,
+        "percent": 10.8,
+        "wOBA": 0.295,
+        "xwOBA": 0.298
+      },
+      {
+        "name": "Ronald Acu\u00f1a Jr.",
+        "PA": 412,
+        "percent": 6.7,
+        "wOBA": 0.403,
+        "xwOBA": 0.395
+      },
+      {
+        "name": "Sean Murphy",
+        "PA": 337,
+        "percent": 5.4,
+        "wOBA": 0.309,
+        "xwOBA": 0.313
+      },
+      {
+        "name": "Stuart Fairchild",
+        "PA": 55,
+        "percent": 0.9,
+        "wOBA": 0.266,
+        "xwOBA": 0.267
+      },
+      {
+        "name": "Vidal Bruj\u00e1n",
+        "PA": 47,
+        "percent": 0.8,
+        "wOBA": 0.311,
+        "xwOBA": 0.333
+      },
+      {
+        "name": "Other",
+        "PA": 36,
+        "percent": 0.6,
+        "wOBA": 0.182,
+        "xwOBA": 0.158
+      }
+    ]
+  },
+  "pitching": {
+    "all": {
+      "total_ip": 1428.9,
+      "players": [
+        {
+          "name": "Aaron Bummer",
+          "IP": 54.1,
+          "percent": 3.8,
+          "ERA": 3.81,
+          "FIP": 3.52,
+          "xFIP": 3.68
+        },
+        {
+          "name": "AJ Smith-Shawver",
+          "IP": 44.1,
+          "percent": 3.1,
+          "ERA": 3.86,
+          "FIP": 3.9,
+          "xFIP": 4.36
+        },
+        {
+          "name": "Austin Cox",
+          "IP": 21.1,
+          "percent": 1.5,
+          "ERA": 8.86,
+          "FIP": 7.54,
+          "xFIP": 4.01
+        },
+        {
+          "name": "Bryce Elder",
+          "IP": 156.1,
+          "percent": 10.9,
+          "ERA": 5.3,
+          "FIP": 4.55,
+          "xFIP": 4.04
+        },
+        {
+          "name": "Carlos Carrasco",
+          "IP": 13.2,
+          "percent": 0.9,
+          "ERA": 9.88,
+          "FIP": 6.21,
+          "xFIP": 5.95
+        },
+        {
+          "name": "Chris Sale",
+          "IP": 125.2,
+          "percent": 8.8,
+          "ERA": 2.58,
+          "FIP": 2.67,
+          "xFIP": 2.98
+        },
+        {
+          "name": "Dane Dunning",
+          "IP": 10.0,
+          "percent": 0.7,
+          "ERA": 10.8,
+          "FIP": 4.74,
+          "xFIP": 3.21
+        },
+        {
+          "name": "Davis Daniel",
+          "IP": 10.0,
+          "percent": 0.7,
+          "ERA": 5.4,
+          "FIP": 5.04,
+          "xFIP": 5.89
+        },
+        {
+          "name": "Daysbel Hern\u00e1ndez",
+          "IP": 37.0,
+          "percent": 2.6,
+          "ERA": 3.41,
+          "FIP": 5.0,
+          "xFIP": 5.65
+        },
+        {
+          "name": "Didier Fuentes",
+          "IP": 13.0,
+          "percent": 0.9,
+          "ERA": 13.85,
+          "FIP": 9.14,
+          "xFIP": 5.74
+        },
+        {
+          "name": "Dylan Dodd",
+          "IP": 35.0,
+          "percent": 2.4,
+          "ERA": 3.6,
+          "FIP": 3.79,
+          "xFIP": 3.43
+        },
+        {
+          "name": "Dylan Lee",
+          "IP": 68.1,
+          "percent": 4.8,
+          "ERA": 3.29,
+          "FIP": 4.0,
+          "xFIP": 3.22
+        },
+        {
+          "name": "Enyel De Los Santos",
+          "IP": 43.2,
+          "percent": 3.0,
+          "ERA": 4.53,
+          "FIP": 3.36,
+          "xFIP": 4.5
+        },
+        {
+          "name": "Erick Fedde",
+          "IP": 23.1,
+          "percent": 1.6,
+          "ERA": 8.1,
+          "FIP": 5.49,
+          "xFIP": 5.67
+        },
+        {
+          "name": "Grant Holmes",
+          "IP": 115.0,
+          "percent": 8.0,
+          "ERA": 3.99,
+          "FIP": 4.4,
+          "xFIP": 4.04
+        },
+        {
+          "name": "Hunter Stratton",
+          "IP": 16.1,
+          "percent": 1.1,
+          "ERA": 2.2,
+          "FIP": 4.18,
+          "xFIP": 4.57
+        },
+        {
+          "name": "Hurston Waldrep",
+          "IP": 56.1,
+          "percent": 3.9,
+          "ERA": 2.88,
+          "FIP": 3.21,
+          "xFIP": 3.66
+        },
+        {
+          "name": "Joey Wentz",
+          "IP": 64.0,
+          "percent": 4.5,
+          "ERA": 4.92,
+          "FIP": 3.43,
+          "xFIP": 4.0
+        },
+        {
+          "name": "Jos\u00e9 Suarez",
+          "IP": 19.1,
+          "percent": 1.3,
+          "ERA": 1.86,
+          "FIP": 3.7,
+          "xFIP": 4.39
+        },
+        {
+          "name": "Pierce Johnson",
+          "IP": 59.0,
+          "percent": 4.1,
+          "ERA": 3.05,
+          "FIP": 3.91,
+          "xFIP": 4.03
+        },
+        {
+          "name": "Rafael Montero",
+          "IP": 34.1,
+          "percent": 2.4,
+          "ERA": 5.5,
+          "FIP": 4.13,
+          "xFIP": 4.65
+        },
+        {
+          "name": "Raisel Iglesias",
+          "IP": 67.1,
+          "percent": 4.7,
+          "ERA": 3.21,
+          "FIP": 3.31,
+          "xFIP": 3.78
+        },
+        {
+          "name": "Scott Blewett",
+          "IP": 16.1,
+          "percent": 1.1,
+          "ERA": 5.51,
+          "FIP": 7.36,
+          "xFIP": 4.51
+        },
+        {
+          "name": "Spencer Schwellenbach",
+          "IP": 110.2,
+          "percent": 7.7,
+          "ERA": 3.09,
+          "FIP": 3.25,
+          "xFIP": 3.01
+        },
+        {
+          "name": "Spencer Strider",
+          "IP": 125.1,
+          "percent": 8.8,
+          "ERA": 4.45,
+          "FIP": 4.53,
+          "xFIP": 4.24
+        },
+        {
+          "name": "Tyler Kinley",
+          "IP": 25.0,
+          "percent": 1.7,
+          "ERA": 0.72,
+          "FIP": 2.74,
+          "xFIP": 4.37
+        },
+        {
+          "name": "Other",
+          "IP": 68.8,
+          "percent": 4.8,
+          "ERA": 8.51,
+          "FIP": 7.48,
+          "xFIP": 5.86
+        }
+      ]
+    },
+    "relief_only": {
+      "total_ip": 449.3,
+      "players": [
+        {
+          "name": "Alexis D\u00edaz",
+          "IP": 2.2,
+          "percent": 0.5,
+          "ERA": 10.13,
+          "FIP": 6.14,
+          "xFIP": 6.14
+        },
+        {
+          "name": "Connor Seabold",
+          "IP": 3.2,
+          "percent": 0.7,
+          "ERA": 9.82,
+          "FIP": 6.41,
+          "xFIP": 4.96
+        },
+        {
+          "name": "Craig Kimbrel",
+          "IP": 1.0,
+          "percent": 0.2,
+          "ERA": 0.0,
+          "FIP": 4.14,
+          "xFIP": 4.14
+        },
+        {
+          "name": "Dane Dunning",
+          "IP": 10.0,
+          "percent": 2.2,
+          "ERA": 10.8,
+          "FIP": 4.74,
+          "xFIP": 3.21
+        },
+        {
+          "name": "Daysbel Hern\u00e1ndez",
+          "IP": 37.0,
+          "percent": 8.2,
+          "ERA": 3.41,
+          "FIP": 5.0,
+          "xFIP": 5.65
+        },
+        {
+          "name": "Dylan Dodd",
+          "IP": 35.0,
+          "percent": 7.8,
+          "ERA": 3.6,
+          "FIP": 3.79,
+          "xFIP": 3.43
+        },
+        {
+          "name": "Dylan Lee",
+          "IP": 68.1,
+          "percent": 15.2,
+          "ERA": 3.29,
+          "FIP": 4.0,
+          "xFIP": 3.22
+        },
+        {
+          "name": "Enyel De Los Santos",
+          "IP": 43.2,
+          "percent": 9.6,
+          "ERA": 4.53,
+          "FIP": 3.36,
+          "xFIP": 4.5
+        },
+        {
+          "name": "Hayden Harris",
+          "IP": 2.2,
+          "percent": 0.5,
+          "ERA": 3.38,
+          "FIP": 5.39,
+          "xFIP": 7.12
+        },
+        {
+          "name": "H\u00e9ctor Neris",
+          "IP": 1.0,
+          "percent": 0.2,
+          "ERA": 45.0,
+          "FIP": 17.14,
+          "xFIP": 7.22
+        },
+        {
+          "name": "Hunter Stratton",
+          "IP": 16.1,
+          "percent": 3.6,
+          "ERA": 2.2,
+          "FIP": 4.18,
+          "xFIP": 4.57
+        },
+        {
+          "name": "Jesse Chavez",
+          "IP": 8.0,
+          "percent": 1.8,
+          "ERA": 9.0,
+          "FIP": 9.51,
+          "xFIP": 6.09
+        },
+        {
+          "name": "Joel Payamps",
+          "IP": 2.2,
+          "percent": 0.5,
+          "ERA": 3.38,
+          "FIP": 6.51,
+          "xFIP": 3.95
+        },
+        {
+          "name": "John Brebbia",
+          "IP": 4.2,
+          "percent": 0.9,
+          "ERA": 7.71,
+          "FIP": 7.42,
+          "xFIP": 3.83
+        },
+        {
+          "name": "Jos\u00e9 Ruiz",
+          "IP": 2.0,
+          "percent": 0.4,
+          "ERA": 13.5,
+          "FIP": 4.64,
+          "xFIP": 6.95
+        },
+        {
+          "name": "Kevin Herget",
+          "IP": 1.0,
+          "percent": 0.2,
+          "ERA": 0.0,
+          "FIP": 9.14,
+          "xFIP": 10.68
+        },
+        {
+          "name": "Luke Williams",
+          "IP": 6.0,
+          "percent": 1.3,
+          "ERA": 3.0,
+          "FIP": 4.47,
+          "xFIP": 5.13
+        },
+        {
+          "name": "Michael Petersen",
+          "IP": 6.2,
+          "percent": 1.4,
+          "ERA": 4.05,
+          "FIP": 4.49,
+          "xFIP": 4.39
+        },
+        {
+          "name": "Nathan Wiles",
+          "IP": 1.0,
+          "percent": 0.2,
+          "ERA": 27.0,
+          "FIP": 1.14,
+          "xFIP": 2.68
+        },
+        {
+          "name": "Pierce Johnson",
+          "IP": 59.0,
+          "percent": 13.1,
+          "ERA": 3.05,
+          "FIP": 3.91,
+          "xFIP": 4.03
+        },
+        {
+          "name": "Rafael Montero",
+          "IP": 34.1,
+          "percent": 7.6,
+          "ERA": 5.5,
+          "FIP": 4.13,
+          "xFIP": 4.65
+        },
+        {
+          "name": "Raisel Iglesias",
+          "IP": 67.1,
+          "percent": 14.9,
+          "ERA": 3.21,
+          "FIP": 3.31,
+          "xFIP": 3.78
+        },
+        {
+          "name": "Rolddy Mu\u00f1oz",
+          "IP": 3.2,
+          "percent": 0.7,
+          "ERA": 12.27,
+          "FIP": 9.68,
+          "xFIP": 6.98
+        },
+        {
+          "name": "Tyler Kinley",
+          "IP": 25.0,
+          "percent": 5.6,
+          "ERA": 0.72,
+          "FIP": 2.74,
+          "xFIP": 4.37
+        },
+        {
+          "name": "Vidal Bruj\u00e1n",
+          "IP": 2.0,
+          "percent": 0.4,
+          "ERA": 13.5,
+          "FIP": 11.14,
+          "xFIP": 8.49
+        },
+        {
+          "name": "Wander Suero",
+          "IP": 6.1,
+          "percent": 1.4,
+          "ERA": 11.37,
+          "FIP": 8.98,
+          "xFIP": 5.98
+        },
+        {
+          "name": "Zach Thompson",
+          "IP": 3.2,
+          "percent": 0.7,
+          "ERA": 0.0,
+          "FIP": 2.32,
+          "xFIP": 4.42
+        }
+      ]
+    }
+  }
+}
