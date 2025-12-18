@@ -1,21 +1,15 @@
-// ----------------------------
-// Utilities
-// ----------------------------
+// js/usage_page.js
 
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
 }
 
 function getColor(team, index) {
-  const palette = TEAM_COLORS?.[team] || ["#666666"]; // fallback gray
-  return index < palette.length ? palette[index] : OTHER_COLOR;
+  const palette = TEAM_COLORS?.[team] || ["#666666"];
+  return index < palette.length ? palette[index] : "#999999";
 }
 
-// ----------------------------
-// Row Builder (Expandable)
-// ----------------------------
-
-function createRow(labelText, totalLabel, players, statLabel = "", tableColumns = []) {
+function createRow(team, labelText, totalLabel, players, statLabel = "", tableColumns = []) {
   const row = document.createElement("div");
   row.className = "position-row";
 
@@ -29,12 +23,11 @@ function createRow(labelText, totalLabel, players, statLabel = "", tableColumns 
   const bar = document.createElement("div");
   bar.className = "bar";
 
-  // ✅ Use index in forEach
   players.forEach((p, i) => {
     const seg = document.createElement("div");
     seg.className = "segment";
     seg.style.width = `${p.percent}%`;
-    seg.style.background = getColor(getParam("team"), i);
+    seg.style.background = getColor(team, i);
     seg.title = `${p.name}: ${p.percent.toFixed(1)}%`;
     bar.appendChild(seg);
   });
@@ -90,16 +83,15 @@ function createRow(labelText, totalLabel, players, statLabel = "", tableColumns 
   return row;
 }
 
-// ----------------------------
-// Build Dashboard
-// ----------------------------
-
 async function buildDashboard() {
   const team = getParam("team");
   const year = getParam("year");
 
+  const container = document.getElementById("usage-dashboard");
+  if (!container) return;
+
   if (!team || !year) {
-    document.body.innerHTML = "<h2>Missing team or year</h2>";
+    container.innerHTML = "<h2>Missing team or year</h2>";
     return;
   }
 
@@ -108,19 +100,109 @@ async function buildDashboard() {
   let data;
   try {
     const res = await fetch(file);
-    if (!res.ok) throw new Error("Data not found");
+    if (!res.ok) throw new Error("Not found");
     data = await res.json();
   } catch (e) {
-    document.body.innerHTML = `<h2>Could not load data for ${team} ${year}</h2>`;
+    container.innerHTML = `<h2>Could not load data for ${team} ${year}</h2>`;
     return;
   }
 
-  const container = document.getElementById("usage-dashboard");
   container.innerHTML = "";
 
-  // ----------------------------
-  // Defensive Positions
-  // ----------------------------
-
+  // --- Defensive ---
   const defenseSection = document.createElement("div");
-  defenseS
+  defenseSection.className = "section";
+  defenseSection.innerHTML = "<h2>Defense</h2>";
+
+  if (data.positions) {
+    data.positions.forEach(pos => {
+      const players = pos.players
+        .map(p => ({
+          name: p.name,
+          usage: p.usage,
+          percent: p.percent,
+          wOBA: p.wOBA,
+          xwOBA: p.xwOBA
+        }))
+        .sort((a, b) => b.percent - a.percent);
+
+      defenseSection.appendChild(
+        createRow(team, pos.position, `${pos.total_inn} inn`, players, `wOBA ${pos.team_wOBA}`, [
+          { label: "Player", key: "name" },
+          { label: "Innings", key: "usage" },
+          { label: "%", key: "percent" },
+          { label: "wOBA", key: "wOBA" },
+          { label: "xwOBA", key: "xwOBA" }
+        ])
+      );
+    });
+  } else {
+    defenseSection.innerHTML += "<p>No defensive data available.</p>";
+  }
+
+  container.appendChild(defenseSection);
+
+  // --- Batting ---
+  const batSection = document.createElement("div");
+  batSection.className = "section";
+  batSection.innerHTML = "<h2>Batting</h2>";
+
+  if (data.batting) {
+    const batPlayers = data.batting.players
+      .map(p => ({
+        name: p.name,
+        PA: p.PA,
+        percent: (p.PA / data.batting.total_PA) * 100,
+        wOBA: p.wOBA,
+        xwOBA: p.xwOBA
+      }))
+      .sort((a, b) => b.percent - a.percent);
+
+    batSection.appendChild(
+      createRow(team, "Batters", `${data.batting.total_PA} PA`, batPlayers, "", [
+        { label: "Player", key: "name" },
+        { label: "PA", key: "PA" },
+        { label: "%", key: "percent" },
+        { label: "wOBA", key: "wOBA" },
+        { label: "xwOBA", key: "xwOBA" }
+      ])
+    );
+  } else {
+    batSection.innerHTML += "<p>No batting data available.</p>";
+  }
+
+  container.appendChild(batSection);
+
+  // --- Pitching ---
+  const pitchSection = document.createElement("div");
+  pitchSection.className = "section";
+  pitchSection.innerHTML = "<h2>Pitching</h2>";
+
+  if (data.pitching && data.pitching.all) {
+    const allPitchers = data.pitching.all.players
+      .map(p => ({
+        name: p.name,
+        IP: p.IP,
+        percent: (p.IP / data.pitching.all.total_ip) * 100,
+        ERA: p.ERA,
+        FIP: p.FIP
+      }))
+      .sort((a, b) => b.percent - a.percent);
+
+    pitchSection.appendChild(
+      createRow(team, "All Pitchers", `${data.pitching.all.total_ip} IP`, allPitchers, "", [
+        { label: "Pitcher", key: "name" },
+        { label: "IP", key: "IP" },
+        { label: "%", key: "percent" },
+        { label: "ERA", key: "ERA" },
+        { label: "FIP", key: "FIP" }
+      ])
+    );
+  } else {
+    pitchSection.innerHTML += "<p>No pitching data available.</p>";
+  }
+
+  container.appendChild(pitchSection);
+}
+
+buildDashboard();

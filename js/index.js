@@ -1,3 +1,4 @@
+// js/index.js
 async function buildTeamSelector() {
   const container = document.querySelector("#team-selector");
   if (!container) return;
@@ -10,11 +11,13 @@ async function buildTeamSelector() {
     card.className = "team-card";
     card.textContent = team;
 
-    // Apply team colors (use first color as primary background, second color for text)
+    // Use first team color as background, text white for contrast
     if (window.TEAM_COLORS && TEAM_COLORS[team]) {
-      const [bgColor, textColor] = TEAM_COLORS[team];
-      card.style.backgroundColor = bgColor;
-      card.style.color = textColor || "#ffffff";
+      card.style.backgroundColor = TEAM_COLORS[team][0];
+      card.style.color = "#ffffff";
+    } else {
+      card.style.backgroundColor = "#777";
+      card.style.color = "#000";
     }
 
     card.onclick = () => {
