@@ -1,4 +1,7 @@
 // js/index.js
+if (!window.TEAM_COLORS) {
+  console.error("TEAM_COLORS not defined. Make sure team_colors.js is loaded first.");
+}
 
 async function buildTeamSelector() {
   const container = document.querySelector("#team-selector");
