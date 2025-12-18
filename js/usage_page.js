@@ -6,12 +6,9 @@ function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
 }
 
-function getColor(name) {
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return `hsl(${hash % 360}, 60%, 60%)`;
+function getColor(team, index) {
+  const palette = TEAM_COLORS[team] || ["#666666"]; // fallback gray
+  return index < palette.length ? palette[index] : OTHER_COLOR;
 }
 
 // ----------------------------
@@ -36,7 +33,7 @@ function createRow(labelText, totalLabel, players, statLabel = "", tableColumns 
     const seg = document.createElement("div");
     seg.className = "segment";
     seg.style.width = `${p.percent}%`;
-    seg.style.background = getColor(p.name);
+    seg.style.background = getColor(team, i);
     seg.title = `${p.name}: ${p.percent.toFixed(1)}%`;
     bar.appendChild(seg);
   });
