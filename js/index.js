@@ -10,11 +10,17 @@ async function buildTeamSelector() {
     card.className = "team-card";
     card.textContent = team;
 
-    // Apply team color (use first color as background, second as text)
+    // Apply team colors
     if (window.TEAM_COLORS && TEAM_COLORS[team]) {
-      card.style.backgroundColor = TEAM_COLORS[team][0]; // primary color
-      card.style.color = TEAM_COLORS[team][1] || "#ffffff"; // secondary color or white
-      card.style.border = `2px solid ${TEAM_COLORS[team][0]}`;
+      const colors = TEAM_COLORS[team];
+      card.style.backgroundColor = colors[0];       // primary color
+      card.style.borderColor = colors[1] || "#000"; // secondary color
+      card.style.color = colors[2] || "#fff";       // text color
+    } else {
+      // fallback colors
+      card.style.backgroundColor = "#cccccc";
+      card.style.borderColor = "#888888";
+      card.style.color = "#000000";
     }
 
     card.onclick = () => {
@@ -26,7 +32,10 @@ async function buildTeamSelector() {
   });
 }
 
-// Ensure scripts are loaded
-window.addEventListener("DOMContentLoaded", () => {
-  buildTeamSelector();
-});
+// Ensure TEAM_COLORS is loaded before running
+function waitForTeamColors(callback) {
+  if (window.TEAM_COLORS) callback();
+  else setTimeout(() => waitForTeamColors(callback), 50);
+}
+
+waitForTeamColors(buildTeamSelector);
