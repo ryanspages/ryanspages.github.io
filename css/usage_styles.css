@@ -120,14 +120,24 @@ h2 {
 }
 
 table {
+  width: auto;              /* do NOT force full width */
+  max-width: 100%;
   border-collapse: collapse;
-  width: 100%;
+  font-size: 0.85rem;
+  margin-top: 8px;
+  display: inline-table;
+}
+
+.section table {
+  background: #fff;
+  border-radius: 6px;
 }
 
 td, th {
   border: 1px solid #ccc;
-  padding: 4px 8px;
+  padding: 3px 6px;
   text-align: left;
+  white-space: nowrap;   /* prevents ugly column stretching */
 }
 .toggle-view {
   margin: 8px 0 16px;
