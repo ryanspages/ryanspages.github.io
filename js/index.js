@@ -1,13 +1,7 @@
-// js/index.js
-if (!window.TEAM_COLORS) {
-  console.error("TEAM_COLORS not defined. Make sure team_colors.js is loaded first.");
-}
-
 async function buildTeamSelector() {
   const container = document.querySelector("#team-selector");
   if (!container) return;
 
-  // Load index data
   const resp = await fetch("data/index.json");
   const data = await resp.json();
 
@@ -16,20 +10,13 @@ async function buildTeamSelector() {
     card.className = "team-card";
     card.textContent = team;
 
-    // Apply team colors
+    // Apply team color (use first color as background, second as text)
     if (window.TEAM_COLORS && TEAM_COLORS[team]) {
-      const colors = TEAM_COLORS[team];
-      card.style.backgroundColor = colors[0];   // primary color
-      card.style.color = "#ffffff";             // text color for readability
-      card.style.border = `2px solid ${colors[1] || "#000"}`; // secondary color border
-    } else {
-      // Fallback for teams without a defined palette
-      card.style.backgroundColor = "#666666";
-      card.style.color = "#ffffff";
-      card.style.border = "2px solid #444";
+      card.style.backgroundColor = TEAM_COLORS[team][0]; // primary color
+      card.style.color = TEAM_COLORS[team][1] || "#ffffff"; // secondary color or white
+      card.style.border = `2px solid ${TEAM_COLORS[team][0]}`;
     }
 
-    // Navigate to team page on click
     card.onclick = () => {
       const latestYear = Math.max(...data.years);
       window.location.href = `team.html?team=${team}&year=${latestYear}`;
@@ -39,5 +26,7 @@ async function buildTeamSelector() {
   });
 }
 
-// Initialize
-buildTeamSelector();
+// Ensure scripts are loaded
+window.addEventListener("DOMContentLoaded", () => {
+  buildTeamSelector();
+});
