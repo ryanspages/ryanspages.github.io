@@ -1,5 +1,8 @@
 // js/usage_page.js
 
+// ----------------------------
+// Utilities
+// ----------------------------
 function getParam(name) {
   return new URLSearchParams(window.location.search).get(name);
 }
@@ -9,6 +12,9 @@ function getColor(team, index) {
   return index < palette.length ? palette[index] : "#999999";
 }
 
+// ----------------------------
+// Row Builder (Expandable)
+// ----------------------------
 function createRow(team, labelText, totalLabel, players, statLabel = "", tableColumns = []) {
   const row = document.createElement("div");
   row.className = "position-row";
@@ -83,6 +89,9 @@ function createRow(team, labelText, totalLabel, players, statLabel = "", tableCo
   return row;
 }
 
+// ----------------------------
+// Build Dashboard
+// ----------------------------
 async function buildDashboard() {
   const team = getParam("team");
   const year = getParam("year");
@@ -90,14 +99,20 @@ async function buildDashboard() {
   const container = document.getElementById("usage-dashboard");
   if (!container) return;
 
+  // --- Page Title ---
+  const pageTitleEl = document.querySelector("#page-title");
+  if (pageTitleEl) {
+    pageTitleEl.textContent = TEAM_NAMES?.[team] || team;
+  }
+
   if (!team || !year) {
     container.innerHTML = "<h2>Missing team or year</h2>";
     return;
   }
 
   const file = `data/${team}_${year}_usage.json`;
-
   let data;
+
   try {
     const res = await fetch(file);
     if (!res.ok) throw new Error("Not found");
@@ -205,4 +220,7 @@ async function buildDashboard() {
   container.appendChild(pitchSection);
 }
 
+// ----------------------------
+// Initialize
+// ----------------------------
 buildDashboard();
