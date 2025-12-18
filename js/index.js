@@ -10,9 +10,11 @@ async function buildTeamSelector() {
     card.className = "team-card";
     card.textContent = team;
 
-    // Apply team color (use first color as primary)
+    // Apply team colors (use first color as primary background, second color for text)
     if (window.TEAM_COLORS && TEAM_COLORS[team]) {
-      card.style.borderColor = TEAM_COLORS[team][0];
+      const [bgColor, textColor] = TEAM_COLORS[team];
+      card.style.backgroundColor = bgColor;
+      card.style.color = textColor || "#ffffff";
     }
 
     card.onclick = () => {
