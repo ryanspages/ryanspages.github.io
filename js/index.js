@@ -1,41 +1,32 @@
-async function buildTeamSelector() {
-  const container = document.querySelector("#team-selector");
-  if (!container) return;
+// index.js
+const container = document.querySelector("#team-selector");
 
-  const resp = await fetch("data/index.json");
-  const data = await resp.json();
+fetch("data/index.json")
+  .then(resp => resp.json())
+  .then(data => {
+    data.teams.forEach(team => {
+      const card = document.createElement("div");
+      card.className = "team-card";
+      card.textContent = team;
 
-  data.teams.forEach(team => {
-    const card = document.createElement("div");
-    card.className = "team-card";
-    card.textContent = team;
+      // Apply team colors
+      if (TEAM_COLORS && TEAM_COLORS[team]) {
+        const colors = TEAM_COLORS[team];
+        card.style.backgroundColor = colors[0];  // primary
+        card.style.borderColor = colors[1] || "#000"; // secondary
+        card.style.color = colors[2] || "#fff"; // text
+      } else {
+        card.style.backgroundColor = "#cccccc";
+        card.style.borderColor = "#888888";
+        card.style.color = "#000000";
+      }
 
-    // Apply team colors
-    if (window.TEAM_COLORS && TEAM_COLORS[team]) {
-      const colors = TEAM_COLORS[team];
-      card.style.backgroundColor = colors[0];       // primary color
-      card.style.borderColor = colors[1] || "#000"; // secondary color
-      card.style.color = colors[2] || "#fff";       // text color
-    } else {
-      // fallback colors
-      card.style.backgroundColor = "#cccccc";
-      card.style.borderColor = "#888888";
-      card.style.color = "#000000";
-    }
+      card.onclick = () => {
+        const latestYear = Math.max(...data.years);
+        window.location.href = `team.html?team=${team}&year=${latestYear}`;
+      };
 
-    card.onclick = () => {
-      const latestYear = Math.max(...data.years);
-      window.location.href = `team.html?team=${team}&year=${latestYear}`;
-    };
-
-    container.appendChild(card);
-  });
-}
-
-// Ensure TEAM_COLORS is loaded before running
-function waitForTeamColors(callback) {
-  if (window.TEAM_COLORS) callback();
-  else setTimeout(() => waitForTeamColors(callback), 50);
-}
-
-waitForTeamColors(buildTeamSelector);
+      container.appendChild(card);
+    });
+  })
+  .catch(err => console.error("Could not load teams:", err));
