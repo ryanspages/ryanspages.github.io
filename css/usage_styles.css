@@ -9,8 +9,12 @@ body {
 }
 
 .container {
-  width: 100%;
+  width: 80%;
   max-width: 1200px;
+    background: #e8e8e8; /* white box on gray page */
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 h1, h2 {
@@ -98,7 +102,7 @@ h2 {
 
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 90%;
 }
 
 td, th {
