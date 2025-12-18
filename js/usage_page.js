@@ -7,7 +7,7 @@ function getParam(name) {
 }
 
 function getColor(team, index) {
-  const palette = TEAM_COLORS[team] || ["#666666"]; // fallback gray
+  const palette = TEAM_COLORS?.[team] || ["#666666"]; // fallback gray
   return index < palette.length ? palette[index] : OTHER_COLOR;
 }
 
@@ -29,11 +29,12 @@ function createRow(labelText, totalLabel, players, statLabel = "", tableColumns 
   const bar = document.createElement("div");
   bar.className = "bar";
 
-  players.forEach(p => {
+  // ✅ Use index in forEach
+  players.forEach((p, i) => {
     const seg = document.createElement("div");
     seg.className = "segment";
     seg.style.width = `${p.percent}%`;
-    seg.style.background = getColor(team, i);
+    seg.style.background = getColor(getParam("team"), i);
     seg.title = `${p.name}: ${p.percent.toFixed(1)}%`;
     bar.appendChild(seg);
   });
@@ -82,9 +83,9 @@ function createRow(labelText, totalLabel, players, statLabel = "", tableColumns 
   row.appendChild(details);
 
   header.onclick = () => {
-  const isOpen = details.style.display === "block";
-  details.style.display = isOpen ? "none" : "block";
-};
+    const isOpen = details.style.display === "block";
+    details.style.display = isOpen ? "none" : "block";
+  };
 
   return row;
 }
@@ -107,6 +108,7 @@ async function buildDashboard() {
   let data;
   try {
     const res = await fetch(file);
+    if (!res.ok) throw new Error("Data not found");
     data = await res.json();
   } catch (e) {
     document.body.innerHTML = `<h2>Could not load data for ${team} ${year}</h2>`;
@@ -116,123 +118,9 @@ async function buildDashboard() {
   const container = document.getElementById("usage-dashboard");
   container.innerHTML = "";
 
-// ----------------------------
-// Defensive Positions
-// ----------------------------
-
-const defenseSection = document.createElement("div");
-defenseSection.className = "section";
-defenseSection.innerHTML = "<h2>Defense</h2>";
-
-if (data.positions) {
-  data.positions.forEach(pos => {
-    const players = pos.players
-      .map(p => ({
-        name: p.name,
-        usage: p.usage,
-        percent: p.percent,
-        wOBA: p.wOBA,
-        xwOBA: p.xwOBA
-      }))
-      .sort((a, b) => b.percent - a.percent); // largest → smallest
-
-    defenseSection.appendChild(
-      createRow(
-        pos.position,
-        `${pos.total_inn} inn`,
-        players,
-        `wOBA ${pos.team_wOBA}`,
-        [
-          { label: "Player", key: "name" },
-          { label: "Innings", key: "usage" },
-          { label: "%", key: "percent" },
-          { label: "wOBA", key: "wOBA" },
-          { label: "xwOBA", key: "xwOBA" }
-        ]
-      )
-    );
-  });
-} else {
-  defenseSection.innerHTML += "<p>No defensive data available.</p>";
-}
-
-container.appendChild(defenseSection);
-
   // ----------------------------
-  // Batting
+  // Defensive Positions
   // ----------------------------
 
-  const batSection = document.createElement("div");
-  batSection.className = "section";
-  batSection.innerHTML = "<h2>Batting</h2>";
-
-  const batPlayers = data.batting.players
-    .map(p => ({
-      name: p.name,
-      PA: p.PA,
-      percent: (p.PA / data.batting.total_PA) * 100,
-      wOBA: p.wOBA,
-      xwOBA: p.xwOBA
-    }))
-    .sort((a, b) => b.percent - a.percent);
-
-  batSection.appendChild(
-    createRow(
-      "Batters",
-      `${data.batting.total_PA} PA`,
-      batPlayers,
-      "",
-      [
-        { label: "Player", key: "name" },
-        { label: "PA", key: "PA" },
-        { label: "%", key: "percent" },
-        { label: "wOBA", key: "wOBA" },
-        { label: "xwOBA", key: "xwOBA" }
-      ]
-    )
-  );
-
-  container.appendChild(batSection);
-
-  // ----------------------------
-  // Pitching – All IP
-  // ----------------------------
-
-  const pitchSection = document.createElement("div");
-  pitchSection.className = "section";
-  pitchSection.innerHTML = "<h2>Pitching</h2>";
-
-  const allPitchers = data.pitching.all.players
-    .map(p => ({
-      name: p.name,
-      IP: p.IP,
-      percent: (p.IP / data.pitching.all.total_ip) * 100,
-      ERA: p.ERA,
-      FIP: p.FIP
-    }))
-    .sort((a, b) => b.percent - a.percent);
-
-  pitchSection.appendChild(
-    createRow(
-      "All Pitchers",
-      `${data.pitching.all.total_ip} IP`,
-      allPitchers,
-      "",
-      [
-        { label: "Pitcher", key: "name" },
-        { label: "IP", key: "IP" },
-        { label: "%", key: "percent" },
-        { label: "ERA", key: "ERA" },
-        { label: "FIP", key: "FIP" }
-      ]
-    )
-  );
-
-  container.appendChild(pitchSection);
-}
-
-// ----------------------------
-// Init
-// ----------------------------
-
-buildDashboard();
+  const defenseSection = document.createElement("div");
+  defenseS
