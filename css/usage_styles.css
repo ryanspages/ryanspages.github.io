@@ -110,11 +110,13 @@ td, th {
   padding: 4px 8px;
   text-align: left;
 }
+
 .team-header {
   display: flex;
-  align-items: center;
-  gap: 16px; /* space between link and title */
-  margin-bottom: 24px;
+  align-items: center;   /* vertically center the link and title */
+  gap: 16px;             /* space between link and title */
+  margin-bottom: 24px;   /* spacing below header */
+  flex-wrap: wrap;        /* optional, prevents overflow on small screens */
 }
 
 .home-link {
