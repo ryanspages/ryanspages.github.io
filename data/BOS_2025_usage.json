@@ -409,6 +409,48 @@
           "xwOBA": 0.324
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 707,
+      "team_wOBA": 0.357,
+      "players": [
+        {
+          "name": "Masataka Yoshida",
+          "PA": 179,
+          "percent": 25.3,
+          "wOBA": 0.302,
+          "xwOBA": 0.319
+        },
+        {
+          "name": "Rafael Devers",
+          "PA": 334,
+          "percent": 47.2,
+          "wOBA": 0.385,
+          "xwOBA": 0.389
+        },
+        {
+          "name": "Rob Refsnyder",
+          "PA": 72,
+          "percent": 10.2,
+          "wOBA": 0.359,
+          "xwOBA": 0.336
+        },
+        {
+          "name": "Roman Anthony",
+          "PA": 78,
+          "percent": 11.0,
+          "wOBA": 0.376,
+          "xwOBA": 0.371
+        },
+        {
+          "name": "Other",
+          "PA": 44,
+          "percent": 6.2,
+          "wOBA": 0.331,
+          "xwOBA": 0.319
+        }
+      ]
     }
   ],
   "batting": {

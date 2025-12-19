@@ -401,6 +401,27 @@
           "xwOBA": 0.324
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 710,
+      "team_wOBA": 0.416,
+      "players": [
+        {
+          "name": "Shohei Ohtani",
+          "PA": 695,
+          "percent": 97.9,
+          "wOBA": 0.418,
+          "xwOBA": 0.423
+        },
+        {
+          "name": "Other",
+          "PA": 15,
+          "percent": 2.1,
+          "wOBA": 0.3,
+          "xwOBA": 0.413
+        }
+      ]
     }
   ],
   "batting": {

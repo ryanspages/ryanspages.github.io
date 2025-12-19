@@ -489,6 +489,34 @@
           "xwOBA": 0.32
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 698,
+      "team_wOBA": 0.31,
+      "players": [
+        {
+          "name": "Andrew McCutchen",
+          "PA": 513,
+          "percent": 73.5,
+          "wOBA": 0.309,
+          "xwOBA": 0.332
+        },
+        {
+          "name": "Bryan Reynolds",
+          "PA": 151,
+          "percent": 21.6,
+          "wOBA": 0.315,
+          "xwOBA": 0.338
+        },
+        {
+          "name": "Other",
+          "PA": 34,
+          "percent": 4.9,
+          "wOBA": 0.308,
+          "xwOBA": 0.32
+        }
+      ]
     }
   ],
   "batting": {

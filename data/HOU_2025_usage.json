@@ -473,6 +473,55 @@
           "xwOBA": 0.239
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 682,
+      "team_wOBA": 0.321,
+      "players": [
+        {
+          "name": "Isaac Paredes",
+          "PA": 50,
+          "percent": 7.3,
+          "wOBA": 0.353,
+          "xwOBA": 0.318
+        },
+        {
+          "name": "Jose Altuve",
+          "PA": 211,
+          "percent": 30.9,
+          "wOBA": 0.331,
+          "xwOBA": 0.301
+        },
+        {
+          "name": "Victor Caratini",
+          "PA": 117,
+          "percent": 17.2,
+          "wOBA": 0.318,
+          "xwOBA": 0.327
+        },
+        {
+          "name": "Yainer Diaz",
+          "PA": 105,
+          "percent": 15.4,
+          "wOBA": 0.3,
+          "xwOBA": 0.329
+        },
+        {
+          "name": "Yordan Alvarez",
+          "PA": 136,
+          "percent": 19.9,
+          "wOBA": 0.338,
+          "xwOBA": 0.391
+        },
+        {
+          "name": "Other",
+          "PA": 63,
+          "percent": 9.2,
+          "wOBA": 0.267,
+          "xwOBA": 0.302
+        }
+      ]
     }
   ],
   "batting": {

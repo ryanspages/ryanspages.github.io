@@ -473,6 +473,62 @@
           "xwOBA": 0.291
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 672,
+      "team_wOBA": 0.33,
+      "players": [
+        {
+          "name": "Austin Hays",
+          "PA": 160,
+          "percent": 23.8,
+          "wOBA": 0.327,
+          "xwOBA": 0.3
+        },
+        {
+          "name": "Elly De La Cruz",
+          "PA": 20,
+          "percent": 3.0,
+          "wOBA": 0.333,
+          "xwOBA": 0.322
+        },
+        {
+          "name": "Gavin Lux",
+          "PA": 222,
+          "percent": 33.0,
+          "wOBA": 0.322,
+          "xwOBA": 0.296
+        },
+        {
+          "name": "Miguel Andujar",
+          "PA": 88,
+          "percent": 13.1,
+          "wOBA": 0.407,
+          "xwOBA": 0.324
+        },
+        {
+          "name": "Spencer Steer",
+          "PA": 65,
+          "percent": 9.7,
+          "wOBA": 0.316,
+          "xwOBA": 0.292
+        },
+        {
+          "name": "Tyler Stephenson",
+          "PA": 70,
+          "percent": 10.4,
+          "wOBA": 0.319,
+          "xwOBA": 0.311
+        },
+        {
+          "name": "Other",
+          "PA": 47,
+          "percent": 7.0,
+          "wOBA": 0.272,
+          "xwOBA": 0.272
+        }
+      ]
     }
   ],
   "batting": {

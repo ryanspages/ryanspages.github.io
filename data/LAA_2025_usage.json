@@ -481,6 +481,41 @@
           "xwOBA": 0.191
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 695,
+      "team_wOBA": 0.327,
+      "players": [
+        {
+          "name": "Jorge Soler",
+          "PA": 152,
+          "percent": 21.9,
+          "wOBA": 0.298,
+          "xwOBA": 0.295
+        },
+        {
+          "name": "Logan O'Hoppe",
+          "PA": 35,
+          "percent": 5.0,
+          "wOBA": 0.273,
+          "xwOBA": 0.299
+        },
+        {
+          "name": "Mike Trout",
+          "PA": 463,
+          "percent": 66.6,
+          "wOBA": 0.343,
+          "xwOBA": 0.358
+        },
+        {
+          "name": "Other",
+          "PA": 45,
+          "percent": 6.5,
+          "wOBA": 0.307,
+          "xwOBA": 0.313
+        }
+      ]
     }
   ],
   "batting": {
@@ -629,7 +664,7 @@
       {
         "name": "Taylor Ward",
         "PA": 663,
-        "percent": 11.0,
+        "percent": 11.1,
         "wOBA": 0.339,
         "xwOBA": 0.331
       },
@@ -643,7 +678,7 @@
       {
         "name": "Travis d'Arnaud",
         "PA": 231,
-        "percent": 3.8,
+        "percent": 3.9,
         "wOBA": 0.263,
         "xwOBA": 0.273
       },

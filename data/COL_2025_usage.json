@@ -465,6 +465,76 @@
           "xwOBA": 0.193
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 626,
+      "team_wOBA": 0.303,
+      "players": [
+        {
+          "name": "Hunter Goodman",
+          "PA": 159,
+          "percent": 25.4,
+          "wOBA": 0.359,
+          "xwOBA": 0.321
+        },
+        {
+          "name": "Jordan Beck",
+          "PA": 21,
+          "percent": 3.4,
+          "wOBA": 0.319,
+          "xwOBA": 0.299
+        },
+        {
+          "name": "Kris Bryant",
+          "PA": 40,
+          "percent": 6.4,
+          "wOBA": 0.181,
+          "xwOBA": 0.216
+        },
+        {
+          "name": "Kyle Farmer",
+          "PA": 59,
+          "percent": 9.4,
+          "wOBA": 0.282,
+          "xwOBA": 0.282
+        },
+        {
+          "name": "Mickey Moniak",
+          "PA": 40,
+          "percent": 6.4,
+          "wOBA": 0.348,
+          "xwOBA": 0.338
+        },
+        {
+          "name": "Nick Martini",
+          "PA": 51,
+          "percent": 8.1,
+          "wOBA": 0.259,
+          "xwOBA": 0.252
+        },
+        {
+          "name": "Tyler Freeman",
+          "PA": 116,
+          "percent": 18.5,
+          "wOBA": 0.319,
+          "xwOBA": 0.323
+        },
+        {
+          "name": "Yanquiel Fern\u00e1ndez",
+          "PA": 76,
+          "percent": 12.1,
+          "wOBA": 0.268,
+          "xwOBA": 0.244
+        },
+        {
+          "name": "Other",
+          "PA": 64,
+          "percent": 10.2,
+          "wOBA": 0.275,
+          "xwOBA": 0.276
+        }
+      ]
     }
   ],
   "batting": {

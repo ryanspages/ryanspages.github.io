@@ -433,6 +433,76 @@
           "xwOBA": 0.246
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 654,
+      "team_wOBA": 0.303,
+      "players": [
+        {
+          "name": "Gavin Sheets",
+          "PA": 243,
+          "percent": 37.2,
+          "wOBA": 0.323,
+          "xwOBA": 0.339
+        },
+        {
+          "name": "Jose Iglesias",
+          "PA": 20,
+          "percent": 3.1,
+          "wOBA": 0.268,
+          "xwOBA": 0.279
+        },
+        {
+          "name": "Luis Arraez",
+          "PA": 129,
+          "percent": 19.7,
+          "wOBA": 0.313,
+          "xwOBA": 0.3
+        },
+        {
+          "name": "Luis Campusano",
+          "PA": 25,
+          "percent": 3.8,
+          "wOBA": 0.154,
+          "xwOBA": 0.208
+        },
+        {
+          "name": "Manny Machado",
+          "PA": 61,
+          "percent": 9.3,
+          "wOBA": 0.341,
+          "xwOBA": 0.354
+        },
+        {
+          "name": "Ryan O'Hearn",
+          "PA": 64,
+          "percent": 9.8,
+          "wOBA": 0.325,
+          "xwOBA": 0.3
+        },
+        {
+          "name": "Trenton Brooks",
+          "PA": 29,
+          "percent": 4.4,
+          "wOBA": 0.199,
+          "xwOBA": 0.253
+        },
+        {
+          "name": "Xander Bogaerts",
+          "PA": 40,
+          "percent": 6.1,
+          "wOBA": 0.313,
+          "xwOBA": 0.325
+        },
+        {
+          "name": "Other",
+          "PA": 43,
+          "percent": 6.6,
+          "wOBA": 0.241,
+          "xwOBA": 0.27
+        }
+      ]
     }
   ],
   "batting": {

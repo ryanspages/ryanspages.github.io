@@ -393,6 +393,48 @@
           "xwOBA": 0.287
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 681,
+      "team_wOBA": 0.349,
+      "players": [
+        {
+          "name": "Cal Raleigh",
+          "PA": 170,
+          "percent": 25.0,
+          "wOBA": 0.392,
+          "xwOBA": 0.369
+        },
+        {
+          "name": "Dominic Canzone",
+          "PA": 21,
+          "percent": 3.1,
+          "wOBA": 0.363,
+          "xwOBA": 0.374
+        },
+        {
+          "name": "Jorge Polanco",
+          "PA": 354,
+          "percent": 52.0,
+          "wOBA": 0.35,
+          "xwOBA": 0.341
+        },
+        {
+          "name": "Mitch Garver",
+          "PA": 96,
+          "percent": 14.1,
+          "wOBA": 0.284,
+          "xwOBA": 0.298
+        },
+        {
+          "name": "Other",
+          "PA": 40,
+          "percent": 5.9,
+          "wOBA": 0.311,
+          "xwOBA": 0.323
+        }
+      ]
     }
   ],
   "batting": {

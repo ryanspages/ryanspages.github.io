@@ -369,6 +369,55 @@
           "xwOBA": 0.244
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 658,
+      "team_wOBA": 0.315,
+      "players": [
+        {
+          "name": "Carlos Santana",
+          "PA": 68,
+          "percent": 10.3,
+          "wOBA": 0.292,
+          "xwOBA": 0.293
+        },
+        {
+          "name": "David Fry",
+          "PA": 128,
+          "percent": 19.5,
+          "wOBA": 0.258,
+          "xwOBA": 0.204
+        },
+        {
+          "name": "George Valera",
+          "PA": 30,
+          "percent": 4.6,
+          "wOBA": 0.33,
+          "xwOBA": 0.263
+        },
+        {
+          "name": "Jos\u00e9 Ram\u00edrez",
+          "PA": 114,
+          "percent": 17.3,
+          "wOBA": 0.36,
+          "xwOBA": 0.342
+        },
+        {
+          "name": "Kyle Manzardo",
+          "PA": 291,
+          "percent": 44.2,
+          "wOBA": 0.329,
+          "xwOBA": 0.321
+        },
+        {
+          "name": "Other",
+          "PA": 27,
+          "percent": 4.1,
+          "wOBA": 0.296,
+          "xwOBA": 0.299
+        }
+      ]
     }
   ],
   "batting": {

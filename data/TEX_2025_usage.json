@@ -505,6 +505,69 @@
           "xwOBA": 0.313
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 624,
+      "team_wOBA": 0.285,
+      "players": [
+        {
+          "name": "Corey Seager",
+          "PA": 21,
+          "percent": 3.4,
+          "wOBA": 0.365,
+          "xwOBA": 0.401
+        },
+        {
+          "name": "Jake Burger",
+          "PA": 29,
+          "percent": 4.6,
+          "wOBA": 0.295,
+          "xwOBA": 0.323
+        },
+        {
+          "name": "Joc Pederson",
+          "PA": 279,
+          "percent": 44.7,
+          "wOBA": 0.276,
+          "xwOBA": 0.313
+        },
+        {
+          "name": "Jonah Heim",
+          "PA": 78,
+          "percent": 12.5,
+          "wOBA": 0.266,
+          "xwOBA": 0.272
+        },
+        {
+          "name": "Josh Smith",
+          "PA": 44,
+          "percent": 7.1,
+          "wOBA": 0.311,
+          "xwOBA": 0.313
+        },
+        {
+          "name": "Kyle Higashioka",
+          "PA": 63,
+          "percent": 10.1,
+          "wOBA": 0.301,
+          "xwOBA": 0.293
+        },
+        {
+          "name": "Sam Haggerty",
+          "PA": 32,
+          "percent": 5.1,
+          "wOBA": 0.307,
+          "xwOBA": 0.302
+        },
+        {
+          "name": "Other",
+          "PA": 78,
+          "percent": 12.5,
+          "wOBA": 0.274,
+          "xwOBA": 0.297
+        }
+      ]
     }
   ],
   "batting": {

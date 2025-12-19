@@ -497,6 +497,55 @@
           "xwOBA": 0.302
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 703,
+      "team_wOBA": 0.354,
+      "players": [
+        {
+          "name": "Brandon Lowe",
+          "PA": 39,
+          "percent": 5.5,
+          "wOBA": 0.334,
+          "xwOBA": 0.337
+        },
+        {
+          "name": "Christopher Morel",
+          "PA": 59,
+          "percent": 8.4,
+          "wOBA": 0.299,
+          "xwOBA": 0.306
+        },
+        {
+          "name": "Jonathan Aranda",
+          "PA": 44,
+          "percent": 6.3,
+          "wOBA": 0.381,
+          "xwOBA": 0.381
+        },
+        {
+          "name": "Junior Caminero",
+          "PA": 26,
+          "percent": 3.7,
+          "wOBA": 0.357,
+          "xwOBA": 0.344
+        },
+        {
+          "name": "Yandy D\u00edaz",
+          "PA": 496,
+          "percent": 70.6,
+          "wOBA": 0.364,
+          "xwOBA": 0.354
+        },
+        {
+          "name": "Other",
+          "PA": 39,
+          "percent": 5.5,
+          "wOBA": 0.303,
+          "xwOBA": 0.306
+        }
+      ]
     }
   ],
   "batting": {

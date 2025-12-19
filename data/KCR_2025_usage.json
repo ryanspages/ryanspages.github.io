@@ -537,6 +537,76 @@
           "xwOBA": 0.335
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 665,
+      "team_wOBA": 0.313,
+      "players": [
+        {
+          "name": "Adam Frazier",
+          "PA": 28,
+          "percent": 4.2,
+          "wOBA": 0.314,
+          "xwOBA": 0.273
+        },
+        {
+          "name": "Carter Jensen",
+          "PA": 38,
+          "percent": 5.7,
+          "wOBA": 0.403,
+          "xwOBA": 0.444
+        },
+        {
+          "name": "Cavan Biggio",
+          "PA": 22,
+          "percent": 3.3,
+          "wOBA": 0.257,
+          "xwOBA": 0.29
+        },
+        {
+          "name": "Jac Caglianone",
+          "PA": 28,
+          "percent": 4.2,
+          "wOBA": 0.239,
+          "xwOBA": 0.318
+        },
+        {
+          "name": "Jonathan India",
+          "PA": 117,
+          "percent": 17.6,
+          "wOBA": 0.301,
+          "xwOBA": 0.313
+        },
+        {
+          "name": "Maikel Garcia",
+          "PA": 24,
+          "percent": 3.6,
+          "wOBA": 0.347,
+          "xwOBA": 0.335
+        },
+        {
+          "name": "Salvador Perez",
+          "PA": 160,
+          "percent": 24.1,
+          "wOBA": 0.311,
+          "xwOBA": 0.356
+        },
+        {
+          "name": "Vinnie Pasquantino",
+          "PA": 144,
+          "percent": 21.7,
+          "wOBA": 0.34,
+          "xwOBA": 0.334
+        },
+        {
+          "name": "Other",
+          "PA": 104,
+          "percent": 15.6,
+          "wOBA": 0.286,
+          "xwOBA": 0.308
+        }
+      ]
     }
   ],
   "batting": {

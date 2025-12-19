@@ -497,6 +497,76 @@
           "xwOBA": 0.2
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 681,
+      "team_wOBA": 0.317,
+      "players": [
+        {
+          "name": "Byron Buxton",
+          "PA": 37,
+          "percent": 5.4,
+          "wOBA": 0.367,
+          "xwOBA": 0.348
+        },
+        {
+          "name": "Edouard Julien",
+          "PA": 39,
+          "percent": 5.7,
+          "wOBA": 0.286,
+          "xwOBA": 0.329
+        },
+        {
+          "name": "Luke Keaschall",
+          "PA": 27,
+          "percent": 4.0,
+          "wOBA": 0.363,
+          "xwOBA": 0.323
+        },
+        {
+          "name": "Matt Wallner",
+          "PA": 55,
+          "percent": 8.1,
+          "wOBA": 0.334,
+          "xwOBA": 0.325
+        },
+        {
+          "name": "Mickey Gasper",
+          "PA": 33,
+          "percent": 4.8,
+          "wOBA": 0.229,
+          "xwOBA": 0.235
+        },
+        {
+          "name": "Royce Lewis",
+          "PA": 24,
+          "percent": 3.5,
+          "wOBA": 0.292,
+          "xwOBA": 0.296
+        },
+        {
+          "name": "Ryan Jeffers",
+          "PA": 118,
+          "percent": 17.3,
+          "wOBA": 0.333,
+          "xwOBA": 0.323
+        },
+        {
+          "name": "Trevor Larnach",
+          "PA": 338,
+          "percent": 49.6,
+          "wOBA": 0.317,
+          "xwOBA": 0.314
+        },
+        {
+          "name": "Other",
+          "PA": 10,
+          "percent": 1.5,
+          "wOBA": 0.195,
+          "xwOBA": 0.225
+        }
+      ]
     }
   ],
   "batting": {

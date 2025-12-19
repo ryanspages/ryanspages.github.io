@@ -433,6 +433,62 @@
           "xwOBA": 0.273
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 717,
+      "team_wOBA": 0.361,
+      "players": [
+        {
+          "name": "Alejandro Kirk",
+          "PA": 30,
+          "percent": 4.2,
+          "wOBA": 0.334,
+          "xwOBA": 0.357
+        },
+        {
+          "name": "Anthony Santander",
+          "PA": 128,
+          "percent": 17.9,
+          "wOBA": 0.255,
+          "xwOBA": 0.264
+        },
+        {
+          "name": "Bo Bichette",
+          "PA": 34,
+          "percent": 4.7,
+          "wOBA": 0.361,
+          "xwOBA": 0.352
+        },
+        {
+          "name": "George Springer",
+          "PA": 359,
+          "percent": 50.1,
+          "wOBA": 0.408,
+          "xwOBA": 0.404
+        },
+        {
+          "name": "Ty France",
+          "PA": 20,
+          "percent": 2.8,
+          "wOBA": 0.3,
+          "xwOBA": 0.311
+        },
+        {
+          "name": "Vladimir Guerrero Jr.",
+          "PA": 107,
+          "percent": 14.9,
+          "wOBA": 0.366,
+          "xwOBA": 0.384
+        },
+        {
+          "name": "Other",
+          "PA": 39,
+          "percent": 5.4,
+          "wOBA": 0.312,
+          "xwOBA": 0.321
+        }
+      ]
     }
   ],
   "batting": {

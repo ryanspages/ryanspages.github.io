@@ -425,6 +425,69 @@
           "xwOBA": 0.287
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 655,
+      "team_wOBA": 0.332,
+      "players": [
+        {
+          "name": "Adrian Del Castillo",
+          "PA": 103,
+          "percent": 15.7,
+          "wOBA": 0.295,
+          "xwOBA": 0.267
+        },
+        {
+          "name": "Gabriel Moreno",
+          "PA": 27,
+          "percent": 4.1,
+          "wOBA": 0.34,
+          "xwOBA": 0.343
+        },
+        {
+          "name": "Josh Naylor",
+          "PA": 80,
+          "percent": 12.2,
+          "wOBA": 0.347,
+          "xwOBA": 0.343
+        },
+        {
+          "name": "Ketel Marte",
+          "PA": 92,
+          "percent": 14.0,
+          "wOBA": 0.381,
+          "xwOBA": 0.389
+        },
+        {
+          "name": "Lourdes Gurriel Jr.",
+          "PA": 49,
+          "percent": 7.5,
+          "wOBA": 0.307,
+          "xwOBA": 0.313
+        },
+        {
+          "name": "Pavin Smith",
+          "PA": 146,
+          "percent": 22.3,
+          "wOBA": 0.348,
+          "xwOBA": 0.32
+        },
+        {
+          "name": "Randal Grichuk",
+          "PA": 89,
+          "percent": 13.6,
+          "wOBA": 0.308,
+          "xwOBA": 0.337
+        },
+        {
+          "name": "Other",
+          "PA": 69,
+          "percent": 10.5,
+          "wOBA": 0.315,
+          "xwOBA": 0.31
+        }
+      ]
     }
   ],
   "batting": {

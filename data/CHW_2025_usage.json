@@ -537,6 +537,69 @@
           "xwOBA": 0.236
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 664,
+      "team_wOBA": 0.304,
+      "players": [
+        {
+          "name": "Andrew Benintendi",
+          "PA": 188,
+          "percent": 28.3,
+          "wOBA": 0.317,
+          "xwOBA": 0.32
+        },
+        {
+          "name": "Andrew Vaughn",
+          "PA": 68,
+          "percent": 10.2,
+          "wOBA": 0.23,
+          "xwOBA": 0.308
+        },
+        {
+          "name": "Edgar Quero",
+          "PA": 115,
+          "percent": 17.3,
+          "wOBA": 0.307,
+          "xwOBA": 0.288
+        },
+        {
+          "name": "Kyle Teel",
+          "PA": 56,
+          "percent": 8.4,
+          "wOBA": 0.349,
+          "xwOBA": 0.337
+        },
+        {
+          "name": "Lenyn Sosa",
+          "PA": 42,
+          "percent": 6.3,
+          "wOBA": 0.313,
+          "xwOBA": 0.326
+        },
+        {
+          "name": "Mike Tauchman",
+          "PA": 80,
+          "percent": 12.0,
+          "wOBA": 0.335,
+          "xwOBA": 0.32
+        },
+        {
+          "name": "Nick Maton",
+          "PA": 47,
+          "percent": 7.1,
+          "wOBA": 0.273,
+          "xwOBA": 0.235
+        },
+        {
+          "name": "Other",
+          "PA": 68,
+          "percent": 10.2,
+          "wOBA": 0.281,
+          "xwOBA": 0.302
+        }
+      ]
     }
   ],
   "batting": {

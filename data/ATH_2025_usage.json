@@ -505,6 +505,41 @@
           "xwOBA": 0.276
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 709,
+      "team_wOBA": 0.351,
+      "players": [
+        {
+          "name": "Brent Rooker",
+          "PA": 584,
+          "percent": 82.4,
+          "wOBA": 0.349,
+          "xwOBA": 0.352
+        },
+        {
+          "name": "Nick Kurtz",
+          "PA": 23,
+          "percent": 3.2,
+          "wOBA": 0.419,
+          "xwOBA": 0.371
+        },
+        {
+          "name": "Shea Langeliers",
+          "PA": 72,
+          "percent": 10.2,
+          "wOBA": 0.364,
+          "xwOBA": 0.328
+        },
+        {
+          "name": "Other",
+          "PA": 30,
+          "percent": 4.2,
+          "wOBA": 0.315,
+          "xwOBA": 0.296
+        }
+      ]
     }
   ],
   "batting": {

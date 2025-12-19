@@ -513,6 +513,90 @@
           "xwOBA": 0.295
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 670,
+      "team_wOBA": 0.315,
+      "players": [
+        {
+          "name": "Adley Rutschman",
+          "PA": 76,
+          "percent": 11.3,
+          "wOBA": 0.298,
+          "xwOBA": 0.324
+        },
+        {
+          "name": "Coby Mayo",
+          "PA": 35,
+          "percent": 5.2,
+          "wOBA": 0.303,
+          "xwOBA": 0.287
+        },
+        {
+          "name": "Gary S\u00e1nchez",
+          "PA": 24,
+          "percent": 3.6,
+          "wOBA": 0.311,
+          "xwOBA": 0.319
+        },
+        {
+          "name": "Gunnar Henderson",
+          "PA": 36,
+          "percent": 5.4,
+          "wOBA": 0.339,
+          "xwOBA": 0.339
+        },
+        {
+          "name": "Jordan Westburg",
+          "PA": 63,
+          "percent": 9.4,
+          "wOBA": 0.332,
+          "xwOBA": 0.327
+        },
+        {
+          "name": "Ram\u00f3n Laureano",
+          "PA": 32,
+          "percent": 4.8,
+          "wOBA": 0.376,
+          "xwOBA": 0.364
+        },
+        {
+          "name": "Ryan Mountcastle",
+          "PA": 143,
+          "percent": 21.3,
+          "wOBA": 0.284,
+          "xwOBA": 0.311
+        },
+        {
+          "name": "Ryan O'Hearn",
+          "PA": 124,
+          "percent": 18.5,
+          "wOBA": 0.362,
+          "xwOBA": 0.365
+        },
+        {
+          "name": "Samuel Basallo",
+          "PA": 28,
+          "percent": 4.2,
+          "wOBA": 0.246,
+          "xwOBA": 0.287
+        },
+        {
+          "name": "Tyler O'Neill",
+          "PA": 51,
+          "percent": 7.6,
+          "wOBA": 0.297,
+          "xwOBA": 0.363
+        },
+        {
+          "name": "Other",
+          "PA": 58,
+          "percent": 8.7,
+          "wOBA": 0.303,
+          "xwOBA": 0.295
+        }
+      ]
     }
   ],
   "batting": {

@@ -345,6 +345,27 @@
           "xwOBA": 0.329
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 724,
+      "team_wOBA": 0.388,
+      "players": [
+        {
+          "name": "Kyle Schwarber",
+          "PA": 687,
+          "percent": 94.9,
+          "wOBA": 0.391,
+          "xwOBA": 0.402
+        },
+        {
+          "name": "Other",
+          "PA": 37,
+          "percent": 5.1,
+          "wOBA": 0.323,
+          "xwOBA": 0.322
+        }
+      ]
     }
   ],
   "batting": {

@@ -401,6 +401,48 @@
           "xwOBA": 0.284
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 714,
+      "team_wOBA": 0.402,
+      "players": [
+        {
+          "name": "Aaron Judge",
+          "PA": 253,
+          "percent": 35.4,
+          "wOBA": 0.463,
+          "xwOBA": 0.458
+        },
+        {
+          "name": "Ben Rice",
+          "PA": 213,
+          "percent": 29.8,
+          "wOBA": 0.358,
+          "xwOBA": 0.396
+        },
+        {
+          "name": "Giancarlo Stanton",
+          "PA": 197,
+          "percent": 27.6,
+          "wOBA": 0.395,
+          "xwOBA": 0.354
+        },
+        {
+          "name": "Jasson Dom\u00ednguez",
+          "PA": 41,
+          "percent": 5.7,
+          "wOBA": 0.316,
+          "xwOBA": 0.305
+        },
+        {
+          "name": "Other",
+          "PA": 10,
+          "percent": 1.4,
+          "wOBA": 0.306,
+          "xwOBA": 0.318
+        }
+      ]
     }
   ],
   "batting": {

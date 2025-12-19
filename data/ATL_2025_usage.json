@@ -345,6 +345,41 @@
           "xwOBA": 0.227
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 695,
+      "team_wOBA": 0.335,
+      "players": [
+        {
+          "name": "Drake Baldwin",
+          "PA": 52,
+          "percent": 7.5,
+          "wOBA": 0.351,
+          "xwOBA": 0.353
+        },
+        {
+          "name": "Marcell Ozuna",
+          "PA": 584,
+          "percent": 84.0,
+          "wOBA": 0.334,
+          "xwOBA": 0.351
+        },
+        {
+          "name": "Sean Murphy",
+          "PA": 29,
+          "percent": 4.2,
+          "wOBA": 0.309,
+          "xwOBA": 0.313
+        },
+        {
+          "name": "Other",
+          "PA": 30,
+          "percent": 4.3,
+          "wOBA": 0.351,
+          "xwOBA": 0.35
+        }
+      ]
     }
   ],
   "batting": {

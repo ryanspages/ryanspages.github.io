@@ -345,6 +345,48 @@
           "xwOBA": 0.265
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 691,
+      "team_wOBA": 0.339,
+      "players": [
+        {
+          "name": "Justin Turner",
+          "PA": 59,
+          "percent": 8.5,
+          "wOBA": 0.268,
+          "xwOBA": 0.295
+        },
+        {
+          "name": "Kyle Tucker",
+          "PA": 84,
+          "percent": 12.2,
+          "wOBA": 0.363,
+          "xwOBA": 0.371
+        },
+        {
+          "name": "Mois\u00e9s Ballesteros",
+          "PA": 60,
+          "percent": 8.7,
+          "wOBA": 0.374,
+          "xwOBA": 0.338
+        },
+        {
+          "name": "Seiya Suzuki",
+          "PA": 444,
+          "percent": 64.3,
+          "wOBA": 0.343,
+          "xwOBA": 0.351
+        },
+        {
+          "name": "Other",
+          "PA": 44,
+          "percent": 6.4,
+          "wOBA": 0.295,
+          "xwOBA": 0.3
+        }
+      ]
     }
   ],
   "batting": {

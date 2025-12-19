@@ -393,6 +393,48 @@
           "xwOBA": 0.303
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 681,
+      "team_wOBA": 0.319,
+      "players": [
+        {
+          "name": "Bryce Eldridge",
+          "PA": 22,
+          "percent": 3.2,
+          "wOBA": 0.242,
+          "xwOBA": 0.364
+        },
+        {
+          "name": "Dominic Smith",
+          "PA": 21,
+          "percent": 3.1,
+          "wOBA": 0.325,
+          "xwOBA": 0.303
+        },
+        {
+          "name": "Rafael Devers",
+          "PA": 265,
+          "percent": 38.9,
+          "wOBA": 0.348,
+          "xwOBA": 0.348
+        },
+        {
+          "name": "Wilmer Flores",
+          "PA": 341,
+          "percent": 50.1,
+          "wOBA": 0.302,
+          "xwOBA": 0.282
+        },
+        {
+          "name": "Other",
+          "PA": 32,
+          "percent": 4.7,
+          "wOBA": 0.31,
+          "xwOBA": 0.312
+        }
+      ]
     }
   ],
   "batting": {

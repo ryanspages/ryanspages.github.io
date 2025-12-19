@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 from pathlib import Path
+import numpy as np
 
 # -----------------------------
 # CONFIG
@@ -9,7 +10,7 @@ INPUT_CSV = "raw_data/season_data.csv"
 OUTPUT_DIR = Path("data")
 YEAR = 2025
 
-# List the teams you want to generate files for
+# Teams to generate
 TEAMS = [
     "ARI", "ATL", "BAL", "BOS", "CHC", "CHW", "CIN", "CLE", "COL",
     "DET", "HOU", "KCR", "LAA", "LAD", "MIA", "MIL", "MIN", "NYM",
@@ -23,7 +24,7 @@ DEF_OTHER_INN = 10
 PITCH_OTHER_IP = 10
 RP_OTHER_IP = 1
 
-# Defensive position mapping
+# Defensive positions mapping
 DEF_POSITIONS = {
     "C": "C_Inn",
     "1B": "FirstB_Inn",
@@ -43,14 +44,24 @@ def weighted_avg(series, weights):
         return None
     return (series * weights).sum() / weights.sum()
 
+def safe_int(val):
+    if pd.isna(val):
+        return None
+    return int(val)
+
+def safe_float(val, round_digits=None):
+    if pd.isna(val):
+        return None
+    val = float(val)
+    if round_digits is not None:
+        val = round(val, round_digits)
+    return val
 
 # -----------------------------
-# LOAD FULL DATA
+# LOAD DATA
 # -----------------------------
 df_full = pd.read_csv(INPUT_CSV)
-
-# Ensure numeric columns are numeric
-df_full = df_full.apply(pd.to_numeric, errors="ignore")
+df_full = df_full.apply(pd.to_numeric, errors="ignore")  # FutureWarning in pandas >=2.0
 
 OUTPUT_DIR.mkdir(exist_ok=True)
 
@@ -59,11 +70,11 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 # -----------------------------
 for TEAM in TEAMS:
     print(f"Processing {TEAM} {YEAR}...")
-
     df = df_full[(df_full["Team"] == TEAM) & (df_full["Year"] == YEAR)].copy()
 
-    # Defensive positions
     positions_output = []
+
+    # --------- DEFENSIVE POSITIONS ----------
     for pos, col in DEF_POSITIONS.items():
         total_inn = df[col].sum()
         if total_inn == 0:
@@ -77,11 +88,11 @@ for TEAM in TEAMS:
         for _, row in major.iterrows():
             players.append({
                 "name": row["Name"],
-                "usage": round(row[col], 1),
-                "percent": round(row[col] / total_inn * 100, 1),
-                "PA": int(row["PA"]),
-                "wOBA": row["wOBA"],
-                "xwOBA": row["xwOBA"]
+                "usage": safe_float(row[col], 1),
+                "percent": safe_float(row[col] / total_inn * 100, 1),
+                "PA": safe_int(row["PA"]),
+                "wOBA": safe_float(row["wOBA"], 3),
+                "xwOBA": safe_float(row["xwOBA"], 3)
             })
 
         if not minor.empty:
@@ -90,21 +101,21 @@ for TEAM in TEAMS:
             xwoba = weighted_avg(minor["xwOBA"], minor["PA"])
             players.append({
                 "name": "Other",
-                "usage": round(minor[col].sum(), 1),
-                "percent": round(minor[col].sum() / total_inn * 100, 1) if total_inn > 0 else 0,
-                "PA": int(minor_pa),
-                "wOBA": None if woba is None else round(woba, 3),
-                "xwOBA": None if xwoba is None else round(xwoba, 3)
+                "usage": safe_float(minor[col].sum(), 1),
+                "percent": safe_float(minor[col].sum() / total_inn * 100, 1),
+                "PA": safe_int(minor_pa),
+                "wOBA": safe_float(woba, 3),
+                "xwOBA": safe_float(xwoba, 3)
             })
 
         positions_output.append({
             "position": pos,
-            "total_inn": round(total_inn, 1),
-            "team_wOBA": round(weighted_avg(pos_players["wOBA"], pos_players["PA"]), 3),
+            "total_inn": safe_float(total_inn, 1),
+            "team_wOBA": safe_float(weighted_avg(pos_players["wOBA"], pos_players["PA"]), 3),
             "players": players
         })
 
-    # Batting
+    # --------- BATTING ----------
     batters = df[df["PA"] > 0].copy()
     total_pa = batters["PA"].sum()
     major = batters[batters["PA"] >= BATTER_OTHER_PA]
@@ -114,24 +125,58 @@ for TEAM in TEAMS:
     for _, row in major.iterrows():
         batting_players.append({
             "name": row["Name"],
-            "PA": int(row["PA"]),
-            "percent": round(row["PA"] / total_pa * 100, 1),
-            "wOBA": row["wOBA"],
-            "xwOBA": row["xwOBA"]
+            "PA": safe_int(row["PA"]),
+            "percent": safe_float(row["PA"] / total_pa * 100, 1),
+            "wOBA": safe_float(row["wOBA"], 3),
+            "xwOBA": safe_float(row["xwOBA"], 3)
         })
 
     if not minor.empty:
         batting_players.append({
             "name": "Other",
-            "PA": int(minor["PA"].sum()),
-            "percent": round(minor["PA"].sum() / total_pa * 100, 1),
-            "wOBA": None if weighted_avg(minor["wOBA"], minor["PA"]) is None else round(weighted_avg(minor["wOBA"], minor["PA"]), 3),
-            "xwOBA": None if weighted_avg(minor["xwOBA"], minor["PA"]) is None else round(weighted_avg(minor["xwOBA"], minor["PA"]), 3)
+            "PA": safe_int(minor["PA"].sum()),
+            "percent": safe_float(minor["PA"].sum() / total_pa * 100, 1),
+            "wOBA": safe_float(weighted_avg(minor["wOBA"], minor["PA"]), 3),
+            "xwOBA": safe_float(weighted_avg(minor["xwOBA"], minor["PA"]), 3)
         })
 
-    batting_output = {"total_PA": int(total_pa), "players": batting_players}
+    batting_output = {"total_PA": safe_int(total_pa), "players": batting_players}
 
-    # Pitching — all IP
+    # --------- DH POSITION ----------
+    dh_players_df = df[df["DH_PA"] > 0].copy()
+    total_dh_pa = dh_players_df["DH_PA"].sum()
+    dh_players = []
+
+    major = dh_players_df[dh_players_df["DH_PA"] >= BATTER_OTHER_PA]
+    minor = dh_players_df[dh_players_df["DH_PA"] < BATTER_OTHER_PA]
+
+    for _, row in major.iterrows():
+        dh_players.append({
+            "name": row["Name"],
+            "PA": safe_int(row["DH_PA"]),
+            "percent": safe_float(row["DH_PA"] / total_dh_pa * 100, 1),
+            "wOBA": safe_float(row["wOBA"], 3),
+            "xwOBA": safe_float(row["xwOBA"], 3)
+        })
+
+    if not minor.empty:
+        dh_players.append({
+            "name": "Other",
+            "PA": safe_int(minor["DH_PA"].sum()),
+            "percent": safe_float(minor["DH_PA"].sum() / total_dh_pa * 100, 1),
+            "wOBA": safe_float(weighted_avg(minor["wOBA"], minor["DH_PA"]), 3),
+            "xwOBA": safe_float(weighted_avg(minor["xwOBA"], minor["DH_PA"]), 3)
+        })
+
+    if dh_players:
+        positions_output.append({
+            "position": "DH",
+            "total_inn": safe_int(total_dh_pa),  # using PA instead of innings
+            "team_wOBA": safe_float(weighted_avg(dh_players_df["wOBA"], dh_players_df["DH_PA"]), 3),
+            "players": dh_players
+        })
+
+    # --------- PITCHING ALL ----------
     pitchers = df[df["IP"] > 0].copy()
     total_ip = pitchers["IP"].sum()
     major = pitchers[pitchers["IP"] >= PITCH_OTHER_IP]
@@ -141,68 +186,24 @@ for TEAM in TEAMS:
     for _, row in major.iterrows():
         pitching_all.append({
             "name": row["Name"],
-            "IP": round(row["IP"], 1),
-            "percent": round(row["IP"] / total_ip * 100, 1),
-            "ERA": row["ERA"],
-            "FIP": row["FIP"],
-            "xFIP": row["xFIP"]
+            "IP": safe_float(row["IP"], 1),
+            "percent": safe_float(row["IP"] / total_ip * 100, 1),
+            "ERA": safe_float(row["ERA"], 2),
+            "FIP": safe_float(row["FIP"], 2),
+            "xFIP": safe_float(row["xFIP"], 2)
         })
 
     if not minor.empty:
         pitching_all.append({
             "name": "Other",
-            "IP": round(minor["IP"].sum(), 1),
-            "percent": round(minor["IP"].sum() / total_ip * 100, 1),
-            "ERA": None if weighted_avg(minor["ERA"], minor["IP"]) is None else round(weighted_avg(minor["ERA"], minor["IP"]), 2),
-            "FIP": None if weighted_avg(minor["FIP"], minor["IP"]) is None else round(weighted_avg(minor["FIP"], minor["IP"]), 2),
-            "xFIP": None if weighted_avg(minor["xFIP"], minor["IP"]) is None else round(weighted_avg(minor["xFIP"], minor["IP"]), 2)
+            "IP": safe_float(minor["IP"].sum(), 1),
+            "percent": safe_float(minor["IP"].sum() / total_ip * 100, 1),
+            "ERA": safe_float(weighted_avg(minor["ERA"], minor["IP"]), 2),
+            "FIP": safe_float(weighted_avg(minor["FIP"], minor["IP"]), 2),
+            "xFIP": safe_float(weighted_avg(minor["xFIP"], minor["IP"]), 2)
         })
-    # -----------------------------
-    # DH POSITION (based on PA)
-    # -----------------------------
-    dh_players_df = batters.copy()  # or filter by team if needed
-    total_dh_pa = dh_players_df["PA"].sum()
 
-    dh_players = []
-
-    major = dh_players_df[dh_players_df["PA"] >= BATTER_OTHER_PA]
-    minor = dh_players_df[dh_players_df["PA"] < BATTER_OTHER_PA]
-
-    for _, row in major.iterrows():
-      dh_players.append({
-        "name": row["Name"],
-        "PA": int(row["PA"]),
-        "percent": round(row["PA"] / total_dh_pa * 100, 1),
-        "wOBA": row["wOBA"],
-        "xwOBA": row["xwOBA"]
-      })
-
-    if not minor.empty:
-      dh_players.append({
-        "name": "Other",
-        "PA": int(minor["PA"].sum()),
-        "percent": round(minor["PA"].sum() / total_dh_pa * 100, 1),
-        "wOBA": round(weighted_avg(minor["wOBA"], minor["PA"]), 3),
-        "xwOBA": round(weighted_avg(minor["xwOBA"], minor["PA"]), 3)
-    })
-
-    dh_output = {
-      "position": "DH",
-      "total_PA": int(total_dh_pa),
-      "players": dh_players
-    }
-    
-    # ---------- DH POSITION ----------
-# Assume you already prepared dh_players (list of dicts) and total_dh_pa
-if dh_players:  # only append if there are any DH entries
-    positions_output.append({
-        "position": "DH",
-        "total_inn": total_dh_pa,  # we’re using PA here instead of innings
-        "team_wOBA": round(weighted_avg(dh_players_df["wOBA"], dh_players_df["PA"]), 3),
-        "players": dh_players
-    })
-
-    # Pitching — relief only
+    # --------- PITCHING RELIEF ----------
     relievers = pitchers[pitchers["P_GS"] == 0].copy()
     rp_total_ip = relievers["IP"].sum()
     major = relievers[relievers["IP"] >= RP_OTHER_IP]
@@ -212,32 +213,32 @@ if dh_players:  # only append if there are any DH entries
     for _, row in major.iterrows():
         pitching_rp.append({
             "name": row["Name"],
-            "IP": round(row["IP"], 1),
-            "percent": round(row["IP"] / rp_total_ip * 100, 1),
-            "ERA": row["ERA"],
-            "FIP": row["FIP"],
-            "xFIP": row["xFIP"]
+            "IP": safe_float(row["IP"], 1),
+            "percent": safe_float(row["IP"] / rp_total_ip * 100, 1),
+            "ERA": safe_float(row["ERA"], 2),
+            "FIP": safe_float(row["FIP"], 2),
+            "xFIP": safe_float(row["xFIP"], 2)
         })
 
     if not minor.empty:
         pitching_rp.append({
             "name": "Other",
-            "IP": round(minor["IP"].sum(), 1),
-            "percent": round(minor["IP"].sum() / rp_total_ip * 100, 1),
-            "ERA": None if weighted_avg(minor["ERA"], minor["IP"]) is None else round(weighted_avg(minor["ERA"], minor["IP"]), 2),
-            "FIP": None if weighted_avg(minor["FIP"], minor["IP"]) is None else round(weighted_avg(minor["FIP"], minor["IP"]), 2),
-            "xFIP": None if weighted_avg(minor["xFIP"], minor["IP"]) is None else round(weighted_avg(minor["xFIP"], minor["IP"]), 2)
+            "IP": safe_float(minor["IP"].sum(), 1),
+            "percent": safe_float(minor["IP"].sum() / rp_total_ip * 100, 1),
+            "ERA": safe_float(weighted_avg(minor["ERA"], minor["IP"]), 2),
+            "FIP": safe_float(weighted_avg(minor["FIP"], minor["IP"]), 2),
+            "xFIP": safe_float(weighted_avg(minor["xFIP"], minor["IP"]), 2)
         })
 
-    # Final JSON output
+    # --------- FINAL JSON OUTPUT ----------
     output = {
         "team": TEAM,
         "year": YEAR,
         "positions": positions_output,
         "batting": batting_output,
         "pitching": {
-            "all": {"total_ip": round(total_ip, 1), "players": pitching_all},
-            "relief_only": {"total_ip": round(rp_total_ip, 1), "players": pitching_rp}
+            "all": {"total_ip": safe_float(total_ip, 1), "players": pitching_all},
+            "relief_only": {"total_ip": safe_float(rp_total_ip, 1), "players": pitching_rp}
         }
     }
 

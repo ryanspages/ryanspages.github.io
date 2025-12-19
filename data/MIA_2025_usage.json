@@ -537,6 +537,62 @@
           "xwOBA": 0.333
         }
       ]
+    },
+    {
+      "position": "DH",
+      "total_inn": 671,
+      "team_wOBA": 0.308,
+      "players": [
+        {
+          "name": "Agust\u00edn Ram\u00edrez",
+          "PA": 270,
+          "percent": 40.2,
+          "wOBA": 0.302,
+          "xwOBA": 0.332
+        },
+        {
+          "name": "Eric Wagaman",
+          "PA": 43,
+          "percent": 6.4,
+          "wOBA": 0.293,
+          "xwOBA": 0.315
+        },
+        {
+          "name": "Heriberto Hern\u00e1ndez",
+          "PA": 124,
+          "percent": 18.5,
+          "wOBA": 0.341,
+          "xwOBA": 0.331
+        },
+        {
+          "name": "Kyle Stowers",
+          "PA": 34,
+          "percent": 5.1,
+          "wOBA": 0.386,
+          "xwOBA": 0.375
+        },
+        {
+          "name": "Liam Hicks",
+          "PA": 75,
+          "percent": 11.2,
+          "wOBA": 0.313,
+          "xwOBA": 0.314
+        },
+        {
+          "name": "Matt Mervis",
+          "PA": 44,
+          "percent": 6.6,
+          "wOBA": 0.274,
+          "xwOBA": 0.226
+        },
+        {
+          "name": "Other",
+          "PA": 81,
+          "percent": 12.1,
+          "wOBA": 0.266,
+          "xwOBA": 0.294
+        }
+      ]
     }
   ],
   "batting": {
