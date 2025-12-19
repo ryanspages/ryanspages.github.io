@@ -164,3 +164,10 @@ td, th {
   width: 100%;
   font-size: 0.85rem;
 }
+
+.team-dashboard-header {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  text-align: center; /* optional */
+}

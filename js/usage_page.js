@@ -102,6 +102,11 @@ async function buildDashboard() {
   }
 
   container.innerHTML = "";
+    // ---------- TEAM HEADER ----------
+  const titleEl = document.createElement("div");
+  titleEl.className = "team-dashboard-header";
+  titleEl.textContent = `${(typeof TEAM_NAMES !== "undefined" && TEAM_NAMES[team]) ? TEAM_NAMES[team] : team} — ${year}`;
+  container.appendChild(titleEl);
 
   /* ================= DEFENSE ================= */
 
