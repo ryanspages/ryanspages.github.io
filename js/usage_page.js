@@ -128,7 +128,7 @@ async function buildDashboard() {
   if (data.positions) {
     const section = document.createElement("div");
     section.className = "section";
-    section.innerHTML = "<h2>Position Breakdown</h2><p>By defensive innings; DH by PA</p>";
+    section.innerHTML = "<h2>Position Breakdown</h2><p>Innings by position, % of team innings, wOBA, and xwOBA (DH pos % is by PA)</p>";
 
     const bars = document.createElement("div");
     const tableWrap = document.createElement("div");
@@ -189,7 +189,7 @@ async function buildDashboard() {
   if (data.batting) {
     const section = document.createElement("div");
     section.className = "section";
-    section.innerHTML = "<h2>Batting</h2>";
+    section.innerHTML = "<h2>Plate Apperance Breakdown</h2><p>Season PA, % of team total, wOBA, and xwOBA</p>";
 
     const bars = document.createElement("div");
     const tableWrap = document.createElement("div");
@@ -245,7 +245,7 @@ async function buildDashboard() {
   if (data.pitching?.all) {
     const section = document.createElement("div");
     section.className = "section";
-    section.innerHTML = "<h2>Pitching</h2>";
+    section.innerHTML = "<h2>Innings Pitched Breakdown</h2><p>Innings, % of team total, ERA, and FIP</p>";
 
     const bars = document.createElement("div");
     const tableWrap = document.createElement("div");
