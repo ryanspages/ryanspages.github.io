@@ -116,7 +116,7 @@ container.appendChild(titleEl);
   if (data.positions) {
     const section = document.createElement("div");
     section.className = "section";
-    section.innerHTML = "<h2>Position Breakdown</h2>";
+    section.innerHTML = "<h2>Position Breakdown</h2><p>By defensive innings; DH by PA</p>";
 
     const bars = document.createElement("div");
     const tableWrap = document.createElement("div");
