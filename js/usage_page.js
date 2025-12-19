@@ -5,41 +5,44 @@ function getParam(name) {
 }
 
 function getColor(team, index) {
-  const palette = TEAM_COLORS?.[team] || ["#666666"];
-  return index < palette.length ? palette[index] : "#999999";
+  const palette = TEAM_COLORS?.[team] || ["#666"];
+  return palette[index % palette.length];
 }
 
-/* ---------- TOGGLE ---------- */
+/* ---------- SORTABLE TABLE ---------- */
 
-function createViewToggle(onToggle) {
-  const toggle = document.createElement("button");
-  toggle.className = "view-toggle";
-  toggle.textContent = "Show table";
-
-  let mode = "bars";
-
-  toggle.onclick = () => {
-    mode = mode === "bars" ? "table" : "bars";
-    toggle.textContent = mode === "bars" ? "Show table" : "Show bars";
-    onToggle(mode);
-  };
-
-  return toggle;
+function makeTableSortable(table) {
+  const ths = table.querySelectorAll("th");
+  ths.forEach((th, i) => {
+    let asc = true;
+    th.onclick = () => {
+      const rows = Array.from(table.tBodies[0].rows);
+      rows.sort((a, b) => {
+        const A = a.cells[i].innerText;
+        const B = b.cells[i].innerText;
+        const nA = parseFloat(A);
+        const nB = parseFloat(B);
+        if (!isNaN(nA) && !isNaN(nB)) return asc ? nA - nB : nB - nA;
+        return asc ? A.localeCompare(B) : B.localeCompare(A);
+      });
+      asc = !asc;
+      rows.forEach(r => table.tBodies[0].appendChild(r));
+    };
+  });
 }
 
-/* ---------- ROW ---------- */
+/* ---------- BAR ROW ---------- */
 
-function createRow(team, labelText, totalLabel, players, statLabel, tableColumns) {
+function createBarRow(team, label, total, players) {
   const row = document.createElement("div");
   row.className = "position-row";
 
-  /* Header */
   const header = document.createElement("div");
   header.className = "row-header";
 
-  const label = document.createElement("div");
-  label.className = "position-label";
-  label.innerHTML = `${labelText}<br><span class="subtle">${totalLabel}</span>`;
+  const labelDiv = document.createElement("div");
+  labelDiv.className = "position-label";
+  labelDiv.innerHTML = `${label}<br><span class="subtle">${total}</span>`;
 
   const bar = document.createElement("div");
   bar.className = "bar";
@@ -53,50 +56,26 @@ function createRow(team, labelText, totalLabel, players, statLabel, tableColumns
     bar.appendChild(seg);
   });
 
-  const stats = document.createElement("div");
-  stats.className = "stats";
-  stats.textContent = statLabel || "";
-
-  header.append(label, bar, stats);
-
-  /* Table */
-  const tableWrap = document.createElement("div");
-  tableWrap.className = "table-wrap";
-  tableWrap.style.display = "none";
-
-  const table = document.createElement("table");
-
-  const thead = document.createElement("thead");
-  const trh = document.createElement("tr");
-  tableColumns.forEach(col => {
-    const th = document.createElement("th");
-    th.textContent = col.label;
-    trh.appendChild(th);
-  });
-  thead.appendChild(trh);
-  table.appendChild(thead);
-
-  const tbody = document.createElement("tbody");
-  players.forEach(p => {
-    const tr = document.createElement("tr");
-    tableColumns.forEach(col => {
-      const td = document.createElement("td");
-      td.textContent = p[col.key] ?? "";
-      tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
-  });
-  table.appendChild(tbody);
-  tableWrap.appendChild(table);
-
-  /* Toggle */
-  const toggle = createViewToggle(mode => {
-    bar.style.display = mode === "bars" ? "flex" : "none";
-    tableWrap.style.display = mode === "table" ? "block" : "none";
-  });
-
-  row.append(toggle, header, tableWrap);
+  header.append(labelDiv, bar);
+  row.appendChild(header);
   return row;
+}
+
+/* ---------- SECTION TOGGLE ---------- */
+
+function createSectionToggle(barsEl, tableEl) {
+  const btn = document.createElement("button");
+  btn.className = "view-toggle";
+  btn.textContent = "Show table";
+
+  btn.onclick = () => {
+    const barsVisible = barsEl.style.display !== "none";
+    barsEl.style.display = barsVisible ? "none" : "block";
+    tableEl.style.display = barsVisible ? "block" : "none";
+    btn.textContent = barsVisible ? "Show bars" : "Show table";
+  };
+
+  return btn;
 }
 
 /* ---------- DASHBOARD ---------- */
@@ -124,110 +103,180 @@ async function buildDashboard() {
 
   container.innerHTML = "";
 
-  /* ---------- DEFENSE ---------- */
+  /* ================= DEFENSE ================= */
+
   if (data.positions) {
-    const sec = document.createElement("div");
-    sec.className = "section";
-    sec.innerHTML = "<h2>Defense</h2>";
+    const section = document.createElement("div");
+    section.className = "section";
+    section.innerHTML = "<h2>Defense</h2>";
+
+    const bars = document.createElement("div");
+    const tableWrap = document.createElement("div");
+    tableWrap.className = "table-wrap";
+    tableWrap.style.display = "none";
+
+    const rows = [];
 
     data.positions.forEach(pos => {
-      const players = pos.players.map(p => ({
-        position: pos.position,
-        name: p.name,
-        usage: p.usage,
-        percent: p.percent,
-        wOBA: p.wOBA,
-        xwOBA: p.xwOBA
-      })).sort((a,b) => b.percent - a.percent);
+      const players = pos.players
+        .map(p => ({
+          position: pos.position,
+          name: p.name,
+          innings: p.usage,
+          percent: p.percent,
+          wOBA: p.wOBA,
+          xwOBA: p.xwOBA
+        }))
+        .sort((a,b) => b.percent - a.percent);
 
-      sec.appendChild(
-        createRow(
-          team,
-          pos.position,
-          `${pos.total_inn} inn`,
-          players,
-          `wOBA ${pos.team_wOBA}`,
-          [
-            { label: "Pos", key: "position" },
-            { label: "Player", key: "name" },
-            { label: "Inn", key: "usage" },
-            { label: "%", key: "percent" },
-            { label: "wOBA", key: "wOBA" },
-            { label: "xwOBA", key: "xwOBA" }
-          ]
-        )
+      bars.appendChild(
+        createBarRow(team, pos.position, `${pos.total_inn} inn`, players)
       );
+
+      rows.push(...players);
     });
 
-    container.appendChild(sec);
+    const table = document.createElement("table");
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>Pos</th><th>Player</th><th>Inn</th><th>%</th><th>wOBA</th><th>xwOBA</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows.map(r => `
+          <tr>
+            <td>${r.position}</td>
+            <td>${r.name}</td>
+            <td>${r.innings}</td>
+            <td>${r.percent.toFixed(1)}</td>
+            <td>${r.wOBA}</td>
+            <td>${r.xwOBA}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    `;
+    makeTableSortable(table);
+    tableWrap.appendChild(table);
+
+    section.append(
+      createSectionToggle(bars, tableWrap),
+      bars,
+      tableWrap
+    );
+    container.appendChild(section);
   }
 
-  /* ---------- BATTING ---------- */
+  /* ================= BATTING ================= */
+
   if (data.batting) {
-    const sec = document.createElement("div");
-    sec.className = "section";
-    sec.innerHTML = "<h2>Batting</h2>";
+    const section = document.createElement("div");
+    section.className = "section";
+    section.innerHTML = "<h2>Batting</h2>";
 
-    const players = data.batting.players.map(p => ({
-      name: p.name,
-      PA: p.PA,
-      percent: (p.PA / data.batting.total_PA) * 100,
-      wOBA: p.wOBA,
-      xwOBA: p.xwOBA
-    })).sort((a,b) => b.percent - a.percent);
+    const bars = document.createElement("div");
+    const tableWrap = document.createElement("div");
+    tableWrap.className = "table-wrap";
+    tableWrap.style.display = "none";
 
-    sec.appendChild(
-      createRow(
-        team,
-        "Batters",
-        `${data.batting.total_PA} PA`,
-        players,
-        "",
-        [
-          { label: "Player", key: "name" },
-          { label: "PA", key: "PA" },
-          { label: "%", key: "percent" },
-          { label: "wOBA", key: "wOBA" },
-          { label: "xwOBA", key: "xwOBA" }
-        ]
-      )
+    const players = data.batting.players
+      .map(p => ({
+        name: p.name,
+        PA: p.PA,
+        percent: (p.PA / data.batting.total_PA) * 100,
+        wOBA: p.wOBA,
+        xwOBA: p.xwOBA
+      }))
+      .sort((a,b) => b.percent - a.percent);
+
+    bars.appendChild(
+      createBarRow(team, "Batters", `${data.batting.total_PA} PA`, players)
     );
 
-    container.appendChild(sec);
+    const table = document.createElement("table");
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>Player</th><th>PA</th><th>%</th><th>wOBA</th><th>xwOBA</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${players.map(p => `
+          <tr>
+            <td>${p.name}</td>
+            <td>${p.PA}</td>
+            <td>${p.percent.toFixed(1)}</td>
+            <td>${p.wOBA}</td>
+            <td>${p.xwOBA}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    `;
+    makeTableSortable(table);
+    tableWrap.appendChild(table);
+
+    section.append(
+      createSectionToggle(bars, tableWrap),
+      bars,
+      tableWrap
+    );
+    container.appendChild(section);
   }
 
-  /* ---------- PITCHING ---------- */
+  /* ================= PITCHING ================= */
+
   if (data.pitching?.all) {
-    const sec = document.createElement("div");
-    sec.className = "section";
-    sec.innerHTML = "<h2>Pitching</h2>";
+    const section = document.createElement("div");
+    section.className = "section";
+    section.innerHTML = "<h2>Pitching</h2>";
 
-    const players = data.pitching.all.players.map(p => ({
-      name: p.name,
-      IP: p.IP,
-      percent: (p.IP / data.pitching.all.total_ip) * 100,
-      ERA: p.ERA,
-      FIP: p.FIP
-    })).sort((a,b) => b.percent - a.percent);
+    const bars = document.createElement("div");
+    const tableWrap = document.createElement("div");
+    tableWrap.className = "table-wrap";
+    tableWrap.style.display = "none";
 
-    sec.appendChild(
-      createRow(
-        team,
-        "All Pitchers",
-        `${data.pitching.all.total_ip} IP`,
-        players,
-        "",
-        [
-          { label: "Pitcher", key: "name" },
-          { label: "IP", key: "IP" },
-          { label: "%", key: "percent" },
-          { label: "ERA", key: "ERA" },
-          { label: "FIP", key: "FIP" }
-        ]
-      )
+    const players = data.pitching.all.players
+      .map(p => ({
+        name: p.name,
+        IP: p.IP,
+        percent: (p.IP / data.pitching.all.total_ip) * 100,
+        ERA: p.ERA,
+        FIP: p.FIP
+      }))
+      .sort((a,b) => b.percent - a.percent);
+
+    bars.appendChild(
+      createBarRow(team, "All Pitchers", `${data.pitching.all.total_ip} IP`, players)
     );
 
-    container.appendChild(sec);
+    const table = document.createElement("table");
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th>Pitcher</th><th>IP</th><th>%</th><th>ERA</th><th>FIP</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${players.map(p => `
+          <tr>
+            <td>${p.name}</td>
+            <td>${p.IP}</td>
+            <td>${p.percent.toFixed(1)}</td>
+            <td>${p.ERA}</td>
+            <td>${p.FIP}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    `;
+    makeTableSortable(table);
+    tableWrap.appendChild(table);
+
+    section.append(
+      createSectionToggle(bars, tableWrap),
+      bars,
+      tableWrap
+    );
+    container.appendChild(section);
   }
 }
 
