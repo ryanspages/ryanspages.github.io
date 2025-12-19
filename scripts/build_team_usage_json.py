@@ -1,13 +1,14 @@
 import pandas as pd
 import json
 from pathlib import Path
+import math
 
 # -----------------------------
 # CONFIG
 # -----------------------------
 INPUT_CSV = "raw_data/season_data.csv"
 OUTPUT_DIR = Path("data")
-TEAM = "ARI"
+TEAM = "LAA"
 YEAR = 2025
 
 # Bucketing thresholds
@@ -32,10 +33,7 @@ DEF_POSITIONS = {
 # LOAD & FILTER DATA
 # -----------------------------
 df = pd.read_csv(INPUT_CSV)
-
 df = df[(df["Team"] == TEAM) & (df["Year"] == YEAR)].copy()
-
-# Ensure numeric columns are numeric
 df = df.apply(pd.to_numeric, errors="ignore")
 
 # -----------------------------
@@ -44,21 +42,25 @@ df = df.apply(pd.to_numeric, errors="ignore")
 def weighted_avg(series, weights):
     if weights.sum() == 0:
         return None
-    return (series * weights).sum() / weights.sum()
+    value = (series * weights).sum() / weights.sum()
+    if pd.isna(value):
+        return None
+    return value
+
+def safe_round(value, digits):
+    return None if value is None or (isinstance(value, float) and math.isnan(value)) else round(value, digits)
 
 # -----------------------------
-# DEFENSIVE POSITIONS
+# DEFENSE
 # -----------------------------
 positions_output = []
 
 for pos, col in DEF_POSITIONS.items():
     total_inn = df[col].sum()
-
     if total_inn == 0:
         continue
 
     pos_players = df[df[col] > 0].copy()
-
     major = pos_players[pos_players[col] >= DEF_OTHER_INN]
     minor = pos_players[pos_players[col] < DEF_OTHER_INN]
 
@@ -75,24 +77,30 @@ for pos, col in DEF_POSITIONS.items():
         })
 
     if not minor.empty:
+        minor_pa = minor["PA"].sum()
+        woba = weighted_avg(minor["wOBA"], minor["PA"])
+        xwoba = weighted_avg(minor["xwOBA"], minor["PA"])
+
         players.append({
             "name": "Other",
             "usage": round(minor[col].sum(), 1),
             "percent": round(minor[col].sum() / total_inn * 100, 1),
-            "PA": int(minor["PA"].sum()),
-            "wOBA": round(weighted_avg(minor["wOBA"], minor["PA"]), 3),
-            "xwOBA": round(weighted_avg(minor["xwOBA"], minor["PA"]), 3)
+            "PA": int(minor_pa),
+            "wOBA": safe_round(woba, 3),
+            "xwOBA": safe_round(xwoba, 3),
         })
+
+    team_woba = weighted_avg(pos_players["wOBA"], pos_players["PA"])
 
     positions_output.append({
         "position": pos,
         "total_inn": round(total_inn, 1),
-        "team_wOBA": round(weighted_avg(pos_players["wOBA"], pos_players["PA"]), 3),
+        "team_wOBA": safe_round(team_woba, 3),
         "players": players
     })
 
 # -----------------------------
-# BATTING (PA BAR)
+# BATTING
 # -----------------------------
 batters = df[df["PA"] > 0].copy()
 total_pa = batters["PA"].sum()
@@ -112,12 +120,15 @@ for _, row in major.iterrows():
     })
 
 if not minor.empty:
+    woba = weighted_avg(minor["wOBA"], minor["PA"])
+    xwoba = weighted_avg(minor["xwOBA"], minor["PA"])
+
     batting_players.append({
         "name": "Other",
         "PA": int(minor["PA"].sum()),
         "percent": round(minor["PA"].sum() / total_pa * 100, 1),
-        "wOBA": round(weighted_avg(minor["wOBA"], minor["PA"]), 3),
-        "xwOBA": round(weighted_avg(minor["xwOBA"], minor["PA"]), 3)
+        "wOBA": safe_round(woba, 3),
+        "xwOBA": safe_round(xwoba, 3)
     })
 
 batting_output = {
@@ -126,7 +137,7 @@ batting_output = {
 }
 
 # -----------------------------
-# PITCHING — ALL IP
+# PITCHING — ALL
 # -----------------------------
 pitchers = df[df["IP"] > 0].copy()
 total_ip = pitchers["IP"].sum()
@@ -151,13 +162,13 @@ if not minor.empty:
         "name": "Other",
         "IP": round(minor["IP"].sum(), 1),
         "percent": round(minor["IP"].sum() / total_ip * 100, 1),
-        "ERA": round(weighted_avg(minor["ERA"], minor["IP"]), 2),
-        "FIP": round(weighted_avg(minor["FIP"], minor["IP"]), 2),
-        "xFIP": round(weighted_avg(minor["xFIP"], minor["IP"]), 2)
+        "ERA": safe_round(weighted_avg(minor["ERA"], minor["IP"]), 2),
+        "FIP": safe_round(weighted_avg(minor["FIP"], minor["IP"]), 2),
+        "xFIP": safe_round(weighted_avg(minor["xFIP"], minor["IP"]), 2)
     })
 
 # -----------------------------
-# PITCHING — RELIEF ONLY (P_GS = 0)
+# PITCHING — RELIEF ONLY
 # -----------------------------
 relievers = pitchers[pitchers["P_GS"] == 0].copy()
 rp_total_ip = relievers["IP"].sum()
@@ -182,13 +193,13 @@ if not minor.empty:
         "name": "Other",
         "IP": round(minor["IP"].sum(), 1),
         "percent": round(minor["IP"].sum() / rp_total_ip * 100, 1),
-        "ERA": round(weighted_avg(minor["ERA"], minor["IP"]), 2),
-        "FIP": round(weighted_avg(minor["FIP"], minor["IP"]), 2),
-        "xFIP": round(weighted_avg(minor["xFIP"], minor["IP"]), 2)
+        "ERA": safe_round(weighted_avg(minor["ERA"], minor["IP"]), 2),
+        "FIP": safe_round(weighted_avg(minor["FIP"], minor["IP"]), 2),
+        "xFIP": safe_round(weighted_avg(minor["xFIP"], minor["IP"]), 2)
     })
 
 # -----------------------------
-# FINAL JSON OUTPUT
+# OUTPUT
 # -----------------------------
 output = {
     "team": TEAM,
@@ -208,8 +219,8 @@ output = {
 }
 
 OUTPUT_DIR.mkdir(exist_ok=True)
-
 out_path = OUTPUT_DIR / f"{TEAM}_{YEAR}_usage.json"
+
 with open(out_path, "w") as f:
     json.dump(output, f, indent=2)
 
