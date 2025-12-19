@@ -15,7 +15,7 @@ TEAMS = [
     "ARI", "ATL", "BAL", "BOS", "CHC", "CHW", "CIN", "CLE", "COL",
     "DET", "HOU", "KCR", "LAA", "LAD", "MIA", "MIL", "MIN", "NYM",
     "NYY", "PHI", "PIT", "SDP", "SFG", "SEA", "STL", "TBR", "TEX",
-    "TOR", "WSH", "ATH"
+    "TOR", "WSN", "ATH"
 ]
 
 # Bucketing thresholds

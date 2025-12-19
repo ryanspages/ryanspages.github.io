@@ -27,6 +27,6 @@ const TEAM_NAMES = {
   "TBR": "Tampa Bay Rays",
   "TEX": "Texas Rangers",
   "TOR": "Toronto Blue Jays",
-  "WSH": "Washington Nationals",
+  "WSN": "Washington Nationals",
   "ATH": "Athletics"
 };
