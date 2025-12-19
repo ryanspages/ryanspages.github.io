@@ -1,0 +1,19 @@
+{
+  "team": "WSH",
+  "year": 2025,
+  "positions": [],
+  "batting": {
+    "total_PA": 0,
+    "players": []
+  },
+  "pitching": {
+    "all": {
+      "total_ip": 0.0,
+      "players": []
+    },
+    "relief_only": {
+      "total_ip": 0.0,
+      "players": []
+    }
+  }
+}
