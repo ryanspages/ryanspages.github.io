@@ -178,3 +178,8 @@ td, th {
     gap: 0.5rem;
   }
 }
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

@@ -42,7 +42,7 @@ function createBarRow(team, label, total, players) {
 
   const labelDiv = document.createElement("div");
   labelDiv.className = "position-label";
-  labelDiv.innerHTML = `${label}<br><span class="subtle">${total}</span>`;
+  labelDiv.innerHTML = `${label}${total ? `<br><span class="subtle">${total}</span>` : ""}`;
 
   const bar = document.createElement("div");
   bar.className = "bar";
@@ -78,6 +78,15 @@ function createSectionToggle(barsEl, tableEl) {
   return btn;
 }
 
+/* ---------- TABLE WRAPPER (MOBILE FIX) ---------- */
+
+function wrapTable(table) {
+  const scroll = document.createElement("div");
+  scroll.className = "table-scroll";
+  scroll.appendChild(table);
+  return scroll;
+}
+
 /* ---------- DASHBOARD ---------- */
 
 async function buildDashboard() {
@@ -102,14 +111,17 @@ async function buildDashboard() {
   }
 
   container.innerHTML = "";
-    // ---------- TEAM HEADER ----------
+
+  /* ---------- TEAM HEADER ---------- */
+
   const titleEl = document.createElement("div");
   titleEl.className = "team-dashboard-header";
-  titleEl.textContent = (typeof TEAM_NAMES !== "undefined" && TEAM_NAMES[team]) 
-  ? TEAM_NAMES[team] 
-  : team;
+  titleEl.textContent =
+    typeof TEAM_NAMES !== "undefined" && TEAM_NAMES[team]
+      ? TEAM_NAMES[team]
+      : team;
 
-container.appendChild(titleEl);
+  container.appendChild(titleEl);
 
   /* ================= DEFENSE ================= */
 
@@ -120,7 +132,6 @@ container.appendChild(titleEl);
 
     const bars = document.createElement("div");
     const tableWrap = document.createElement("div");
-    tableWrap.className = "table-wrap";
     tableWrap.style.display = "none";
 
     const rows = [];
@@ -135,12 +146,9 @@ container.appendChild(titleEl);
           wOBA: p.wOBA,
           xwOBA: p.xwOBA
         }))
-        .sort((a,b) => b.percent - a.percent);
+        .sort((a, b) => b.percent - a.percent);
 
-      bars.appendChild(
-        createBarRow(team, pos.position, "", players)
-      );
-
+      bars.appendChild(createBarRow(team, pos.position, "", players));
       rows.push(...players);
     });
 
@@ -164,8 +172,9 @@ container.appendChild(titleEl);
         `).join("")}
       </tbody>
     `;
+
     makeTableSortable(table);
-    tableWrap.appendChild(table);
+    tableWrap.appendChild(wrapTable(table));
 
     section.append(
       createSectionToggle(bars, tableWrap),
@@ -174,62 +183,6 @@ container.appendChild(titleEl);
     );
     container.appendChild(section);
   }
-  
-  /* ================= DH ================= */
-  
-if (data.dh) {
-  const section = document.createElement("div");
-  section.className = "section";
-  section.innerHTML = "<h2>Designated Hitter (DH)</h2>";
-
-  const bars = document.createElement("div");
-  const tableWrap = document.createElement("div");
-  tableWrap.className = "table-wrap";
-  tableWrap.style.display = "none";
-
-  const players = data.dh.players
-    .map(p => ({
-      name: p.name,
-      PA: p.PA,
-      percent: p.percent,
-      wOBA: p.wOBA,
-      xwOBA: p.xwOBA
-    }))
-    .sort((a,b) => b.percent - a.percent);
-
-  bars.appendChild(
-    createBarRow(team, "DH", `${data.dh.total_PA} PA`, players)
-  );
-
-  const table = document.createElement("table");
-  table.innerHTML = `
-    <thead>
-      <tr>
-        <th>Player</th><th>PA</th><th>%</th><th>wOBA</th><th>xwOBA</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${players.map(p => `
-        <tr>
-          <td>${p.name}</td>
-          <td>${p.PA}</td>
-          <td>${p.percent.toFixed(1)}</td>
-          <td>${p.wOBA}</td>
-          <td>${p.xwOBA}</td>
-        </tr>
-      `).join("")}
-    </tbody>
-  `;
-  makeTableSortable(table);
-  tableWrap.appendChild(table);
-
-  section.append(
-    createSectionToggle(bars, tableWrap),
-    bars,
-    tableWrap
-  );
-  container.appendChild(section);
-}
 
   /* ================= BATTING ================= */
 
@@ -240,7 +193,6 @@ if (data.dh) {
 
     const bars = document.createElement("div");
     const tableWrap = document.createElement("div");
-    tableWrap.className = "table-wrap";
     tableWrap.style.display = "none";
 
     const players = data.batting.players
@@ -251,7 +203,7 @@ if (data.dh) {
         wOBA: p.wOBA,
         xwOBA: p.xwOBA
       }))
-      .sort((a,b) => b.percent - a.percent);
+      .sort((a, b) => b.percent - a.percent);
 
     bars.appendChild(
       createBarRow(team, "Batters", `${data.batting.total_PA} PA`, players)
@@ -276,8 +228,9 @@ if (data.dh) {
         `).join("")}
       </tbody>
     `;
+
     makeTableSortable(table);
-    tableWrap.appendChild(table);
+    tableWrap.appendChild(wrapTable(table));
 
     section.append(
       createSectionToggle(bars, tableWrap),
@@ -296,7 +249,6 @@ if (data.dh) {
 
     const bars = document.createElement("div");
     const tableWrap = document.createElement("div");
-    tableWrap.className = "table-wrap";
     tableWrap.style.display = "none";
 
     const players = data.pitching.all.players
@@ -307,7 +259,7 @@ if (data.dh) {
         ERA: p.ERA,
         FIP: p.FIP
       }))
-      .sort((a,b) => b.percent - a.percent);
+      .sort((a, b) => b.percent - a.percent);
 
     bars.appendChild(
       createBarRow(team, "All Pitchers", `${data.pitching.all.total_ip} IP`, players)
@@ -332,8 +284,9 @@ if (data.dh) {
         `).join("")}
       </tbody>
     `;
+
     makeTableSortable(table);
-    tableWrap.appendChild(table);
+    tableWrap.appendChild(wrapTable(table));
 
     section.append(
       createSectionToggle(bars, tableWrap),
