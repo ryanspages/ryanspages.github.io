@@ -139,9 +139,32 @@ td, th {
   text-align: left;
   white-space: nowrap;   /* prevents ugly column stretching */
 }
-.toggle-view {
-  margin: 8px 0 16px;
-  padding: 4px 10px;
-  font-size: 0.85rem;
+/* ----- Bars/Table Toggle ----- */
+
+.view-toggle {
+  margin-bottom: 6px;
+  font-size: 0.8rem;
+  background: none;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  padding: 2px 8px;
   cursor: pointer;
 }
+
+.view-toggle:hover {
+  background: #f0f0f0;
+}
+
+/* ----- Table Fit ----- */
+
+.table-wrap {
+  margin-left: 136px; /* aligns under bars */
+  margin-top: 8px;
+  max-width: 700px;
+}
+
+.table-wrap table {
+  width: 100%;
+  font-size: 0.85rem;
+}
+
