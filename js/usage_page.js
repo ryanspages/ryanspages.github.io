@@ -174,6 +174,62 @@ container.appendChild(titleEl);
     );
     container.appendChild(section);
   }
+  
+  /* ================= DH ================= */
+  
+if (data.dh) {
+  const section = document.createElement("div");
+  section.className = "section";
+  section.innerHTML = "<h2>Designated Hitter (DH)</h2>";
+
+  const bars = document.createElement("div");
+  const tableWrap = document.createElement("div");
+  tableWrap.className = "table-wrap";
+  tableWrap.style.display = "none";
+
+  const players = data.dh.players
+    .map(p => ({
+      name: p.name,
+      PA: p.PA,
+      percent: p.percent,
+      wOBA: p.wOBA,
+      xwOBA: p.xwOBA
+    }))
+    .sort((a,b) => b.percent - a.percent);
+
+  bars.appendChild(
+    createBarRow(team, "DH", `${data.dh.total_PA} PA`, players)
+  );
+
+  const table = document.createElement("table");
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Player</th><th>PA</th><th>%</th><th>wOBA</th><th>xwOBA</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${players.map(p => `
+        <tr>
+          <td>${p.name}</td>
+          <td>${p.PA}</td>
+          <td>${p.percent.toFixed(1)}</td>
+          <td>${p.wOBA}</td>
+          <td>${p.xwOBA}</td>
+        </tr>
+      `).join("")}
+    </tbody>
+  `;
+  makeTableSortable(table);
+  tableWrap.appendChild(table);
+
+  section.append(
+    createSectionToggle(bars, tableWrap),
+    bars,
+    tableWrap
+  );
+  container.appendChild(section);
+}
 
   /* ================= BATTING ================= */
 

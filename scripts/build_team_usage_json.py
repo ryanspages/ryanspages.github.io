@@ -157,6 +157,50 @@ for TEAM in TEAMS:
             "FIP": None if weighted_avg(minor["FIP"], minor["IP"]) is None else round(weighted_avg(minor["FIP"], minor["IP"]), 2),
             "xFIP": None if weighted_avg(minor["xFIP"], minor["IP"]) is None else round(weighted_avg(minor["xFIP"], minor["IP"]), 2)
         })
+    # -----------------------------
+    # DH POSITION (based on PA)
+    # -----------------------------
+    dh_players_df = batters.copy()  # or filter by team if needed
+    total_dh_pa = dh_players_df["PA"].sum()
+
+    dh_players = []
+
+    major = dh_players_df[dh_players_df["PA"] >= BATTER_OTHER_PA]
+    minor = dh_players_df[dh_players_df["PA"] < BATTER_OTHER_PA]
+
+    for _, row in major.iterrows():
+      dh_players.append({
+        "name": row["Name"],
+        "PA": int(row["PA"]),
+        "percent": round(row["PA"] / total_dh_pa * 100, 1),
+        "wOBA": row["wOBA"],
+        "xwOBA": row["xwOBA"]
+      })
+
+    if not minor.empty:
+      dh_players.append({
+        "name": "Other",
+        "PA": int(minor["PA"].sum()),
+        "percent": round(minor["PA"].sum() / total_dh_pa * 100, 1),
+        "wOBA": round(weighted_avg(minor["wOBA"], minor["PA"]), 3),
+        "xwOBA": round(weighted_avg(minor["xwOBA"], minor["PA"]), 3)
+    })
+
+    dh_output = {
+      "position": "DH",
+      "total_PA": int(total_dh_pa),
+      "players": dh_players
+    }
+    
+    # ---------- DH POSITION ----------
+# Assume you already prepared dh_players (list of dicts) and total_dh_pa
+if dh_players:  # only append if there are any DH entries
+    positions_output.append({
+        "position": "DH",
+        "total_inn": total_dh_pa,  # we’re using PA here instead of innings
+        "team_wOBA": round(weighted_avg(dh_players_df["wOBA"], dh_players_df["PA"]), 3),
+        "players": dh_players
+    })
 
     # Pitching — relief only
     relievers = pitchers[pitchers["P_GS"] == 0].copy()
