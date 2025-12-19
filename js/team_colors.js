@@ -30,7 +30,7 @@ const TEAM_COLORS = {
   "TBR": ["#092C5C", "#F5D130", "#8FBCE6"], // Navy blue, yellow, Columbia blue
   "TEX": ["#003278", "#C0111F", "#ffffff"], // blue, red, white
   "TOR": ["#134A8E", "#1D2D5C", "#ffffff"], // blue, navy blue, white
-  "WSH": ["#AB0003", "#14225A", "#ffffff"], // red, navy blue, white
+  "WSN": ["#AB0003", "#14225A", "#ffffff"], // red, navy blue, white
   
 
 };
