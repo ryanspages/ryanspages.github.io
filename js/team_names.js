@@ -29,3 +29,4 @@ const TEAM_NAMES = {
   "TOR": "Toronto Blue Jays",
   "WSH": "Washington Nationals",
   "ATH": "Athletics"
+};
