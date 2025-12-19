@@ -103,12 +103,19 @@ async function buildDashboard() {
 
   container.innerHTML = "";
 
-  /* ================= DEFENSE ================= */
+  /* ---------- TEAM TITLE ---------- */
+  const titleCard = document.createElement("div");
+  titleCard.className = "team-title-card";
+  const titleEl = document.createElement("h1");
+  titleEl.textContent = TEAM_NAMES?.[team] || team;
+  titleCard.appendChild(titleEl);
+  container.appendChild(titleCard);
 
-  if (data.positions) {
+  /* ---------- DEFENSE ---------- */
+  if (data.positions?.length) {
     const section = document.createElement("div");
     section.className = "section";
-    section.innerHTML = "<h2>Defense</h2>";
+    section.innerHTML = "<h2>Position Breakdown</h2>";
 
     const bars = document.createElement("div");
     const tableWrap = document.createElement("div");
@@ -129,9 +136,8 @@ async function buildDashboard() {
         }))
         .sort((a,b) => b.percent - a.percent);
 
-      bars.appendChild(
-        createBarRow(team, pos.position, `${pos.total_inn} inn`, players)
-      );
+      // Bar row: only show position label, no total/innings
+      bars.appendChild(createBarRow(team, pos.position, "", players));
 
       rows.push(...players);
     });
@@ -164,12 +170,12 @@ async function buildDashboard() {
       bars,
       tableWrap
     );
+
     container.appendChild(section);
   }
 
-  /* ================= BATTING ================= */
-
-  if (data.batting) {
+  /* ---------- BATTING ---------- */
+  if (data.batting?.players?.length) {
     const section = document.createElement("div");
     section.className = "section";
     section.innerHTML = "<h2>Batting</h2>";
@@ -189,9 +195,7 @@ async function buildDashboard() {
       }))
       .sort((a,b) => b.percent - a.percent);
 
-    bars.appendChild(
-      createBarRow(team, "Batters", `${data.batting.total_PA} PA`, players)
-    );
+    bars.appendChild(createBarRow(team, "Batters", "", players));
 
     const table = document.createElement("table");
     table.innerHTML = `
@@ -220,12 +224,12 @@ async function buildDashboard() {
       bars,
       tableWrap
     );
+
     container.appendChild(section);
   }
 
-  /* ================= PITCHING ================= */
-
-  if (data.pitching?.all) {
+  /* ---------- PITCHING ---------- */
+  if (data.pitching?.all?.players?.length) {
     const section = document.createElement("div");
     section.className = "section";
     section.innerHTML = "<h2>Pitching</h2>";
@@ -245,9 +249,7 @@ async function buildDashboard() {
       }))
       .sort((a,b) => b.percent - a.percent);
 
-    bars.appendChild(
-      createBarRow(team, "All Pitchers", `${data.pitching.all.total_ip} IP`, players)
-    );
+    bars.appendChild(createBarRow(team, "All Pitchers", "", players));
 
     const table = document.createElement("table");
     table.innerHTML = `
@@ -276,8 +278,10 @@ async function buildDashboard() {
       bars,
       tableWrap
     );
+
     container.appendChild(section);
   }
 }
+
 
 buildDashboard();
