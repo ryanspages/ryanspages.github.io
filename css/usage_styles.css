@@ -187,23 +187,29 @@ td, th {
   display: flex;
   align-items: center;
   margin: 6px 0;
+  gap: 8px;
 }
 
 .player-label {
+  flex: 0 0 120px;
   width: 90px;
   font-size: 0.85rem;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .player-bar-wrap {
   flex: 1;
-  background: #f2f2f2;
-  height: 14px;
+  background: none;
+  height: 16px;
   border-radius: 6px;
   overflow: hidden;
+  position: relative;
 }
 
 .player-bar {
   height: 100%;
-  border-radius: 6px;
+  border-radius: 4px;
+  height: 24px;
 }
