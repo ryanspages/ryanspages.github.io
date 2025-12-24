@@ -183,3 +183,27 @@ td, th {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+.player-bar-row {
+  display: flex;
+  align-items: center;
+  margin: 6px 0;
+}
+
+.player-label {
+  width: 90px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.player-bar-wrap {
+  flex: 1;
+  background: #f2f2f2;
+  height: 14px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.player-bar {
+  height: 100%;
+  border-radius: 6px;
+}

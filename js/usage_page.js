@@ -186,59 +186,138 @@ async function buildDashboard() {
 
   /* ================= BATTING ================= */
 
-  if (data.batting) {
-    const section = document.createElement("div");
-    section.className = "section";
-    section.innerHTML = "<h2>Plate Apperance Breakdown</h2><p>Season PA, % of team total, wOBA, and xwOBA</p>";
+if (data.batting) {
+  const section = document.createElement("div");
+  section.className = "section";
+  section.innerHTML =
+    "<h2>Plate Appearance Breakdown</h2>" +
+    "<p>Top players accounting for ~75% of team PA. Bar length = PA share; color = wRC+.</p>";
 
-    const bars = document.createElement("div");
-    const tableWrap = document.createElement("div");
-    tableWrap.style.display = "none";
+  const bars = document.createElement("div");
+  bars.className = "bar-list";
 
-    const players = data.batting.players
-      .map(p => ({
-        name: p.name,
-        PA: p.PA,
-        percent: (p.PA / data.batting.total_PA) * 100,
-        wOBA: p.wOBA,
-        xwOBA: p.xwOBA
-      }))
-      .sort((a, b) => b.percent - a.percent);
+  const tableWrap = document.createElement("div");
+  tableWrap.style.display = "none";
 
-    bars.appendChild(
-      createBarRow(team, "Batters", `${data.batting.total_PA} PA`, players)
-    );
+  const LEAGUE_WOBA = 0.315;
 
-    const table = document.createElement("table");
-    table.innerHTML = `
-      <thead>
-        <tr>
-          <th>Player</th><th>PA</th><th>%</th><th>wOBA</th><th>xwOBA</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${players.map(p => `
-          <tr>
-            <td>${p.name}</td>
-            <td>${p.PA}</td>
-            <td>${p.percent.toFixed(1)}</td>
-            <td>${p.wOBA}</td>
-            <td>${p.xwOBA}</td>
-          </tr>
-        `).join("")}
-      </tbody>
-    `;
+  function wrcPlusColor(wrc) {
+    if (wrc == null) return "#ccc";
+    if (wrc >= 140) return "#b11226";   // elite
+    if (wrc >= 115) return "#e63946";   // above avg
+    if (wrc >= 95)  return "#cccccc";   // average
+    if (wrc >= 75)  return "#8ecae6";   // below avg
+    return "#457b9d";                   // poor
+}
 
-    makeTableSortable(table);
-    tableWrap.appendChild(wrapTable(table));
+  // ---- sort by PA ----
+  const sorted = [...data.batting.players]
+    .filter(p => p.PA > 0)
+    .sort((a, b) => b.PA - a.PA);
 
-    section.append(
-      createSectionToggle(bars, tableWrap),
-      bars,
-      tableWrap
-    );
-    container.appendChild(section);
+  // ---- accumulate until 75% ----
+  const cutoff = data.batting.total_PA * 0.75;
+  let cumulative = 0;
+
+  const major = [];
+  const minor = [];
+
+  for (const p of sorted) {
+    if (cumulative < cutoff) {
+      major.push(p);
+      cumulative += p.PA;
+    } else {
+      minor.push(p);
+    }
   }
+
+  // ---- build bar rows ----
+  major.forEach(p => {
+    const row = document.createElement("div");
+    row.className = "player-bar-row";
+
+    const label = document.createElement("div");
+    label.className = "player-label";
+    label.textContent = p.name;
+
+    const barWrap = document.createElement("div");
+    barWrap.className = "player-bar-wrap";
+
+    const bar = document.createElement("div");
+    bar.className = "player-bar";
+    bar.style.width = `${(p.PA / data.batting.total_PA) * 100}%`;
+    bar.style.background = wrcPlusColor(p["wRC+"]);
+bar.title = `${p.name}
+PA: ${p.PA}
+wRC+: ${p["wRC+"]}`;
+
+    barWrap.appendChild(bar);
+    row.append(label, barWrap);
+    bars.appendChild(row);
+  });
+
+  // ---- Other bucket ----
+  if (minor.length) {
+    const otherPA = minor.reduce((s, p) => s + p.PA, 0);
+    const wrcPlus =
+  minor.reduce((s, p) => s + (p["wRC+"] ?? 100) * p.PA, 0) / otherPA || null;
+
+    const row = document.createElement("div");
+    row.className = "player-bar-row";
+
+    const label = document.createElement("div");
+    label.className = "player-label";
+    label.textContent = "Other";
+
+    const barWrap = document.createElement("div");
+    barWrap.className = "player-bar-wrap";
+
+    const bar = document.createElement("div");
+    bar.className = "player-bar";
+    bar.style.width = `${(otherPA / data.batting.total_PA) * 100}%`;
+    bar.style.background = wrcPlusColor(wrcPlus);
+bar.title = `Other players
+PA: ${otherPA}
+wRC+: ${wrcPlus?.toFixed(0) ?? "—"}`;
+
+    barWrap.appendChild(bar);
+    row.append(label, barWrap);
+    bars.appendChild(row);
+  }
+
+  // ---- TABLE (unchanged but cleaner) ----
+  const table = document.createElement("table");
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Player</th><th>PA</th><th>%</th><th>wOBA</th><th>xwOBA</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${sorted.map(p => `
+        <tr>
+          <td>${p.name}</td>
+          <td>${p.PA}</td>
+          <td>${((p.PA / data.batting.total_PA) * 100).toFixed(1)}</td>
+          <td>${p.wOBA ?? "—"}</td>
+          <td>${p.xwOBA ?? "—"}</td>
+        </tr>
+      `).join("")}
+    </tbody>
+  `;
+
+  makeTableSortable(table);
+  tableWrap.appendChild(wrapTable(table));
+
+  section.append(
+    createSectionToggle(bars, tableWrap),
+    bars,
+    tableWrap
+  );
+
+  container.appendChild(section);
+}
+
 
   /* ================= PITCHING ================= */
 
