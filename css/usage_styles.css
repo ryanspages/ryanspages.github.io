@@ -202,7 +202,7 @@ td, th {
 .player-bar-wrap {
   flex: 1;
   background: none;
-  height: 16px;
+  height: 24px;
   border-radius: 6px;
   overflow: hidden;
   position: relative;
