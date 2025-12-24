@@ -246,10 +246,13 @@ topPlayers.forEach(p => {
   // Keep the wrapper to control height and spacing
   const barWrap = document.createElement("div");
   barWrap.className = "player-bar-wrap";
+  
+  // Max bar lenght
+  const maxPA = Math.max(...major.map(p => p.PA));
 
   const bar = document.createElement("div");
   bar.className = "player-bar";
-  bar.style.width = `${(p.PA / data.batting.total_PA) * 100}%`;
+  bar.style.width = `${(p.PA / maxPA) * 100}%`;
   bar.style.background = wrcPlusColor(p["wRC+"]);
   bar.title = `${p.name}\nPA: ${p.PA}\nwRC+: ${p["wRC+"]?.toFixed(0) ?? "—"}`;
 
