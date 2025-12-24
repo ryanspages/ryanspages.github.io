@@ -233,6 +233,9 @@ if (data.batting) {
     const wrcPlus = otherPlayers.reduce((s, p) => s + (p["wRC+"] ?? 100) * p.PA, 0) / otherPA || null;
     topPlayers.push({ name: "Other", PA: otherPA, ["wRC+"]: wrcPlus });
   }
+  
+  // ---- Compute max PA for bar scaling ----
+const maxPA = Math.max(...topPlayers.map(p => p.PA));
 
   // Build bars
 topPlayers.forEach(p => {
@@ -243,22 +246,15 @@ topPlayers.forEach(p => {
   label.className = "player-label";
   label.textContent = p.name;
 
-  // Keep the wrapper to control height and spacing
   const barWrap = document.createElement("div");
   barWrap.className = "player-bar-wrap";
-  
-  // Max bar lenght
-  const maxPA = Math.max(...major.map(p => p.PA));
 
   const bar = document.createElement("div");
   bar.className = "player-bar";
   bar.style.width = `${(p.PA / maxPA) * 100}%`;
   bar.style.background = wrcPlusColor(p["wRC+"]);
-  bar.title = `${p.name}\nPA: ${p.PA}\nwRC+: ${p["wRC+"]?.toFixed(0) ?? "—"}`;
-
-  // Ensure bar is visible
-  bar.style.height = "20px";        // or whatever fits your layout
-  bar.style.display = "inline-block";
+  bar.title =
+    `${p.name}\nPA: ${p.PA}\nwRC+: ${p["wRC+"]?.toFixed(0) ?? "—"}`;
 
   barWrap.appendChild(bar);
   row.append(label, barWrap);
