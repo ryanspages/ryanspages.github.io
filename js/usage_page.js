@@ -235,25 +235,32 @@ if (data.batting) {
   }
 
   // Build bars
-  topPlayers.forEach(p => {
-    const row = document.createElement("div");
-    row.className = "player-bar-row";
+topPlayers.forEach(p => {
+  const row = document.createElement("div");
+  row.className = "player-bar-row";
 
-    const label = document.createElement("div");
-    label.className = "player-label";
-    label.textContent = p.name;
+  const label = document.createElement("div");
+  label.className = "player-label";
+  label.textContent = p.name;
 
-    const bar = document.createElement("div");
-    bar.className = "player-bar";
-    // width proportional to PA share
-    bar.style.width = `${(p.PA / data.batting.total_PA) * 100}%`;
-    // color based on wRC+
-    bar.style.background = wrcPlusColor(p["wRC+"]);
-    bar.title = `${p.name}\nPA: ${p.PA}\nwRC+: ${p["wRC+"]?.toFixed(0) ?? "—"}`;
+  // Keep the wrapper to control height and spacing
+  const barWrap = document.createElement("div");
+  barWrap.className = "player-bar-wrap";
 
-    row.append(label, bar);
-    bars.appendChild(row);
-  });
+  const bar = document.createElement("div");
+  bar.className = "player-bar";
+  bar.style.width = `${(p.PA / data.batting.total_PA) * 100}%`;
+  bar.style.background = wrcPlusColor(p["wRC+"]);
+  bar.title = `${p.name}\nPA: ${p.PA}\nwRC+: ${p["wRC+"]?.toFixed(0) ?? "—"}`;
+
+  // Ensure bar is visible
+  bar.style.height = "20px";        // or whatever fits your layout
+  bar.style.display = "inline-block";
+
+  barWrap.appendChild(bar);
+  row.append(label, barWrap);
+  bars.appendChild(row);
+});
 
   // ---- Table (unchanged) ----
   const table = document.createElement("table");
