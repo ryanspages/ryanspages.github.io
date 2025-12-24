@@ -499,161 +499,184 @@
         "PA": 502,
         "percent": 8.1,
         "wOBA": 0.322,
-        "xwOBA": 0.331
+        "xwOBA": 0.331,
+        "wRC+": 107.0
       },
       {
         "name": "Alan Roden",
         "PA": 113,
         "percent": 1.8,
         "wOBA": 0.263,
-        "xwOBA": 0.233
+        "xwOBA": 0.233,
+        "wRC+": 67.0
       },
       {
         "name": "Alejandro Kirk",
         "PA": 506,
         "percent": 8.2,
         "wOBA": 0.334,
-        "xwOBA": 0.357
+        "xwOBA": 0.357,
+        "wRC+": 116.0
       },
       {
         "name": "Ali S\u00e1nchez",
         "PA": 21,
         "percent": 0.3,
         "wOBA": 0.245,
-        "xwOBA": 0.254
+        "xwOBA": 0.254,
+        "wRC+": 54.0
       },
       {
         "name": "Andr\u00e9s Gim\u00e9nez",
         "PA": 369,
         "percent": 6.0,
         "wOBA": 0.269,
-        "xwOBA": 0.306
+        "xwOBA": 0.306,
+        "wRC+": 70.0
       },
       {
         "name": "Anthony Santander",
         "PA": 221,
         "percent": 3.6,
         "wOBA": 0.255,
-        "xwOBA": 0.264
+        "xwOBA": 0.264,
+        "wRC+": 61.0
       },
       {
         "name": "Bo Bichette",
         "PA": 628,
         "percent": 10.2,
         "wOBA": 0.361,
-        "xwOBA": 0.352
+        "xwOBA": 0.352,
+        "wRC+": 134.0
       },
       {
         "name": "Daulton Varsho",
         "PA": 271,
         "percent": 4.4,
         "wOBA": 0.345,
-        "xwOBA": 0.326
+        "xwOBA": 0.326,
+        "wRC+": 123.0
       },
       {
         "name": "Davis Schneider",
         "PA": 227,
         "percent": 3.7,
         "wOBA": 0.351,
-        "xwOBA": 0.323
+        "xwOBA": 0.323,
+        "wRC+": 127.0
       },
       {
         "name": "Ernie Clement",
         "PA": 588,
         "percent": 9.5,
         "wOBA": 0.308,
-        "xwOBA": 0.29
+        "xwOBA": 0.29,
+        "wRC+": 98.0
       },
       {
         "name": "George Springer",
         "PA": 586,
         "percent": 9.5,
         "wOBA": 0.408,
-        "xwOBA": 0.404
+        "xwOBA": 0.404,
+        "wRC+": 166.0
       },
       {
         "name": "Isiah Kiner-Falefa",
         "PA": 31,
         "percent": 0.5,
         "wOBA": 0.272,
-        "xwOBA": 0.213
+        "xwOBA": 0.213,
+        "wRC+": 72.0
       },
       {
         "name": "Joey Loperfido",
         "PA": 104,
         "percent": 1.7,
         "wOBA": 0.381,
-        "xwOBA": 0.311
+        "xwOBA": 0.311,
+        "wRC+": 148.0
       },
       {
         "name": "Jonatan Clase",
         "PA": 112,
         "percent": 1.8,
         "wOBA": 0.267,
-        "xwOBA": 0.283
+        "xwOBA": 0.283,
+        "wRC+": 69.0
       },
       {
         "name": "Leo Jim\u00e9nez",
         "PA": 32,
         "percent": 0.5,
         "wOBA": 0.139,
-        "xwOBA": 0.243
+        "xwOBA": 0.243,
+        "wRC+": -19.0
       },
       {
         "name": "Michael Stefanic",
         "PA": 25,
         "percent": 0.4,
         "wOBA": 0.224,
-        "xwOBA": 0.276
+        "xwOBA": 0.276,
+        "wRC+": 40.0
       },
       {
         "name": "Myles Straw",
         "PA": 299,
         "percent": 4.8,
         "wOBA": 0.299,
-        "xwOBA": 0.292
+        "xwOBA": 0.292,
+        "wRC+": 91.0
       },
       {
         "name": "Nathan Lukes",
         "PA": 438,
         "percent": 7.1,
         "wOBA": 0.317,
-        "xwOBA": 0.313
+        "xwOBA": 0.313,
+        "wRC+": 103.0
       },
       {
         "name": "Ty France",
         "PA": 103,
         "percent": 1.7,
         "wOBA": 0.3,
-        "xwOBA": 0.311
+        "xwOBA": 0.311,
+        "wRC+": 92.0
       },
       {
         "name": "Tyler Heineman",
         "PA": 174,
         "percent": 2.8,
         "wOBA": 0.341,
-        "xwOBA": 0.272
+        "xwOBA": 0.272,
+        "wRC+": 120.0
       },
       {
         "name": "Vladimir Guerrero Jr.",
         "PA": 680,
         "percent": 11.0,
         "wOBA": 0.366,
-        "xwOBA": 0.384
+        "xwOBA": 0.384,
+        "wRC+": 137.0
       },
       {
         "name": "Will Wagner",
         "PA": 132,
         "percent": 2.1,
         "wOBA": 0.292,
-        "xwOBA": 0.322
+        "xwOBA": 0.322,
+        "wRC+": 86.0
       },
       {
         "name": "Other",
         "PA": 18,
         "percent": 0.3,
         "wOBA": 0.235,
-        "xwOBA": 0.232
+        "xwOBA": 0.232,
+        "wRC+": 47.0
       }
     ]
   },

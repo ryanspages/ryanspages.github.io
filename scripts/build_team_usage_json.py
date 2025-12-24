@@ -128,17 +128,21 @@ for TEAM in TEAMS:
             "PA": safe_int(row["PA"]),
             "percent": safe_float(row["PA"] / total_pa * 100, 1),
             "wOBA": safe_float(row["wOBA"], 3),
-            "xwOBA": safe_float(row["xwOBA"], 3)
+            "xwOBA": safe_float(row["xwOBA"], 3),
+            "wRC+": safe_float(row["wRC+"], 0)
         })
 
     if not minor.empty:
-        batting_players.append({
-            "name": "Other",
-            "PA": safe_int(minor["PA"].sum()),
-            "percent": safe_float(minor["PA"].sum() / total_pa * 100, 1),
-            "wOBA": safe_float(weighted_avg(minor["wOBA"], minor["PA"]), 3),
-            "xwOBA": safe_float(weighted_avg(minor["xwOBA"], minor["PA"]), 3)
-        })
+      wrc_plus = weighted_avg(minor["wRC+"], minor["PA"])
+
+      batting_players.append({
+        "name": "Other",
+        "PA": safe_int(minor["PA"].sum()),
+        "percent": safe_float(minor["PA"].sum() / total_pa * 100, 1),
+        "wOBA": safe_float(weighted_avg(minor["wOBA"], minor["PA"]), 3),
+        "xwOBA": safe_float(weighted_avg(minor["xwOBA"], minor["PA"]), 3),
+        "wRC+": None if wrc_plus is None else round(wrc_plus, 0)
+    })
 
     batting_output = {"total_PA": safe_int(total_pa), "players": batting_players}
 

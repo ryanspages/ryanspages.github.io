@@ -376,112 +376,128 @@
         "PA": 504,
         "percent": 8.2,
         "wOBA": 0.322,
-        "xwOBA": 0.324
+        "xwOBA": 0.324,
+        "wRC+": 105.0
       },
       {
         "name": "Brandon Marsh",
         "PA": 425,
         "percent": 6.9,
         "wOBA": 0.339,
-        "xwOBA": 0.329
+        "xwOBA": 0.329,
+        "wRC+": 116.0
       },
       {
         "name": "Bryce Harper",
         "PA": 580,
         "percent": 9.4,
         "wOBA": 0.361,
-        "xwOBA": 0.368
+        "xwOBA": 0.368,
+        "wRC+": 131.0
       },
       {
         "name": "Bryson Stott",
         "PA": 560,
         "percent": 9.1,
         "wOBA": 0.315,
-        "xwOBA": 0.312
+        "xwOBA": 0.312,
+        "wRC+": 100.0
       },
       {
         "name": "Edmundo Sosa",
         "PA": 261,
         "percent": 4.2,
         "wOBA": 0.332,
-        "xwOBA": 0.29
+        "xwOBA": 0.29,
+        "wRC+": 111.0
       },
       {
         "name": "Harrison Bader",
         "PA": 194,
         "percent": 3.1,
         "wOBA": 0.358,
-        "xwOBA": 0.291
+        "xwOBA": 0.291,
+        "wRC+": 129.0
       },
       {
         "name": "J.T. Realmuto",
         "PA": 550,
         "percent": 8.9,
         "wOBA": 0.307,
-        "xwOBA": 0.315
+        "xwOBA": 0.315,
+        "wRC+": 94.0
       },
       {
         "name": "Johan Rojas",
         "PA": 172,
         "percent": 2.8,
         "wOBA": 0.254,
-        "xwOBA": 0.264
+        "xwOBA": 0.264,
+        "wRC+": 58.0
       },
       {
         "name": "Kyle Schwarber",
         "PA": 724,
         "percent": 11.7,
         "wOBA": 0.391,
-        "xwOBA": 0.402
+        "xwOBA": 0.402,
+        "wRC+": 152.0
       },
       {
         "name": "Max Kepler",
         "PA": 474,
         "percent": 7.7,
         "wOBA": 0.3,
-        "xwOBA": 0.329
+        "xwOBA": 0.329,
+        "wRC+": 90.0
       },
       {
         "name": "Nick Castellanos",
         "PA": 589,
         "percent": 9.6,
         "wOBA": 0.3,
-        "xwOBA": 0.3
+        "xwOBA": 0.3,
+        "wRC+": 90.0
       },
       {
         "name": "Otto Kemp",
         "PA": 218,
         "percent": 3.5,
         "wOBA": 0.308,
-        "xwOBA": 0.31
+        "xwOBA": 0.31,
+        "wRC+": 95.0
       },
       {
         "name": "Rafael March\u00e1n",
         "PA": 118,
         "percent": 1.9,
         "wOBA": 0.264,
-        "xwOBA": 0.261
+        "xwOBA": 0.261,
+        "wRC+": 65.0
       },
       {
         "name": "Trea Turner",
         "PA": 639,
         "percent": 10.4,
         "wOBA": 0.352,
-        "xwOBA": 0.318
+        "xwOBA": 0.318,
+        "wRC+": 125.0
       },
       {
         "name": "Weston Wilson",
         "PA": 125,
         "percent": 2.0,
         "wOBA": 0.288,
-        "xwOBA": 0.333
+        "xwOBA": 0.333,
+        "wRC+": 81.0
       },
       {
         "name": "Other",
         "PA": 33,
         "percent": 0.5,
         "wOBA": 0.125,
-        "xwOBA": 0.216
+        "xwOBA": 0.216,
+        "wRC+": -29.0
       }
     ]
   },

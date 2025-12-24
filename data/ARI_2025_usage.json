@@ -498,161 +498,184 @@
         "PA": 131,
         "percent": 2.1,
         "wOBA": 0.295,
-        "xwOBA": 0.267
+        "xwOBA": 0.267,
+        "wRC+": 87.0
       },
       {
         "name": "Alek Thomas",
         "PA": 469,
         "percent": 7.6,
         "wOBA": 0.287,
-        "xwOBA": 0.288
+        "xwOBA": 0.288,
+        "wRC+": 81.0
       },
       {
         "name": "Blaze Alexander",
         "PA": 266,
         "percent": 4.3,
         "wOBA": 0.313,
-        "xwOBA": 0.301
+        "xwOBA": 0.301,
+        "wRC+": 99.0
       },
       {
         "name": "Corbin Carroll",
         "PA": 642,
         "percent": 10.3,
         "wOBA": 0.371,
-        "xwOBA": 0.371
+        "xwOBA": 0.371,
+        "wRC+": 139.0
       },
       {
         "name": "Eugenio Su\u00e1rez",
         "PA": 437,
         "percent": 7.0,
         "wOBA": 0.375,
-        "xwOBA": 0.341
+        "xwOBA": 0.341,
+        "wRC+": 141.0
       },
       {
         "name": "Gabriel Moreno",
         "PA": 309,
         "percent": 5.0,
         "wOBA": 0.34,
-        "xwOBA": 0.343
+        "xwOBA": 0.343,
+        "wRC+": 117.0
       },
       {
         "name": "Garrett Hampson",
         "PA": 41,
         "percent": 0.7,
         "wOBA": 0.273,
-        "xwOBA": 0.296
+        "xwOBA": 0.296,
+        "wRC+": 71.0
       },
       {
         "name": "Geraldo Perdomo",
         "PA": 720,
         "percent": 11.6,
         "wOBA": 0.37,
-        "xwOBA": 0.355
+        "xwOBA": 0.355,
+        "wRC+": 138.0
       },
       {
         "name": "Ildemaro Vargas",
         "PA": 121,
         "percent": 1.9,
         "wOBA": 0.292,
-        "xwOBA": 0.286
+        "xwOBA": 0.286,
+        "wRC+": 85.0
       },
       {
         "name": "Jake McCarthy",
         "PA": 222,
         "percent": 3.6,
         "wOBA": 0.256,
-        "xwOBA": 0.286
+        "xwOBA": 0.286,
+        "wRC+": 60.0
       },
       {
         "name": "James McCann",
         "PA": 137,
         "percent": 2.2,
         "wOBA": 0.328,
-        "xwOBA": 0.313
+        "xwOBA": 0.313,
+        "wRC+": 110.0
       },
       {
         "name": "Jordan Lawlar",
         "PA": 74,
         "percent": 1.2,
         "wOBA": 0.244,
-        "xwOBA": 0.256
+        "xwOBA": 0.256,
+        "wRC+": 52.0
       },
       {
         "name": "Jorge Barrosa",
         "PA": 77,
         "percent": 1.2,
         "wOBA": 0.171,
-        "xwOBA": 0.187
+        "xwOBA": 0.187,
+        "wRC+": 2.0
       },
       {
         "name": "Jose Herrera",
         "PA": 204,
         "percent": 3.3,
         "wOBA": 0.251,
-        "xwOBA": 0.237
+        "xwOBA": 0.237,
+        "wRC+": 57.0
       },
       {
         "name": "Josh Naylor",
         "PA": 394,
         "percent": 6.3,
         "wOBA": 0.347,
-        "xwOBA": 0.343
+        "xwOBA": 0.343,
+        "wRC+": 122.0
       },
       {
         "name": "Ketel Marte",
         "PA": 556,
         "percent": 9.0,
         "wOBA": 0.381,
-        "xwOBA": 0.389
+        "xwOBA": 0.389,
+        "wRC+": 145.0
       },
       {
         "name": "Lourdes Gurriel Jr.",
         "PA": 546,
         "percent": 8.8,
         "wOBA": 0.307,
-        "xwOBA": 0.313
+        "xwOBA": 0.313,
+        "wRC+": 95.0
       },
       {
         "name": "Pavin Smith",
         "PA": 288,
         "percent": 4.6,
         "wOBA": 0.348,
-        "xwOBA": 0.32
+        "xwOBA": 0.32,
+        "wRC+": 123.0
       },
       {
         "name": "Randal Grichuk",
         "PA": 188,
         "percent": 3.0,
         "wOBA": 0.308,
-        "xwOBA": 0.337
+        "xwOBA": 0.337,
+        "wRC+": 96.0
       },
       {
         "name": "Tim Tawa",
         "PA": 225,
         "percent": 3.6,
         "wOBA": 0.273,
-        "xwOBA": 0.287
+        "xwOBA": 0.287,
+        "wRC+": 72.0
       },
       {
         "name": "Tristin English",
         "PA": 23,
         "percent": 0.4,
         "wOBA": 0.123,
-        "xwOBA": 0.128
+        "xwOBA": 0.128,
+        "wRC+": -31.0
       },
       {
         "name": "Tyler Locklear",
         "PA": 116,
         "percent": 1.9,
         "wOBA": 0.245,
-        "xwOBA": 0.251
+        "xwOBA": 0.251,
+        "wRC+": 52.0
       },
       {
         "name": "Other",
         "PA": 24,
         "percent": 0.4,
         "wOBA": 0.155,
-        "xwOBA": 0.203
+        "xwOBA": 0.203,
+        "wRC+": -7.0
       }
     ]
   },

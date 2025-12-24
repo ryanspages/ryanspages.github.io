@@ -406,147 +406,168 @@
         "PA": 237,
         "percent": 4.0,
         "wOBA": 0.337,
-        "xwOBA": 0.32
+        "xwOBA": 0.32,
+        "wRC+": 116.0
       },
       {
         "name": "Amed Rosario",
         "PA": 158,
         "percent": 2.6,
         "wOBA": 0.318,
-        "xwOBA": 0.344
+        "xwOBA": 0.344,
+        "wRC+": 104.0
       },
       {
         "name": "Andr\u00e9s Chaparro",
         "PA": 73,
         "percent": 1.2,
         "wOBA": 0.228,
-        "xwOBA": 0.252
+        "xwOBA": 0.252,
+        "wRC+": 42.0
       },
       {
         "name": "Brady House",
         "PA": 274,
         "percent": 4.6,
         "wOBA": 0.248,
-        "xwOBA": 0.281
+        "xwOBA": 0.281,
+        "wRC+": 56.0
       },
       {
         "name": "CJ Abrams",
         "PA": 635,
         "percent": 10.6,
         "wOBA": 0.324,
-        "xwOBA": 0.308
+        "xwOBA": 0.308,
+        "wRC+": 107.0
       },
       {
         "name": "Daylen Lile",
         "PA": 351,
         "percent": 5.9,
         "wOBA": 0.36,
-        "xwOBA": 0.347
+        "xwOBA": 0.347,
+        "wRC+": 132.0
       },
       {
         "name": "Drew Millas",
         "PA": 55,
         "percent": 0.9,
         "wOBA": 0.35,
-        "xwOBA": 0.308
+        "xwOBA": 0.308,
+        "wRC+": 125.0
       },
       {
         "name": "Dylan Crews",
         "PA": 322,
         "percent": 5.4,
         "wOBA": 0.279,
-        "xwOBA": 0.307
+        "xwOBA": 0.307,
+        "wRC+": 77.0
       },
       {
         "name": "Jacob Young",
         "PA": 364,
         "percent": 6.1,
         "wOBA": 0.264,
-        "xwOBA": 0.293
+        "xwOBA": 0.293,
+        "wRC+": 66.0
       },
       {
         "name": "James Wood",
         "PA": 689,
         "percent": 11.5,
         "wOBA": 0.353,
-        "xwOBA": 0.36
+        "xwOBA": 0.36,
+        "wRC+": 127.0
       },
       {
         "name": "Jorge Alfaro",
         "PA": 39,
         "percent": 0.7,
         "wOBA": 0.245,
-        "xwOBA": 0.241
+        "xwOBA": 0.241,
+        "wRC+": 54.0
       },
       {
         "name": "Jos\u00e9 Tena",
         "PA": 169,
         "percent": 2.8,
         "wOBA": 0.296,
-        "xwOBA": 0.301
+        "xwOBA": 0.301,
+        "wRC+": 88.0
       },
       {
         "name": "Josh Bell",
         "PA": 533,
         "percent": 8.9,
         "wOBA": 0.324,
-        "xwOBA": 0.359
+        "xwOBA": 0.359,
+        "wRC+": 107.0
       },
       {
         "name": "Keibert Ruiz",
         "PA": 267,
         "percent": 4.5,
         "wOBA": 0.262,
-        "xwOBA": 0.286
+        "xwOBA": 0.286,
+        "wRC+": 65.0
       },
       {
         "name": "Luis Garc\u00eda Jr.",
         "PA": 526,
         "percent": 8.8,
         "wOBA": 0.3,
-        "xwOBA": 0.337
+        "xwOBA": 0.337,
+        "wRC+": 91.0
       },
       {
         "name": "Nasim Nu\u00f1ez",
         "PA": 92,
         "percent": 1.5,
         "wOBA": 0.304,
-        "xwOBA": 0.291
+        "xwOBA": 0.291,
+        "wRC+": 94.0
       },
       {
         "name": "Nathaniel Lowe",
         "PA": 490,
         "percent": 8.2,
         "wOBA": 0.292,
-        "xwOBA": 0.302
+        "xwOBA": 0.302,
+        "wRC+": 86.0
       },
       {
         "name": "Paul DeJong",
         "PA": 208,
         "percent": 3.5,
         "wOBA": 0.278,
-        "xwOBA": 0.256
+        "xwOBA": 0.256,
+        "wRC+": 76.0
       },
       {
         "name": "Riley Adams",
         "PA": 286,
         "percent": 4.8,
         "wOBA": 0.25,
-        "xwOBA": 0.275
+        "xwOBA": 0.275,
+        "wRC+": 57.0
       },
       {
         "name": "Robert Hassell III",
         "PA": 206,
         "percent": 3.4,
         "wOBA": 0.252,
-        "xwOBA": 0.272
+        "xwOBA": 0.272,
+        "wRC+": 58.0
       },
       {
         "name": "Other",
         "PA": 8,
         "percent": 0.1,
         "wOBA": 0.221,
-        "xwOBA": 0.099
+        "xwOBA": 0.099,
+        "wRC+": 44.0
       }
     ]
   },

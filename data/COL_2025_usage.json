@@ -545,203 +545,232 @@
         "PA": 33,
         "percent": 0.6,
         "wOBA": 0.177,
-        "xwOBA": 0.225
+        "xwOBA": 0.225,
+        "wRC+": -7.0
       },
       {
         "name": "Adael Amador",
         "PA": 128,
         "percent": 2.2,
         "wOBA": 0.238,
-        "xwOBA": 0.269
+        "xwOBA": 0.269,
+        "wRC+": 35.0
       },
       {
         "name": "Alan Trejo",
         "PA": 43,
         "percent": 0.7,
         "wOBA": 0.181,
-        "xwOBA": 0.236
+        "xwOBA": 0.236,
+        "wRC+": -4.0
       },
       {
         "name": "Austin Nola",
         "PA": 41,
         "percent": 0.7,
         "wOBA": 0.198,
-        "xwOBA": 0.273
+        "xwOBA": 0.273,
+        "wRC+": 8.0
       },
       {
         "name": "Blaine Crim",
         "PA": 61,
         "percent": 1.0,
         "wOBA": 0.352,
-        "xwOBA": 0.364
+        "xwOBA": 0.364,
+        "wRC+": 113.0
       },
       {
         "name": "Braxton Fulford",
         "PA": 120,
         "percent": 2.0,
         "wOBA": 0.258,
-        "xwOBA": 0.257
+        "xwOBA": 0.257,
+        "wRC+": 49.0
       },
       {
         "name": "Brenton Doyle",
         "PA": 538,
         "percent": 9.1,
         "wOBA": 0.282,
-        "xwOBA": 0.296
+        "xwOBA": 0.296,
+        "wRC+": 65.0
       },
       {
         "name": "Ezequiel Tovar",
         "PA": 390,
         "percent": 6.6,
         "wOBA": 0.301,
-        "xwOBA": 0.319
+        "xwOBA": 0.319,
+        "wRC+": 78.0
       },
       {
         "name": "Hunter Goodman",
         "PA": 579,
         "percent": 9.8,
         "wOBA": 0.359,
-        "xwOBA": 0.321
+        "xwOBA": 0.321,
+        "wRC+": 118.0
       },
       {
         "name": "Jacob Stallings",
         "PA": 93,
         "percent": 1.6,
         "wOBA": 0.188,
-        "xwOBA": 0.223
+        "xwOBA": 0.223,
+        "wRC+": 1.0
       },
       {
         "name": "Jordan Beck",
         "PA": 588,
         "percent": 10.0,
         "wOBA": 0.319,
-        "xwOBA": 0.299
+        "xwOBA": 0.299,
+        "wRC+": 90.0
       },
       {
         "name": "Keston Hiura",
         "PA": 21,
         "percent": 0.4,
         "wOBA": 0.289,
-        "xwOBA": 0.238
+        "xwOBA": 0.238,
+        "wRC+": 70.0
       },
       {
         "name": "Kris Bryant",
         "PA": 41,
         "percent": 0.7,
         "wOBA": 0.181,
-        "xwOBA": 0.216
+        "xwOBA": 0.216,
+        "wRC+": -4.0
       },
       {
         "name": "Kyle Farmer",
         "PA": 300,
         "percent": 5.1,
         "wOBA": 0.282,
-        "xwOBA": 0.282
+        "xwOBA": 0.282,
+        "wRC+": 65.0
       },
       {
         "name": "Kyle Karros",
         "PA": 156,
         "percent": 2.6,
         "wOBA": 0.268,
-        "xwOBA": 0.257
+        "xwOBA": 0.257,
+        "wRC+": 56.0
       },
       {
         "name": "Michael Toglia",
         "PA": 337,
         "percent": 5.7,
         "wOBA": 0.265,
-        "xwOBA": 0.271
+        "xwOBA": 0.271,
+        "wRC+": 54.0
       },
       {
         "name": "Mickey Moniak",
         "PA": 461,
         "percent": 7.8,
         "wOBA": 0.348,
-        "xwOBA": 0.338
+        "xwOBA": 0.338,
+        "wRC+": 110.0
       },
       {
         "name": "Nick Martini",
         "PA": 111,
         "percent": 1.9,
         "wOBA": 0.259,
-        "xwOBA": 0.252
+        "xwOBA": 0.252,
+        "wRC+": 49.0
       },
       {
         "name": "Orlando Arcia",
         "PA": 182,
         "percent": 3.1,
         "wOBA": 0.239,
-        "xwOBA": 0.246
+        "xwOBA": 0.246,
+        "wRC+": 36.0
       },
       {
         "name": "Ryan McMahon",
         "PA": 401,
         "percent": 6.8,
         "wOBA": 0.314,
-        "xwOBA": 0.332
+        "xwOBA": 0.332,
+        "wRC+": 87.0
       },
       {
         "name": "Ryan Ritter",
         "PA": 207,
         "percent": 3.5,
         "wOBA": 0.28,
-        "xwOBA": 0.245
+        "xwOBA": 0.245,
+        "wRC+": 64.0
       },
       {
         "name": "Sam Hilliard",
         "PA": 61,
         "percent": 1.0,
         "wOBA": 0.326,
-        "xwOBA": 0.299
+        "xwOBA": 0.299,
+        "wRC+": 95.0
       },
       {
         "name": "Sean Bouchard",
         "PA": 73,
         "percent": 1.2,
         "wOBA": 0.225,
-        "xwOBA": 0.225
+        "xwOBA": 0.225,
+        "wRC+": 26.0
       },
       {
         "name": "Thairo Estrada",
         "PA": 165,
         "percent": 2.8,
         "wOBA": 0.284,
-        "xwOBA": 0.26
+        "xwOBA": 0.26,
+        "wRC+": 66.0
       },
       {
         "name": "Tyler Freeman",
         "PA": 428,
         "percent": 7.2,
         "wOBA": 0.319,
-        "xwOBA": 0.323
+        "xwOBA": 0.323,
+        "wRC+": 91.0
       },
       {
         "name": "Warming Bernabel",
         "PA": 146,
         "percent": 2.5,
         "wOBA": 0.301,
-        "xwOBA": 0.271
+        "xwOBA": 0.271,
+        "wRC+": 78.0
       },
       {
         "name": "Yanquiel Fern\u00e1ndez",
         "PA": 147,
         "percent": 2.5,
         "wOBA": 0.268,
-        "xwOBA": 0.244
+        "xwOBA": 0.244,
+        "wRC+": 55.0
       },
       {
         "name": "Zac Veen",
         "PA": 37,
         "percent": 0.6,
         "wOBA": 0.193,
-        "xwOBA": 0.193
+        "xwOBA": 0.193,
+        "wRC+": 4.0
       },
       {
         "name": "Other",
         "PA": 20,
         "percent": 0.3,
         "wOBA": 0.194,
-        "xwOBA": 0.223
+        "xwOBA": 0.223,
+        "wRC+": 9.0
       }
     ]
   },
