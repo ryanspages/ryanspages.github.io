@@ -199,8 +199,6 @@ if (data.batting) {
   const tableWrap = document.createElement("div");
   tableWrap.style.display = "none";
 
-  const LEAGUE_WOBA = 0.315;
-
   function wrcPlusColor(wrc) {
     if (wrc == null) return "#ccc";
     if (wrc >= 140) return "#b11226";   // elite
@@ -208,31 +206,36 @@ if (data.batting) {
     if (wrc >= 95)  return "#cccccc";   // average
     if (wrc >= 75)  return "#8ecae6";   // below avg
     return "#457b9d";                   // poor
-}
+  }
 
-  // ---- sort by PA ----
-  const sorted = [...data.batting.players]
-    .filter(p => p.PA > 0)
+  // Sort by PA descending
+  const sorted = [...data.batting.players].filter(p => p.PA > 0)
     .sort((a, b) => b.PA - a.PA);
 
-  // ---- accumulate until 75% ----
+  // Accumulate until 75% total PA
   const cutoff = data.batting.total_PA * 0.75;
   let cumulative = 0;
-
-  const major = [];
-  const minor = [];
+  const topPlayers = [];
+  const otherPlayers = [];
 
   for (const p of sorted) {
     if (cumulative < cutoff) {
-      major.push(p);
+      topPlayers.push(p);
       cumulative += p.PA;
     } else {
-      minor.push(p);
+      otherPlayers.push(p);
     }
   }
 
-  // ---- build bar rows ----
-  major.forEach(p => {
+  // Add "Other" bucket if necessary
+  if (otherPlayers.length) {
+    const otherPA = otherPlayers.reduce((s, p) => s + p.PA, 0);
+    const wrcPlus = otherPlayers.reduce((s, p) => s + (p["wRC+"] ?? 100) * p.PA, 0) / otherPA || null;
+    topPlayers.push({ name: "Other", PA: otherPA, ["wRC+"]: wrcPlus });
+  }
+
+  // Build bars
+  topPlayers.forEach(p => {
     const row = document.createElement("div");
     row.className = "player-bar-row";
 
@@ -240,52 +243,19 @@ if (data.batting) {
     label.className = "player-label";
     label.textContent = p.name;
 
-    const barWrap = document.createElement("div");
-    barWrap.className = "player-bar-wrap";
-
     const bar = document.createElement("div");
     bar.className = "player-bar";
+    // width proportional to PA share
     bar.style.width = `${(p.PA / data.batting.total_PA) * 100}%`;
+    // color based on wRC+
     bar.style.background = wrcPlusColor(p["wRC+"]);
-bar.title = `${p.name}
-PA: ${p.PA}
-wRC+: ${p["wRC+"]}`;
+    bar.title = `${p.name}\nPA: ${p.PA}\nwRC+: ${p["wRC+"]?.toFixed(0) ?? "—"}`;
 
-    barWrap.appendChild(bar);
-    row.append(label, barWrap);
+    row.append(label, bar);
     bars.appendChild(row);
   });
 
-  // ---- Other bucket ----
-  if (minor.length) {
-    const otherPA = minor.reduce((s, p) => s + p.PA, 0);
-    const wrcPlus =
-  minor.reduce((s, p) => s + (p["wRC+"] ?? 100) * p.PA, 0) / otherPA || null;
-
-    const row = document.createElement("div");
-    row.className = "player-bar-row";
-
-    const label = document.createElement("div");
-    label.className = "player-label";
-    label.textContent = "Other";
-
-    const barWrap = document.createElement("div");
-    barWrap.className = "player-bar-wrap";
-
-    const bar = document.createElement("div");
-    bar.className = "player-bar";
-    bar.style.width = `${(otherPA / data.batting.total_PA) * 100}%`;
-    bar.style.background = wrcPlusColor(wrcPlus);
-bar.title = `Other players
-PA: ${otherPA}
-wRC+: ${wrcPlus?.toFixed(0) ?? "—"}`;
-
-    barWrap.appendChild(bar);
-    row.append(label, barWrap);
-    bars.appendChild(row);
-  }
-
-  // ---- TABLE (unchanged but cleaner) ----
+  // ---- Table (unchanged) ----
   const table = document.createElement("table");
   table.innerHTML = `
     <thead>
@@ -305,7 +275,6 @@ wRC+: ${wrcPlus?.toFixed(0) ?? "—"}`;
       `).join("")}
     </tbody>
   `;
-
   makeTableSortable(table);
   tableWrap.appendChild(wrapTable(table));
 
@@ -314,9 +283,9 @@ wRC+: ${wrcPlus?.toFixed(0) ?? "—"}`;
     bars,
     tableWrap
   );
-
   container.appendChild(section);
 }
+
 
 
   /* ================= PITCHING ================= */
