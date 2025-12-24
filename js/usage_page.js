@@ -251,7 +251,7 @@ topPlayers.forEach(p => {
 
   const bar = document.createElement("div");
   bar.className = "player-bar";
-  bar.style.width = `${(p.PA / maxPA) * 100}%`;
+  bar.style.width = `${(p.PA / maxPA) * 90}%`;
   bar.style.background = wrcPlusColor(p["wRC+"]);
   bar.title =
     `${p.name}\nPA: ${p.PA}\nwRC+: ${p["wRC+"]?.toFixed(0) ?? "—"}`;
