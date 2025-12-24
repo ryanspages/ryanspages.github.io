@@ -249,12 +249,20 @@ topPlayers.forEach(p => {
   const barWrap = document.createElement("div");
   barWrap.className = "player-bar-wrap";
 
-  const bar = document.createElement("div");
-  bar.className = "player-bar";
-  bar.style.width = `${(p.PA / maxPA) * 90}%`;
-  bar.style.background = wrcPlusColor(p["wRC+"]);
-  bar.title =
-    `${p.name}\nPA: ${p.PA}\nwRC+: ${p["wRC+"]?.toFixed(0) ?? "—"}`;
+  const pct = (p.PA / data.batting.total_PA) * 100;
+
+const bar = document.createElement("div");
+bar.className = "player-bar";
+bar.style.width = `${(p.PA / maxPA) * 100}%`;
+bar.style.background = wrcPlusColor(p["wRC+"]);
+bar.title = `${p.name}\nPA: ${p.PA}\nwRC+: ${p["wRC+"]?.toFixed(0) ?? "—"}`;
+
+// % label
+const pctLabel = document.createElement("span");
+pctLabel.className = "bar-pct";
+pctLabel.textContent = `${pct.toFixed(1)}%`;
+
+bar.appendChild(pctLabel);
 
   barWrap.appendChild(bar);
   row.append(label, barWrap);
