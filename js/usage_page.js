@@ -262,9 +262,12 @@ const pctLabel = document.createElement("span");
 pctLabel.className = "bar-pct";
 pctLabel.textContent = `${pct.toFixed(1)}%`;
 
-barWrap.appendChild(pctLabel);
+// Position label just outside bar end
+const barWidth = (p.PA / maxPA) * 90;
+pctLabel.style.left = `calc(${barWidth}% + 6px)`;
 
-  barWrap.appendChild(bar);
+barWrap.appendChild(bar);
+barWrap.appendChild(pctLabel);
   row.append(label, barWrap);
   bars.appendChild(row);
 });
