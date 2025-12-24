@@ -50,7 +50,7 @@ function createBarRow(team, label, total, players) {
   players.forEach((p, i) => {
     const seg = document.createElement("div");
     seg.className = "segment";
-    seg.style.width = `${p.percent}%`;
+    seg.style.width = `${p.percent * 0.9}%`;
     seg.style.background = getColor(team, i);
     seg.title = `${p.name}: ${p.percent.toFixed(1)}%`;
     bar.appendChild(seg);
