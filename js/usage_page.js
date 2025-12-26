@@ -201,11 +201,17 @@ if (data.batting) {
 
   function wrcPlusColor(wrc) {
     if (wrc == null) return "#ccc";
-    if (wrc >= 140) return "#b11226";   // elite
-    if (wrc >= 115) return "#e63946";   // above avg
-    if (wrc >= 95)  return "#cccccc";   // average
-    if (wrc >= 75)  return "#8ecae6";   // below avg
-    return "#457b9d";                   // poor
+    if (wrc >= 146) return "#99000D";   // 5
+    if (wrc >= 136) return "#CB181D";   // 4
+    if (wrc >= 126)  return "#EF3B2C";   // 3
+    if (wrc >= 116)  return "#FB6A4A";  // 2
+    if (wrc >= 106)  return "#FCAE91";  // 1
+    if (wrc >= 95)  return "#BDBDBD";  // average
+    if (wrc >= 85)  return "#6BAED6";  // -1
+    if (wrc >= 75)  return "#4292C6";  // -2
+    if (wrc >= 65)  return "#2171B5";  // -3
+    if (wrc >= 55)  return "#08519C";  // -4
+    return "#08306B";                   // -5
   }
 
   // Sort by PA descending
